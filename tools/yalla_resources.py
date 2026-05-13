@@ -4,6 +4,7 @@ import json
 import re
 import shutil
 import sys
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from xml.sax.saxutils import escape as xml_escape
 
@@ -11,8 +12,10 @@ from xml.sax.saxutils import escape as xml_escape
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PATH = ROOT / "strings/catalog.json"
 DEFAULT_WORKSPACE = ROOT.parent
+ICON_DIR = ROOT / "assets/icons"
 
 PLACEHOLDER = re.compile(r"\{(\d+)\}")
+ICON_NAME = re.compile(r"^ic_[a-z0-9]+(?:_[a-z0-9]+)*\.svg$")
 
 COMPOSE_LOCALE_DIRS = {
     "default": "values",
@@ -69,7 +72,7 @@ def write(path: Path, content: str) -> None:
     path.write_text(content)
 
 
-def validate(strict: bool) -> int:
+def validate_strings() -> tuple[list[str], list[str]]:
     catalog = load_catalog()
     locales = [locale for locale in catalog["locales"] if locale != "default"]
     errors = []
@@ -95,6 +98,54 @@ def validate(strict: bool) -> int:
             for locale in locales:
                 if locale not in values:
                     warnings.append(f"{key}: missing translation for {locale}")
+
+    return errors, warnings
+
+
+def validate_icons() -> tuple[list[str], list[str]]:
+    errors = []
+    warnings = []
+    generated_names = set()
+
+    if not ICON_DIR.exists():
+        errors.append(f"missing icon directory: {ICON_DIR}")
+        return errors, warnings
+
+    for path in sorted(ICON_DIR.iterdir()):
+        relative = path.relative_to(ROOT)
+        if path.is_dir():
+            warnings.append(f"ignoring icon subdirectory: {relative}")
+            continue
+        if path.suffix != ".svg":
+            errors.append(f"{relative}: icon sources must be SVG files")
+            continue
+        if not ICON_NAME.match(path.name):
+            errors.append(f"{relative}: icon name must be lower snake_case and start with ic_")
+
+        generated_name = f"yalla_{path.stem}"
+        if generated_name in generated_names:
+            errors.append(f"{relative}: duplicate generated name {generated_name}")
+        generated_names.add(generated_name)
+
+        try:
+            root = ET.parse(path).getroot()
+        except ET.ParseError as error:
+            errors.append(f"{relative}: invalid SVG XML: {error}")
+            continue
+        if not root.tag.endswith("svg"):
+            errors.append(f"{relative}: root element must be svg")
+
+    if not generated_names:
+        errors.append("no icons found")
+
+    return errors, warnings
+
+
+def validate(strict: bool) -> int:
+    string_errors, string_warnings = validate_strings()
+    icon_errors, icon_warnings = validate_icons()
+    errors = string_errors + icon_errors
+    warnings = string_warnings + icon_warnings
 
     for message in errors:
         print(f"ERROR: {message}", file=sys.stderr)
@@ -181,6 +232,28 @@ def generate_ios(out: Path, catalog: dict) -> None:
     )
 
 
+def copy_directory_contents(source: Path, destination: Path, pattern: str = "*") -> None:
+    if destination.exists():
+        shutil.rmtree(destination)
+    destination.mkdir(parents=True, exist_ok=True)
+    for path in sorted(source.glob(pattern)):
+        if path.is_file():
+            shutil.copy2(path, destination / path.name)
+
+
+def generate_icons(out: Path) -> None:
+    copy_directory_contents(
+        ICON_DIR,
+        out / "compose/valkyrieResources",
+        "*.svg",
+    )
+    copy_directory_contents(
+        ICON_DIR,
+        out / "ios/YallaResourcesIOS/Resources/Icons",
+        "*.svg",
+    )
+
+
 def generate(out: Path) -> int:
     catalog = load_catalog()
     if out.exists():
@@ -188,6 +261,7 @@ def generate(out: Path) -> int:
     generate_compose(out, catalog)
     generate_android(out, catalog)
     generate_ios(out, catalog)
+    generate_icons(out)
     print(f"Generated resources into {out}")
     return 0
 
@@ -216,12 +290,19 @@ def sync(args: argparse.Namespace) -> int:
 
     if not args.no_cmp:
         cmp_resources = args.cmp / "resources/src/commonMain/composeResources"
+        cmp_icons = args.cmp / "resources/src/commonMain/valkyrieResources"
         for locale_dir in COMPOSE_LOCALE_DIRS.values():
             copy_file(
                 generated / "compose/composeResources" / locale_dir / "strings.xml",
                 cmp_resources / locale_dir / "strings.xml",
             )
+        copy_directory_contents(
+            generated / "compose/valkyrieResources",
+            cmp_icons,
+            "*.svg",
+        )
         print(f"Synced Compose strings to {cmp_resources}")
+        print(f"Synced Compose icons to {cmp_icons}")
 
     if not args.no_android:
         android_res = args.android / "sdk/src/main/res"
@@ -232,11 +313,18 @@ def sync(args: argparse.Namespace) -> int:
 
     if not args.no_ios:
         ios_resources = args.ios / "Sources/YallaResourcesIOS/Resources"
+        ios_icons = ios_resources / "Icons"
         copy_file(
             generated / "ios/YallaResourcesIOS/Resources/Localizable.xcstrings",
             ios_resources / "Localizable.xcstrings",
         )
+        copy_directory_contents(
+            generated / "ios/YallaResourcesIOS/Resources/Icons",
+            ios_icons,
+            "*.svg",
+        )
         print(f"Synced iOS strings to {ios_resources}")
+        print(f"Synced iOS icons to {ios_icons}")
 
     return 0
 

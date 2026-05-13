@@ -13,17 +13,21 @@ made here first, then generated into each platform's native resource format.
 
 ## Current Scope
 
-The first implemented workflow is strings-only:
+The implemented workflow covers strings and canonical SVG icons:
 
 ```text
 strings/catalog.json
     +-> Compose Multiplatform strings.xml
     +-> Android strings.xml
     +-> iOS Localizable.xcstrings
+
+assets/icons/*.svg
+    +-> Compose Multiplatform valkyrieResources/*.svg
+    +-> iOS bundled Resources/Icons/*.svg
 ```
 
-Images, icons, fonts, and files are seeded as source assets under `assets/`.
-Generators for those assets will be added after the string pipeline is stable.
+Images, fonts, and files are seeded as source assets under `assets/`. Generators
+for those assets will be added after the string and icon pipelines are stable.
 
 ## Locales
 
@@ -40,7 +44,7 @@ Native generated outputs use Uzbek Cyrillic locale identifiers.
 
 ## Commands
 
-Validate the catalog:
+Validate the string catalog and icon sources:
 
 ```bash
 python3 tools/yalla_resources.py validate
@@ -52,7 +56,7 @@ Generate sample outputs into `build/generated`:
 python3 tools/yalla_resources.py generate --out build/generated
 ```
 
-Sync generated string outputs into sibling repos:
+Sync generated outputs into sibling repos:
 
 ```bash
 python3 tools/yalla_resources.py sync
