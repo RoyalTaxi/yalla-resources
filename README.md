@@ -13,7 +13,8 @@ made here first, then generated into each platform's native resource format.
 
 ## Current Scope
 
-The implemented workflow covers strings and canonical SVG icons:
+The implemented workflow covers strings, canonical SVG icons, PNG drawables,
+fonts, and JSON file resources:
 
 ```text
 strings/catalog.json
@@ -23,12 +24,26 @@ strings/catalog.json
 
 assets/icons/*.svg
     +-> Compose Multiplatform valkyrieResources/*.svg
-    +-> Android VectorDrawable res/drawable/yalla_ic_*.xml
+    +-> Android VectorDrawable res/drawable/ic_*.xml
     +-> iOS bundled Resources/Icons/*.svg
+
+assets/drawable/*.png
+    +-> Compose Multiplatform composeResources/drawable/*.png
+    +-> Android res/drawable-nodpi/img_*.png
+    +-> iOS bundled Resources/Drawables/*.png
+
+assets/font/*.ttf
+    +-> Compose Multiplatform composeResources/font/*.ttf
+    +-> Android res/font/*.ttf
+    +-> iOS bundled Resources/Fonts/*.ttf
+
+assets/files/*.json
+    +-> Compose Multiplatform composeResources/files/*.json
+    +-> Android res/raw/*.json
+    +-> iOS bundled Resources/Files/*.json
 ```
 
-Images, fonts, and files are seeded as source assets under `assets/`. Generators
-for those assets will be added after the string and icon pipelines are stable.
+All generated resource files should be updated through this repo.
 
 ## Locales
 

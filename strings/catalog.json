@@ -36,6 +36,12 @@
         "default": "Yalla"
       }
     },
+    "sdk_android_module_name": {
+      "translatable": false,
+      "values": {
+        "default": "YallaSDKAndroid"
+      }
+    },
     "language_english": {
       "translatable": false,
       "values": {

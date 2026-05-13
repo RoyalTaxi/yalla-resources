@@ -15,10 +15,16 @@ ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PATH = ROOT / "strings/catalog.json"
 DEFAULT_WORKSPACE = ROOT.parent
 ICON_DIR = ROOT / "assets/icons"
+DRAWABLE_DIR = ROOT / "assets/drawable"
+FONT_DIR = ROOT / "assets/font"
+FILE_DIR = ROOT / "assets/files"
 ANDROID_VECTOR_TOOL_DIR = ROOT / "build/android-vector-tool"
 
 PLACEHOLDER = re.compile(r"\{(\d+)\}")
 ICON_NAME = re.compile(r"^ic_[a-z0-9]+(?:_[a-z0-9]+)*\.svg$")
+DRAWABLE_NAME = re.compile(r"^img_[a-z0-9]+(?:_[a-z0-9]+)*\.png$")
+FONT_NAME = re.compile(r"^[a-z0-9]+(?:_[a-z0-9]+)*\.ttf$")
+FILE_NAME = re.compile(r"^[a-z0-9]+(?:_[a-z0-9]+)*\.json$")
 
 ANDROID_VECTOR_RUNNER = """\
 import com.android.ide.common.vectordrawable.Svg2Vector;
@@ -53,7 +59,6 @@ ANDROID_LOCALE_DIRS = {
     "default": "values",
     "en": "values-en",
     "ru": "values-ru",
-    "uz-Latn": "values-b+uz+Latn",
     "uz-Cyrl": "values-b+uz+Cyrl",
 }
 
@@ -205,7 +210,7 @@ def validate_icons() -> tuple[list[str], list[str]]:
         if not ICON_NAME.match(path.name):
             errors.append(f"{relative}: icon name must be lower snake_case and start with ic_")
 
-        generated_name = f"yalla_{path.stem}"
+        generated_name = path.stem
         if generated_name in generated_names:
             errors.append(f"{relative}: duplicate generated name {generated_name}")
         generated_names.add(generated_name)
@@ -224,11 +229,110 @@ def validate_icons() -> tuple[list[str], list[str]]:
     return errors, warnings
 
 
+def validate_binary_assets(
+    directory: Path,
+    pattern: re.Pattern,
+    expected_suffix: str,
+    description: str,
+    magic=None,
+) -> tuple[list[str], list[str]]:
+    errors = []
+    warnings = []
+    generated_names = set()
+
+    if not directory.exists():
+        errors.append(f"missing {description} directory: {directory}")
+        return errors, warnings
+
+    for path in sorted(directory.iterdir()):
+        relative = path.relative_to(ROOT)
+        if path.is_dir():
+            warnings.append(f"ignoring {description} subdirectory: {relative}")
+            continue
+        if path.suffix != expected_suffix:
+            errors.append(f"{relative}: {description} sources must be {expected_suffix} files")
+            continue
+        if not pattern.match(path.name):
+            errors.append(f"{relative}: invalid {description} resource name")
+
+        if path.stem in generated_names:
+            errors.append(f"{relative}: duplicate generated name {path.stem}")
+        generated_names.add(path.stem)
+
+        if magic is not None:
+            header = path.read_bytes()[:8]
+            if not any(header.startswith(candidate) for candidate in magic):
+                errors.append(f"{relative}: invalid {description} file header")
+
+    if not generated_names:
+        errors.append(f"no {description} resources found")
+
+    return errors, warnings
+
+
+def validate_file_assets() -> tuple[list[str], list[str]]:
+    errors = []
+    warnings = []
+    generated_names = set()
+
+    if not FILE_DIR.exists():
+        errors.append(f"missing file resource directory: {FILE_DIR}")
+        return errors, warnings
+
+    for path in sorted(FILE_DIR.iterdir()):
+        relative = path.relative_to(ROOT)
+        if path.is_dir():
+            warnings.append(f"ignoring file resource subdirectory: {relative}")
+            continue
+        if path.suffix != ".json":
+            errors.append(f"{relative}: file resources must be JSON files")
+            continue
+        if not FILE_NAME.match(path.name):
+            errors.append(f"{relative}: invalid file resource name")
+
+        if path.stem in generated_names:
+            errors.append(f"{relative}: duplicate generated name {path.stem}")
+        generated_names.add(path.stem)
+
+        try:
+            json.loads(path.read_text())
+        except json.JSONDecodeError as error:
+            errors.append(f"{relative}: invalid JSON: {error}")
+
+    if not generated_names:
+        errors.append("no file resources found")
+
+    return errors, warnings
+
+
+def validate_assets() -> tuple[list[str], list[str]]:
+    drawable_errors, drawable_warnings = validate_binary_assets(
+        DRAWABLE_DIR,
+        DRAWABLE_NAME,
+        ".png",
+        "drawable",
+        (b"\x89PNG\r\n\x1a\n",),
+    )
+    font_errors, font_warnings = validate_binary_assets(
+        FONT_DIR,
+        FONT_NAME,
+        ".ttf",
+        "font",
+        (b"\x00\x01\x00\x00", b"true", b"ttcf"),
+    )
+    file_errors, file_warnings = validate_file_assets()
+    return (
+        drawable_errors + font_errors + file_errors,
+        drawable_warnings + font_warnings + file_warnings,
+    )
+
+
 def validate(strict: bool) -> int:
     string_errors, string_warnings = validate_strings()
     icon_errors, icon_warnings = validate_icons()
-    errors = string_errors + icon_errors
-    warnings = string_warnings + icon_warnings
+    asset_errors, asset_warnings = validate_assets()
+    errors = string_errors + icon_errors + asset_errors
+    warnings = string_warnings + icon_warnings + asset_warnings
 
     for message in errors:
         print(f"ERROR: {message}", file=sys.stderr)
@@ -275,9 +379,9 @@ def generate_android(out: Path, catalog: dict) -> None:
             if locale != "default" and not entry.get("translatable", True):
                 continue
             attr = ' translatable="false"' if locale == "default" and not entry.get("translatable", True) else ""
-            lines.append(f'    <string name="yalla_{key}"{attr}>{android_text(values[locale])}</string>\n')
+            lines.append(f'    <string name="{key}"{attr}>{android_text(values[locale])}</string>\n')
         lines.append("</resources>\n")
-        write(base / directory / "yalla_strings.xml", "".join(lines))
+        write(base / directory / "strings.xml", "".join(lines))
 
 
 def generate_ios(out: Path, catalog: dict) -> None:
@@ -337,6 +441,56 @@ def generate_icons(out: Path) -> None:
     )
 
 
+def generate_asset_files(out: Path) -> None:
+    copy_directory_contents(
+        DRAWABLE_DIR,
+        out / "compose/composeResources/drawable",
+        "*.png",
+    )
+    copy_directory_contents(
+        FONT_DIR,
+        out / "compose/composeResources/font",
+        "*.ttf",
+    )
+    copy_directory_contents(
+        FILE_DIR,
+        out / "compose/composeResources/files",
+        "*.json",
+    )
+
+    copy_directory_contents(
+        DRAWABLE_DIR,
+        out / "android/res/drawable-nodpi",
+        "*.png",
+    )
+    copy_directory_contents(
+        FONT_DIR,
+        out / "android/res/font",
+        "*.ttf",
+    )
+    copy_directory_contents(
+        FILE_DIR,
+        out / "android/res/raw",
+        "*.json",
+    )
+
+    copy_directory_contents(
+        DRAWABLE_DIR,
+        out / "ios/YallaResourcesIOS/Resources/Drawables",
+        "*.png",
+    )
+    copy_directory_contents(
+        FONT_DIR,
+        out / "ios/YallaResourcesIOS/Resources/Fonts",
+        "*.ttf",
+    )
+    copy_directory_contents(
+        FILE_DIR,
+        out / "ios/YallaResourcesIOS/Resources/Files",
+        "*.json",
+    )
+
+
 def add_generated_comment(path: Path) -> None:
     content = path.read_text()
     path.write_text(
@@ -355,7 +509,7 @@ def generate_android_icons(out: Path) -> None:
     warnings = []
     java_classpath = os.pathsep.join([str(runner_dir), classpath])
     for source in sorted(ICON_DIR.glob("*.svg")):
-        destination = drawable_dir / f"yalla_{source.stem}.xml"
+        destination = drawable_dir / f"{source.stem}.xml"
         result = subprocess.run(
             [
                 "java",
@@ -396,6 +550,7 @@ def generate(out: Path) -> int:
     generate_ios(out, catalog)
     generate_icons(out)
     generate_android_icons(out)
+    generate_asset_files(out)
     print(f"Generated resources into {out}")
     return 0
 
@@ -408,16 +563,31 @@ def copy_file(source: Path, destination: Path) -> None:
 def clean_generated_android_strings(res_dir: Path) -> None:
     if not res_dir.exists():
         return
-    for path in res_dir.glob("values*/yalla_strings.xml"):
-        path.unlink()
+    for pattern in ["values*/yalla_strings.xml", "values*/strings.xml"]:
+        for path in res_dir.glob(pattern):
+            path.unlink()
 
 
 def clean_generated_android_icons(res_dir: Path) -> None:
     drawable_dir = res_dir / "drawable"
     if not drawable_dir.exists():
         return
-    for path in drawable_dir.glob("yalla_ic_*.xml"):
-        path.unlink()
+    for pattern in ["yalla_ic_*.xml", "ic_*.xml"]:
+        for path in drawable_dir.glob(pattern):
+            path.unlink()
+
+
+def clean_generated_android_assets(res_dir: Path) -> None:
+    for directory, pattern in [
+        ("drawable", "img_*.png"),
+        ("drawable-nodpi", "img_*.png"),
+        ("font", "*.ttf"),
+        ("raw", "*.json"),
+    ]:
+        asset_dir = res_dir / directory
+        if asset_dir.exists():
+            for path in asset_dir.glob(pattern):
+                path.unlink()
 
 
 def sync(args: argparse.Namespace) -> int:
@@ -443,19 +613,39 @@ def sync(args: argparse.Namespace) -> int:
             cmp_icons,
             "*.svg",
         )
+        for directory, pattern in [
+            ("drawable", "*.png"),
+            ("font", "*.ttf"),
+            ("files", "*.json"),
+        ]:
+            copy_directory_contents(
+                generated / "compose/composeResources" / directory,
+                cmp_resources / directory,
+                pattern,
+            )
         print(f"Synced Compose strings to {cmp_resources}")
         print(f"Synced Compose icons to {cmp_icons}")
+        print(f"Synced Compose assets to {cmp_resources}")
 
     if not args.no_android:
         android_res = args.android / "sdk/src/main/res"
         clean_generated_android_strings(android_res)
         clean_generated_android_icons(android_res)
-        for source in (generated / "android/res").glob("values*/yalla_strings.xml"):
+        clean_generated_android_assets(android_res)
+        for source in (generated / "android/res").glob("values*/strings.xml"):
             copy_file(source, android_res / source.parent.name / source.name)
-        for source in (generated / "android/res/drawable").glob("yalla_ic_*.xml"):
+        for source in (generated / "android/res/drawable").glob("ic_*.xml"):
             copy_file(source, android_res / "drawable" / source.name)
+        for directory, pattern in [
+            ("drawable-nodpi", "img_*.png"),
+            ("font", "*.ttf"),
+            ("raw", "*.json"),
+        ]:
+            for source in (generated / "android/res" / directory).glob(pattern):
+                copy_file(source, android_res / directory / source.name)
         print(f"Synced Android strings to {android_res}")
         print(f"Synced Android icons to {android_res / 'drawable'}")
+        print(f"Synced Android assets to {android_res}")
 
     if not args.no_ios:
         ios_resources = args.ios / "Sources/YallaResourcesIOS/Resources"
@@ -469,8 +659,19 @@ def sync(args: argparse.Namespace) -> int:
             ios_icons,
             "*.svg",
         )
+        for directory, pattern in [
+            ("Drawables", "*.png"),
+            ("Fonts", "*.ttf"),
+            ("Files", "*.json"),
+        ]:
+            copy_directory_contents(
+                generated / "ios/YallaResourcesIOS/Resources" / directory,
+                ios_resources / directory,
+                pattern,
+            )
         print(f"Synced iOS strings to {ios_resources}")
         print(f"Synced iOS icons to {ios_icons}")
+        print(f"Synced iOS assets to {ios_resources}")
 
     return 0
 
