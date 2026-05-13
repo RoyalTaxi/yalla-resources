@@ -52,9 +52,22 @@ Generate sample outputs into `build/generated`:
 python3 tools/yalla_resources.py generate --out build/generated
 ```
 
+Sync generated string outputs into sibling repos:
+
+```bash
+python3 tools/yalla_resources.py sync
+```
+
+The default sync paths assume this checkout sits next to:
+
+- `/Users/islom/StudioProjects/yalla-sdk`
+- `/Users/islom/StudioProjects/yalla-sdk-android`
+- `/Users/islom/StudioProjects/yalla-sdk-ios`
+
+Use `--no-cmp`, `--no-android`, or `--no-ios` to skip a target.
+
 Seed this repo again from the current `yalla-sdk/resources` Compose source:
 
 ```bash
 python3 tools/import_from_yalla_sdk.py /Users/islom/StudioProjects/yalla-sdk/resources
 ```
-

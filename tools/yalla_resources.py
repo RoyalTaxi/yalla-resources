@@ -10,6 +10,7 @@ from xml.sax.saxutils import escape as xml_escape
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PATH = ROOT / "strings/catalog.json"
+DEFAULT_WORKSPACE = ROOT.parent
 
 PLACEHOLDER = re.compile(r"\{(\d+)\}")
 
@@ -106,7 +107,11 @@ def validate(strict: bool) -> int:
 
 
 def xml_header() -> str:
-    return '<?xml version="1.0" encoding="UTF-8"?>\n<resources>\n'
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        "<!-- Generated from RoyalTaxi/yalla-resources. Do not edit by hand. -->\n"
+        "<resources>\n"
+    )
 
 
 def generate_compose(out: Path, catalog: dict) -> None:
@@ -187,6 +192,55 @@ def generate(out: Path) -> int:
     return 0
 
 
+def copy_file(source: Path, destination: Path) -> None:
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(source, destination)
+
+
+def clean_generated_android_strings(res_dir: Path) -> None:
+    if not res_dir.exists():
+        return
+    for path in res_dir.glob("values*/yalla_strings.xml"):
+        path.unlink()
+
+
+def sync(args: argparse.Namespace) -> int:
+    validation = validate(strict=False)
+    if validation != 0:
+        return validation
+
+    generated = ROOT / "build/generated/sync"
+    result = generate(generated)
+    if result != 0:
+        return result
+
+    if not args.no_cmp:
+        cmp_resources = args.cmp / "resources/src/commonMain/composeResources"
+        for locale_dir in COMPOSE_LOCALE_DIRS.values():
+            copy_file(
+                generated / "compose/composeResources" / locale_dir / "strings.xml",
+                cmp_resources / locale_dir / "strings.xml",
+            )
+        print(f"Synced Compose strings to {cmp_resources}")
+
+    if not args.no_android:
+        android_res = args.android / "sdk/src/main/res"
+        clean_generated_android_strings(android_res)
+        for source in (generated / "android/res").glob("values*/yalla_strings.xml"):
+            copy_file(source, android_res / source.parent.name / source.name)
+        print(f"Synced Android strings to {android_res}")
+
+    if not args.no_ios:
+        ios_resources = args.ios / "Sources/YallaResourcesIOS/Resources"
+        copy_file(
+            generated / "ios/YallaResourcesIOS/Resources/Localizable.xcstrings",
+            ios_resources / "Localizable.xcstrings",
+        )
+        print(f"Synced iOS strings to {ios_resources}")
+
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -197,11 +251,36 @@ def main() -> int:
     generate_parser = subparsers.add_parser("generate")
     generate_parser.add_argument("--out", type=Path, default=ROOT / "build/generated")
 
+    sync_parser = subparsers.add_parser("sync")
+    sync_parser.add_argument(
+        "--cmp",
+        type=Path,
+        default=DEFAULT_WORKSPACE / "yalla-sdk",
+        help="Path to the yalla-sdk repo. Use --no-cmp to skip.",
+    )
+    sync_parser.add_argument(
+        "--android",
+        type=Path,
+        default=DEFAULT_WORKSPACE / "yalla-sdk-android",
+        help="Path to the yalla-sdk-android repo. Use --no-android to skip.",
+    )
+    sync_parser.add_argument(
+        "--ios",
+        type=Path,
+        default=DEFAULT_WORKSPACE / "yalla-sdk-ios",
+        help="Path to the yalla-sdk-ios repo. Use --no-ios to skip.",
+    )
+    sync_parser.add_argument("--no-cmp", action="store_true")
+    sync_parser.add_argument("--no-android", action="store_true")
+    sync_parser.add_argument("--no-ios", action="store_true")
+
     args = parser.parse_args()
     if args.command == "validate":
         return validate(args.strict)
     if args.command == "generate":
         return generate(args.out)
+    if args.command == "sync":
+        return sync(args)
     return 2
 
 
