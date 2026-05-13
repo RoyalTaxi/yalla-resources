@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import os
 import re
 import shutil
+import subprocess
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -13,9 +15,31 @@ ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PATH = ROOT / "strings/catalog.json"
 DEFAULT_WORKSPACE = ROOT.parent
 ICON_DIR = ROOT / "assets/icons"
+ANDROID_VECTOR_TOOL_DIR = ROOT / "build/android-vector-tool"
 
 PLACEHOLDER = re.compile(r"\{(\d+)\}")
 ICON_NAME = re.compile(r"^ic_[a-z0-9]+(?:_[a-z0-9]+)*\.svg$")
+
+ANDROID_VECTOR_RUNNER = """\
+import com.android.ide.common.vectordrawable.Svg2Vector;
+import java.io.FileOutputStream;
+import java.nio.file.Path;
+
+public final class YallaSvgToVector {
+    public static void main(String[] args) throws Exception {
+        if (args.length != 2) {
+            throw new IllegalArgumentException("Usage: YallaSvgToVector <input.svg> <output.xml>");
+        }
+
+        try (FileOutputStream out = new FileOutputStream(args[1])) {
+            String messages = Svg2Vector.parseSvgToXml(Path.of(args[0]), out);
+            if (!messages.isEmpty()) {
+                System.err.print(messages);
+            }
+        }
+    }
+}
+"""
 
 COMPOSE_LOCALE_DIRS = {
     "default": "values",
@@ -51,11 +75,13 @@ def placeholders(value: str) -> list[str]:
 
 
 def android_format(value: str) -> str:
-    return PLACEHOLDER.sub(lambda match: f"%{int(match.group(1)) + 1}$s", value)
+    escaped = value.replace("%", "%%")
+    return PLACEHOLDER.sub(lambda match: f"%{int(match.group(1)) + 1}$s", escaped)
 
 
 def ios_format(value: str) -> str:
-    return PLACEHOLDER.sub(lambda match: f"%{int(match.group(1)) + 1}$@", value)
+    escaped = value.replace("%", "%%")
+    return PLACEHOLDER.sub(lambda match: f"%{int(match.group(1)) + 1}$@", escaped)
 
 
 def xml_text(value: str) -> str:
@@ -70,6 +96,63 @@ def android_text(value: str) -> str:
 def write(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content)
+
+
+def version_key(version: str) -> tuple[str, ...]:
+    parts = re.split(r"[.-]", version)
+    return tuple(part.zfill(8) if part.isdigit() else part for part in parts)
+
+
+def find_module_jar(group: str, artifact: str, version=None) -> tuple[Path, str]:
+    module_dir = Path.home() / ".gradle/caches/modules-2/files-2.1" / group / artifact
+    if not module_dir.exists():
+        raise RuntimeError(f"Gradle cache is missing {group}:{artifact}")
+
+    versions = [version] if version else sorted(
+        [path.name for path in module_dir.iterdir() if path.is_dir()],
+        key=version_key,
+        reverse=True,
+    )
+
+    for candidate_version in versions:
+        for jar in sorted((module_dir / candidate_version).glob(f"*/{artifact}-{candidate_version}.jar")):
+            return jar, candidate_version
+
+    requested = f":{version}" if version else ""
+    raise RuntimeError(f"Gradle cache is missing {group}:{artifact}{requested} jar")
+
+
+def android_vector_classpath() -> tuple[list[Path], str]:
+    sdk_common, sdk_version = find_module_jar("com.android.tools", "sdk-common")
+    common, _ = find_module_jar("com.android.tools", "common", sdk_version)
+    annotations, _ = find_module_jar("com.android.tools", "annotations", sdk_version)
+    guava, _ = find_module_jar("com.google.guava", "guava")
+    kotlin_stdlib, _ = find_module_jar("org.jetbrains.kotlin", "kotlin-stdlib")
+    jetbrains_annotations, _ = find_module_jar("org.jetbrains", "annotations")
+    return (
+        [sdk_common, common, annotations, guava, kotlin_stdlib, jetbrains_annotations],
+        sdk_version,
+    )
+
+
+def ensure_android_vector_runner() -> tuple[Path, str]:
+    if not shutil.which("java") or not shutil.which("javac"):
+        raise RuntimeError("Android vector generation requires java and javac on PATH")
+
+    jars, _ = android_vector_classpath()
+    classpath = os.pathsep.join(str(path) for path in jars)
+    source = ANDROID_VECTOR_TOOL_DIR / "YallaSvgToVector.java"
+    class_file = ANDROID_VECTOR_TOOL_DIR / "YallaSvgToVector.class"
+
+    write(source, ANDROID_VECTOR_RUNNER)
+    if not class_file.exists() or source.stat().st_mtime > class_file.stat().st_mtime:
+        subprocess.run(
+            ["javac", "-cp", classpath, str(source)],
+            check=True,
+            cwd=ROOT,
+        )
+
+    return ANDROID_VECTOR_TOOL_DIR, classpath
 
 
 def validate_strings() -> tuple[list[str], list[str]]:
@@ -254,6 +337,56 @@ def generate_icons(out: Path) -> None:
     )
 
 
+def add_generated_comment(path: Path) -> None:
+    content = path.read_text()
+    path.write_text(
+        "<!-- Generated from RoyalTaxi/yalla-resources. Do not edit by hand. -->\n"
+        + content
+    )
+
+
+def generate_android_icons(out: Path) -> None:
+    runner_dir, classpath = ensure_android_vector_runner()
+    drawable_dir = out / "android/res/drawable"
+    if drawable_dir.exists():
+        shutil.rmtree(drawable_dir)
+    drawable_dir.mkdir(parents=True, exist_ok=True)
+
+    warnings = []
+    java_classpath = os.pathsep.join([str(runner_dir), classpath])
+    for source in sorted(ICON_DIR.glob("*.svg")):
+        destination = drawable_dir / f"yalla_{source.stem}.xml"
+        result = subprocess.run(
+            [
+                "java",
+                "-cp",
+                java_classpath,
+                "YallaSvgToVector",
+                str(source),
+                str(destination),
+            ],
+            check=False,
+            capture_output=True,
+            text=True,
+            cwd=ROOT,
+        )
+        if result.returncode != 0:
+            message = result.stderr.strip() or result.stdout.strip()
+            raise RuntimeError(f"{source.relative_to(ROOT)}: Android vector conversion failed: {message}")
+        if not destination.exists() or destination.stat().st_size == 0:
+            raise RuntimeError(f"{source.relative_to(ROOT)}: Android vector conversion produced no output")
+        add_generated_comment(destination)
+        if result.stderr.strip() or result.stdout.strip():
+            warnings.append(source.name)
+
+    if warnings:
+        print(
+            "WARN: Android vector conversion reported SVG feature limitations for "
+            f"{len(warnings)} icon(s): {', '.join(warnings)}",
+            file=sys.stderr,
+        )
+
+
 def generate(out: Path) -> int:
     catalog = load_catalog()
     if out.exists():
@@ -262,6 +395,7 @@ def generate(out: Path) -> int:
     generate_android(out, catalog)
     generate_ios(out, catalog)
     generate_icons(out)
+    generate_android_icons(out)
     print(f"Generated resources into {out}")
     return 0
 
@@ -275,6 +409,14 @@ def clean_generated_android_strings(res_dir: Path) -> None:
     if not res_dir.exists():
         return
     for path in res_dir.glob("values*/yalla_strings.xml"):
+        path.unlink()
+
+
+def clean_generated_android_icons(res_dir: Path) -> None:
+    drawable_dir = res_dir / "drawable"
+    if not drawable_dir.exists():
+        return
+    for path in drawable_dir.glob("yalla_ic_*.xml"):
         path.unlink()
 
 
@@ -307,9 +449,13 @@ def sync(args: argparse.Namespace) -> int:
     if not args.no_android:
         android_res = args.android / "sdk/src/main/res"
         clean_generated_android_strings(android_res)
+        clean_generated_android_icons(android_res)
         for source in (generated / "android/res").glob("values*/yalla_strings.xml"):
             copy_file(source, android_res / source.parent.name / source.name)
+        for source in (generated / "android/res/drawable").glob("yalla_ic_*.xml"):
+            copy_file(source, android_res / "drawable" / source.name)
         print(f"Synced Android strings to {android_res}")
+        print(f"Synced Android icons to {android_res / 'drawable'}")
 
     if not args.no_ios:
         ios_resources = args.ios / "Sources/YallaResourcesIOS/Resources"

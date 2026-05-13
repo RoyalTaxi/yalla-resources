@@ -23,6 +23,7 @@ strings/catalog.json
 
 assets/icons/*.svg
     +-> Compose Multiplatform valkyrieResources/*.svg
+    +-> Android VectorDrawable res/drawable/yalla_ic_*.xml
     +-> iOS bundled Resources/Icons/*.svg
 ```
 
@@ -55,6 +56,10 @@ Generate sample outputs into `build/generated`:
 ```bash
 python3 tools/yalla_resources.py generate --out build/generated
 ```
+
+Android icon generation uses the Android Gradle Plugin `Svg2Vector` converter
+from the local Gradle cache, so run an Android build once if the converter jars
+are not present yet.
 
 Sync generated outputs into sibling repos:
 
