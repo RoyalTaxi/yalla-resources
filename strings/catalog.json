@@ -1,0 +1,2834 @@
+{
+  "version": 1,
+  "sourceLocale": "uz-Latn",
+  "locales": {
+    "default": {
+      "name": "Default fallback",
+      "source": "composeResources/values",
+      "nativeLocale": null
+    },
+    "en": {
+      "name": "English",
+      "source": "composeResources/values-en",
+      "nativeLocale": "en"
+    },
+    "ru": {
+      "name": "Russian",
+      "source": "composeResources/values-ru",
+      "nativeLocale": "ru"
+    },
+    "uz-Latn": {
+      "name": "Uzbek Latin",
+      "source": "composeResources/values-uz",
+      "nativeLocale": "uz-Latn"
+    },
+    "uz-Cyrl": {
+      "name": "Uzbek Cyrillic",
+      "source": "composeResources/values-be",
+      "nativeLocale": "uz-Cyrl",
+      "note": "Compose Multiplatform currently stores this as values-be."
+    }
+  },
+  "strings": {
+    "app_name": {
+      "translatable": false,
+      "values": {
+        "default": "Yalla"
+      }
+    },
+    "language_english": {
+      "translatable": false,
+      "values": {
+        "default": "English"
+      }
+    },
+    "language_russian": {
+      "translatable": false,
+      "values": {
+        "default": "Русский"
+      }
+    },
+    "language_uzbek_cyrillic": {
+      "translatable": false,
+      "values": {
+        "default": "Ўзбек"
+      }
+    },
+    "language_uzbek_latin": {
+      "translatable": false,
+      "values": {
+        "default": "O'zbek"
+      }
+    },
+    "social_instagram": {
+      "translatable": false,
+      "values": {
+        "default": "Instagram"
+      }
+    },
+    "social_telegram": {
+      "translatable": false,
+      "values": {
+        "default": "Telegram"
+      }
+    },
+    "auth_phone_country_code": {
+      "translatable": false,
+      "values": {
+        "default": "+998"
+      }
+    },
+    "auth_phone_placeholder": {
+      "translatable": false,
+      "values": {
+        "default": "(_ _) _ _ _  _ _  _ _"
+      }
+    },
+    "payment_card_humo_format": {
+      "translatable": false,
+      "values": {
+        "default": "Humo ----{0}"
+      }
+    },
+    "payment_card_uzcard_format": {
+      "translatable": false,
+      "values": {
+        "default": "Uzcard ----{0}"
+      }
+    },
+    "payment_date_default": {
+      "translatable": false,
+      "values": {
+        "default": "01/24"
+      }
+    },
+    "format_distance_km": {
+      "translatable": false,
+      "values": {
+        "default": "{0} km"
+      }
+    },
+    "format_percent": {
+      "translatable": false,
+      "values": {
+        "default": "{0} %"
+      }
+    },
+    "common_action_activate": {
+      "translatable": true,
+      "values": {
+        "default": "Faollashtirish",
+        "en": "Activate",
+        "ru": "Активировать",
+        "uz-Latn": "Faollashtirish",
+        "uz-Cyrl": "Фаоллаштириш"
+      }
+    },
+    "common_action_all": {
+      "translatable": true,
+      "values": {
+        "default": "Barchasi",
+        "en": "All",
+        "ru": "Все",
+        "uz-Latn": "Barchasi",
+        "uz-Cyrl": "Барчаси"
+      }
+    },
+    "common_action_allow": {
+      "translatable": true,
+      "values": {
+        "default": "Ruxsat berish",
+        "en": "Allow",
+        "ru": "Разрешить",
+        "uz-Latn": "Ruxsat berish",
+        "uz-Cyrl": "Рухсат бериш"
+      }
+    },
+    "common_action_cancel": {
+      "translatable": true,
+      "values": {
+        "default": "Bekor qilish",
+        "en": "Cancel",
+        "ru": "Отменить",
+        "uz-Latn": "Bekor qilish",
+        "uz-Cyrl": "Бекор қилиш"
+      }
+    },
+    "common_action_confirm": {
+      "translatable": true,
+      "values": {
+        "default": "Tasdiqlash",
+        "en": "Confirm",
+        "ru": "Подтвердить",
+        "uz-Latn": "Tasdiqlash",
+        "uz-Cyrl": "Тасдиқлаш"
+      }
+    },
+    "common_action_delete": {
+      "translatable": true,
+      "values": {
+        "default": "O'chirish",
+        "en": "Delete",
+        "ru": "Удалить",
+        "uz-Latn": "Oʻchirish",
+        "uz-Cyrl": "Ўчириш"
+      }
+    },
+    "common_action_edit": {
+      "translatable": true,
+      "values": {
+        "default": "Tahrirlash",
+        "en": "Edit",
+        "ru": "Изменить",
+        "uz-Latn": "Tahrirlash",
+        "uz-Cyrl": "Таҳрирлаш"
+      }
+    },
+    "common_action_next": {
+      "translatable": true,
+      "values": {
+        "default": "Keyingi",
+        "en": "Next",
+        "ru": "Далее",
+        "uz-Latn": "Keyingi",
+        "uz-Cyrl": "Кейинги"
+      }
+    },
+    "common_action_start": {
+      "translatable": true,
+      "values": {
+        "default": "Boshlash",
+        "en": "Get Started",
+        "ru": "Начать",
+        "uz-Latn": "Boshlash",
+        "uz-Cyrl": "Бошлаш"
+      }
+    },
+    "common_action_save": {
+      "translatable": true,
+      "values": {
+        "default": "Saqlash",
+        "en": "Save",
+        "ru": "Сохранить",
+        "uz-Latn": "Saqlash",
+        "uz-Cyrl": "Сақлаш"
+      }
+    },
+    "common_action_select": {
+      "translatable": true,
+      "values": {
+        "default": "Tanlash",
+        "en": "Select",
+        "ru": "Выбрать",
+        "uz-Latn": "Tanlash",
+        "uz-Cyrl": "Танлаш"
+      }
+    },
+    "common_action_send": {
+      "translatable": true,
+      "values": {
+        "default": "Yuborish",
+        "en": "Send",
+        "ru": "Отправить",
+        "uz-Latn": "Yuborish",
+        "uz-Cyrl": "Юбориш"
+      }
+    },
+    "common_action_skip": {
+      "translatable": true,
+      "values": {
+        "default": "O'tkazib yuborish",
+        "en": "Skip",
+        "ru": "Пропустить",
+        "uz-Latn": "Oʻtkazib yuborish",
+        "uz-Cyrl": "Ўтказиб юбориш"
+      }
+    },
+    "common_action_use": {
+      "translatable": true,
+      "values": {
+        "default": "Foydalanish",
+        "en": "Use",
+        "ru": "Использовать",
+        "uz-Latn": "Foydalanish",
+        "uz-Cyrl": "Фойдаланиш"
+      }
+    },
+    "common_status_loading": {
+      "translatable": true,
+      "values": {
+        "default": "Yuklanmoqda",
+        "en": "Loading",
+        "ru": "Загрузка",
+        "uz-Latn": "Yuklanmoqda",
+        "uz-Cyrl": "Юкланмоқда"
+      }
+    },
+    "common_status_ready": {
+      "translatable": true,
+      "values": {
+        "default": "Tayyor",
+        "en": "Ready",
+        "ru": "Готово",
+        "uz-Latn": "Tayyor",
+        "uz-Cyrl": "Тайёр"
+      }
+    },
+    "common_status_searching": {
+      "translatable": true,
+      "values": {
+        "default": "Qidirilmoqda",
+        "en": "Searching",
+        "ru": "Поиск",
+        "uz-Latn": "Qidirilmoqda",
+        "uz-Cyrl": "Қидирилмоқда"
+      }
+    },
+    "common_label_details": {
+      "translatable": true,
+      "values": {
+        "default": "Tafsilotlar",
+        "en": "Details",
+        "ru": "Детали",
+        "uz-Latn": "Tafsilotlar",
+        "uz-Cyrl": "Тафсилотлар"
+      }
+    },
+    "common_label_status": {
+      "translatable": true,
+      "values": {
+        "default": "Holat",
+        "en": "Status",
+        "ru": "Статус",
+        "uz-Latn": "Holat",
+        "uz-Cyrl": "Ҳолат"
+      }
+    },
+    "format_currency_sum": {
+      "translatable": true,
+      "values": {
+        "default": "{0} so'm",
+        "en": "{0} sum",
+        "ru": "{0} сум",
+        "uz-Latn": "{0} soʻm",
+        "uz-Cyrl": "{0} сўм"
+      }
+    },
+    "format_currency_range": {
+      "translatable": true,
+      "values": {
+        "default": "{0} dan {1} gacha",
+        "en": "from {0} to {1}",
+        "ru": "от {0} до {1}",
+        "uz-Latn": "{0} dan {1} gacha",
+        "uz-Cyrl": "{0} дан {1} гача"
+      }
+    },
+    "format_time_min": {
+      "translatable": true,
+      "values": {
+        "default": "{0} daq",
+        "en": "{0} min",
+        "ru": "{0} мин",
+        "uz-Latn": "{0} daq",
+        "uz-Cyrl": "{0} мин"
+      }
+    },
+    "format_time_min_short": {
+      "translatable": true,
+      "values": {
+        "default": "daq",
+        "en": "min",
+        "ru": "мин",
+        "uz-Latn": "daq",
+        "uz-Cyrl": "дақ"
+      }
+    },
+    "format_percent_up_to": {
+      "translatable": true,
+      "values": {
+        "default": "{0}% gacha",
+        "en": "Up to {0}%",
+        "ru": "До {0}%",
+        "uz-Latn": "{0}% gacha",
+        "uz-Cyrl": "{0}% гача"
+      }
+    },
+    "auth_welcome_title": {
+      "translatable": true,
+      "values": {
+        "default": "Xush kelibsiz!",
+        "en": "Welcome!",
+        "ru": "Добро пожаловать!",
+        "uz-Latn": "Xush kelibsiz!",
+        "uz-Cyrl": "Хуш келибсиз!"
+      }
+    },
+    "auth_welcome_description": {
+      "translatable": true,
+      "values": {
+        "default": "Davom etish uchun telefon raqamingizni kiriting.",
+        "en": "Enter your phone number to continue.",
+        "ru": "Введите номер телефона, чтобы продолжить.",
+        "uz-Latn": "Davom etish uchun telefon raqamingizni kiriting.",
+        "uz-Cyrl": "Давом этиш учун телефон рақамингизни киритинг."
+      }
+    },
+    "auth_welcome_sms_hint": {
+      "translatable": true,
+      "values": {
+        "default": "Raqamingizga tasdiqlash kodi bilan SMS yuboriladi.",
+        "en": "A verification code will be sent to your number via SMS.",
+        "ru": "На ваш номер будет отправлено SMS с кодом подтверждения.",
+        "uz-Latn": "Raqamingizga tasdiqlash kodi bilan SMS yuboriladi.",
+        "uz-Cyrl": "Рақамингизга тасдиқлаш коди билан СМС юборилади."
+      }
+    },
+    "auth_privacy_policy_agreement": {
+      "translatable": true,
+      "values": {
+        "default": "Davom etish orqali maxfiylik siyosatimiz bilan rozilik bildirasiz.",
+        "en": "By continuing, you agree to our Privacy Policy.",
+        "ru": "Продолжая, вы соглашаетесь с нашей политикой конфиденциальности."
+      }
+    },
+    "auth_privacy_policy_link": {
+      "translatable": true,
+      "values": {
+        "default": "maxfiylik siyosatimiz",
+        "en": "Privacy Policy",
+        "ru": "политикой конфиденциальности"
+      }
+    },
+    "auth_otp_title": {
+      "translatable": true,
+      "values": {
+        "default": "Xavfsizlik kodi",
+        "en": "Security Code",
+        "ru": "Код безопасности",
+        "uz-Latn": "Xavfsizlik kodi",
+        "uz-Cyrl": "Хавфсизлик коди"
+      }
+    },
+    "auth_otp_description": {
+      "translatable": true,
+      "values": {
+        "default": "Iltimos, +998{0} raqamiga yuborilgan {1} xonali kodni kiriting.",
+        "en": "Enter the {1}-digit code sent to +998{0}.",
+        "ru": "Введите {1}-значный код, отправленный на номер +998{0}.",
+        "uz-Latn": "Iltimos, +998{0} raqamiga yuborilgan {1} xonali kodni kiriting.",
+        "uz-Cyrl": "Илтимос, +998{0} рақамига юборилган {1} хонали кодни киритинг."
+      }
+    },
+    "auth_otp_resend": {
+      "translatable": true,
+      "values": {
+        "default": "Kodni qayta yuborish",
+        "en": "Resend code",
+        "ru": "Отправить код ещё раз",
+        "uz-Latn": "Kodni qayta yuborish",
+        "uz-Cyrl": "Кодни қайта юбориш"
+      }
+    },
+    "auth_otp_resend_countdown": {
+      "translatable": true,
+      "values": {
+        "default": "{0} soniyadan so'ng kodni qayta yuborish",
+        "en": "Resend code in {0} seconds",
+        "ru": "Отправить код ещё раз через {0} сек",
+        "uz-Latn": "{0} soniyadan soʻng kodni qayta yuborish",
+        "uz-Cyrl": "{0} сониядан сўнг кодни қайта юбориш"
+      }
+    },
+    "auth_required_title": {
+      "translatable": true,
+      "values": {
+        "default": "Davom etish uchun hisobingizga kiring",
+        "en": "Sign in to continue",
+        "ru": "Для продолжения необходимо войти в аккаунт",
+        "uz-Latn": "Davom etish uchun hisobingizga kiring",
+        "uz-Cyrl": "Давом этиш учун ҳисобингизга киринг"
+      }
+    },
+    "auth_required_description": {
+      "translatable": true,
+      "values": {
+        "default": "Bu atigi bir necha daqiqa oladi",
+        "en": "This will only take a few minutes",
+        "ru": "Это займёт всего пару минут",
+        "uz-Latn": "Bu atigi bir necha daqiqa oladi",
+        "uz-Cyrl": "Бу атиги бир неча дақиқа олади"
+      }
+    },
+    "auth_required_action": {
+      "translatable": true,
+      "values": {
+        "default": "Kirish",
+        "en": "Sign In",
+        "ru": "Войти",
+        "uz-Latn": "Kirish",
+        "uz-Cyrl": "Кириш"
+      }
+    },
+    "auth_send_code_error": {
+      "translatable": true,
+      "values": {
+        "default": "Tasdiqlash kodini yuborib bo'lmadi",
+        "en": "Failed to send verification code",
+        "ru": "Не удалось отправить код подтверждения",
+        "uz-Latn": "Tasdiqlash kodini yuborib boʻlmadi",
+        "uz-Cyrl": "Тасдиқлаш кодини юбориб бўлмади"
+      }
+    },
+    "auth_validate_code_error": {
+      "translatable": true,
+      "values": {
+        "default": "Tasdiqlash kodi noto'g'ri",
+        "en": "Invalid verification code",
+        "ru": "Неверный код подтверждения",
+        "uz-Latn": "Tasdiqlash kodi notoʻgʻri",
+        "uz-Cyrl": "Тасдиқлаш коди нотўғри"
+      }
+    },
+    "register_title": {
+      "translatable": true,
+      "values": {
+        "default": "Keling, tanishamiz",
+        "en": "Let's get acquainted",
+        "ru": "Давайте знакомиться",
+        "uz-Latn": "Keling, tanishamiz",
+        "uz-Cyrl": "Келинг, танишамиз"
+      }
+    },
+    "register_subtitle": {
+      "translatable": true,
+      "values": {
+        "default": "Sizga qanday murojaat qilishim mumkin?",
+        "en": "How should we address you?",
+        "ru": "Как к вам обращаться?",
+        "uz-Latn": "Sizga qanday murojaat qilishim mumkin?",
+        "uz-Cyrl": "Сизга қандай мурожаат қилишим мумкин?"
+      }
+    },
+    "register_action": {
+      "translatable": true,
+      "values": {
+        "default": "Ro'yxatdan o'tish",
+        "en": "Register",
+        "ru": "Зарегистрироваться",
+        "uz-Latn": "Roʻyxatdan oʻtish",
+        "uz-Cyrl": "Рўйхатдан ўтиш"
+      }
+    },
+    "register_input_name": {
+      "translatable": true,
+      "values": {
+        "default": "Ismingizni kiriting",
+        "en": "Enter your first name",
+        "ru": "Введите имя",
+        "uz-Latn": "Ismingizni kiriting",
+        "uz-Cyrl": "Исмингизни киритинг"
+      }
+    },
+    "register_input_surname": {
+      "translatable": true,
+      "values": {
+        "default": "Familiyangizni kiriting",
+        "en": "Enter your last name",
+        "ru": "Введите фамилию",
+        "uz-Latn": "Familiyangizni kiriting",
+        "uz-Cyrl": "Фамилиянгизни киритинг"
+      }
+    },
+    "register_input_birthdate": {
+      "translatable": true,
+      "values": {
+        "default": "Tug'ilgan sana",
+        "en": "Date of birth",
+        "ru": "Дата рождения",
+        "uz-Latn": "Tugʻilgan sana",
+        "uz-Cyrl": "Туғилган сана"
+      }
+    },
+    "register_gender_male": {
+      "translatable": true,
+      "values": {
+        "default": "Erkak",
+        "en": "Male",
+        "ru": "Мужчина",
+        "uz-Latn": "Erkak",
+        "uz-Cyrl": "Эркак"
+      }
+    },
+    "register_gender_female": {
+      "translatable": true,
+      "values": {
+        "default": "Ayol",
+        "en": "Female",
+        "ru": "Женщина",
+        "uz-Latn": "Ayol",
+        "uz-Cyrl": "Аёл"
+      }
+    },
+    "register_error": {
+      "translatable": true,
+      "values": {
+        "default": "Ro'yxatdan o'tish muvaffaqiyatsiz yakunlandi",
+        "en": "Registration failed",
+        "ru": "Не удалось завершить регистрацию",
+        "uz-Latn": "Roʻyxatdan oʻtish muvaffaqiyatsiz yakunlandi",
+        "uz-Cyrl": "Рўйхатдан ўтиш муваффақиятсиз якунланди"
+      }
+    },
+    "profile_edit_title": {
+      "translatable": true,
+      "values": {
+        "default": "Profilni tahrirlash",
+        "en": "Edit Profile",
+        "ru": "Редактировать профиль",
+        "uz-Latn": "Profilni tahrirlash",
+        "uz-Cyrl": "Профилни таҳрирлаш"
+      }
+    },
+    "profile_photo_change": {
+      "translatable": true,
+      "values": {
+        "default": "Rasmni o'zgartirish",
+        "en": "Change photo",
+        "ru": "Изменить фото",
+        "uz-Latn": "Rasmni oʻzgartirish",
+        "uz-Cyrl": "Расмни ўзгартириш"
+      }
+    },
+    "profile_photo_take": {
+      "translatable": true,
+      "values": {
+        "default": "Suratga olish",
+        "en": "Take photo",
+        "ru": "Сделать фото",
+        "uz-Latn": "Suratga olish",
+        "uz-Cyrl": "Суратга олиш"
+      }
+    },
+    "profile_photo_gallery": {
+      "translatable": true,
+      "values": {
+        "default": "Galereyadan tanlash",
+        "en": "Choose from gallery",
+        "ru": "Выбрать из галереи",
+        "uz-Latn": "Galereyadan tanlash",
+        "uz-Cyrl": "Галереядан танлаш"
+      }
+    },
+    "profile_photo_delete": {
+      "translatable": true,
+      "values": {
+        "default": "Rasmni o'chirish",
+        "en": "Delete photo",
+        "ru": "Удалить фото",
+        "uz-Latn": "Rasmni oʻchirish",
+        "uz-Cyrl": "Расмни ўчириш"
+      }
+    },
+    "profile_delete_title": {
+      "translatable": true,
+      "values": {
+        "default": "Hisobni o'chirish",
+        "en": "Delete Account",
+        "ru": "Удалить аккаунт",
+        "uz-Latn": "Hisobni oʻchirish",
+        "uz-Cyrl": "Ҳисобни ўчириш"
+      }
+    },
+    "profile_delete_confirm": {
+      "translatable": true,
+      "values": {
+        "default": "Hisobingizni rostdan ham o'chirmoqchimisiz?",
+        "en": "Are you sure you want to delete your account?",
+        "ru": "Вы действительно хотите удалить свой аккаунт?",
+        "uz-Latn": "Hisobingizni rostdan ham oʻchirmoqchimisiz?",
+        "uz-Cyrl": "Ҳисобингизни ростдан ҳам ўчирмоқчимисиз?"
+      }
+    },
+    "profile_delete_warning": {
+      "translatable": true,
+      "values": {
+        "default": "Hisobingiz o'chirilgandan so'ng barcha ma'lumotlar butunlay yo'qoladi va qayta tiklanmaydi.",
+        "en": "Once deleted, all your data will be permanently lost and cannot be recovered.",
+        "ru": "После удаления все данные будут безвозвратно утеряны и не подлежат восстановлению.",
+        "uz-Latn": "Hisobingiz oʻchirilgandan soʻng barcha maʻlumotlar butunlay yoʻqoladi va qayta tiklanmaydi.",
+        "uz-Cyrl": "Ҳисоб ўчирилгандан сўнг барча маълумотлар бутунлай йўқолади ва қайта тикланмайди."
+      }
+    },
+    "profile_delete_action": {
+      "translatable": true,
+      "values": {
+        "default": "Ha, hisobni o'chirish",
+        "en": "Yes, delete account",
+        "ru": "Да, удалить аккаунт",
+        "uz-Latn": "Ha, hisobni oʻchirish",
+        "uz-Cyrl": "Ҳа, ҳисобни ўчириш"
+      }
+    },
+    "profile_logout_title": {
+      "translatable": true,
+      "values": {
+        "default": "Hisobdan chiqish",
+        "en": "Log Out",
+        "ru": "Выйти из аккаунта",
+        "uz-Latn": "Hisobdan chiqish",
+        "uz-Cyrl": "Ҳисобдан чиқиш"
+      }
+    },
+    "profile_logout_confirm": {
+      "translatable": true,
+      "values": {
+        "default": "Hisobdan rostdan ham chiqmoqchimisiz?",
+        "en": "Are you sure you want to log out?",
+        "ru": "Вы действительно хотите выйти?",
+        "uz-Latn": "Hisobdan rostdan ham chiqmoqchimisiz?",
+        "uz-Cyrl": "Ҳисобдан чиқишни ростдан хоҳлайсизми?"
+      }
+    },
+    "profile_logout_description": {
+      "translatable": true,
+      "values": {
+        "default": "Chiqqaningizdan so'ng qaytadan hisobingizga kirishingiz mumkin",
+        "en": "You can log back in anytime after signing out",
+        "ru": "После выхода вы сможете войти снова в любое время",
+        "uz-Latn": "Chiqqaningizdan soʻng qaytadan hisobingizga kirishingiz mumkin",
+        "uz-Cyrl": "Чиққанингиздан сўнг қайтадан ҳисобингизга киришингиз мумкин"
+      }
+    },
+    "profile_logout_action": {
+      "translatable": true,
+      "values": {
+        "default": "Ha, hisobdan chiqish",
+        "en": "Yes, log out",
+        "ru": "Да, выйти",
+        "uz-Latn": "Ha, hisobdan chiqish",
+        "uz-Cyrl": "Ҳа, ҳисобдан чиқиш"
+      }
+    },
+    "profile_update_success": {
+      "translatable": true,
+      "values": {
+        "default": "Profil muvaffaqiyatli yangilandi",
+        "en": "Profile updated successfully",
+        "ru": "Профиль успешно обновлён",
+        "uz-Latn": "Profil muvaffaqiyatli yangilandi",
+        "uz-Cyrl": "Профил муваффақиятли янгиланди"
+      }
+    },
+    "profile_update_error": {
+      "translatable": true,
+      "values": {
+        "default": "Profilni yangilab bo'lmadi",
+        "en": "Failed to update profile",
+        "ru": "Не удалось обновить профиль",
+        "uz-Latn": "Profilni yangilab boʻlmadi",
+        "uz-Cyrl": "Профилни янгилаб бўлмади"
+      }
+    },
+    "profile_avatar_update_success": {
+      "translatable": true,
+      "values": {
+        "default": "Profil rasmi muvaffaqiyatli yangilandi",
+        "en": "Profile photo updated successfully",
+        "ru": "Фото профиля успешно обновлено",
+        "uz-Latn": "Profil rasmi muvaffaqiyatli yangilandi",
+        "uz-Cyrl": "Профил расми муваффақиятли янгиланди"
+      }
+    },
+    "profile_avatar_update_error": {
+      "translatable": true,
+      "values": {
+        "default": "Profil rasmini yangilab bo'lmadi",
+        "en": "Failed to update profile photo",
+        "ru": "Не удалось обновить фото профиля",
+        "uz-Latn": "Profil rasmini yangilab boʻlmadi",
+        "uz-Cyrl": "Профил расмини янгилаб бўлмади"
+      }
+    },
+    "profile_form_incomplete": {
+      "translatable": true,
+      "values": {
+        "default": "Barcha maydonlarni to'ldiring",
+        "en": "Please fill in all fields",
+        "ru": "Заполните все поля",
+        "uz-Latn": "Barcha maydonlarni toʻldiring",
+        "uz-Cyrl": "Барча майдонларни тўлдиринг"
+      }
+    },
+    "intro_language_title": {
+      "translatable": true,
+      "values": {
+        "default": "Ilova tilini tanlang",
+        "en": "Select app language",
+        "ru": "Выберите язык приложения",
+        "uz-Latn": "Ilova tilini tanlang",
+        "uz-Cyrl": "Илова тилини танланг"
+      }
+    },
+    "intro_language_subtitle": {
+      "translatable": true,
+      "values": {
+        "default": "Keyinroq Sozlamalarda oʻzgartirishingiz mumkin",
+        "en": "You can change this later in Settings",
+        "ru": "Вы сможете изменить это позже в настройках",
+        "uz-Latn": "Keyinroq Sozlamalarda oʻzgartirishingiz mumkin",
+        "uz-Cyrl": "Кейинроқ Созламаларда ўзгартиришингиз мумкин"
+      }
+    },
+    "intro_location_title": {
+      "translatable": true,
+      "values": {
+        "default": "Joylashuv",
+        "en": "Location",
+        "ru": "Местоположение",
+        "uz-Latn": "Joylashuv",
+        "uz-Cyrl": "Жойлашув"
+      }
+    },
+    "intro_location_description": {
+      "translatable": true,
+      "values": {
+        "default": "Aniq buyurtma berish uchun joylashuvingizni ko'rsating.",
+        "en": "Share your location for accurate ride requests.",
+        "ru": "Укажите своё местоположение для точного оформления заказа.",
+        "uz-Latn": "Aniq buyurtma berish uchun joylashuvingizni koʻrsating.",
+        "uz-Cyrl": "Аниқ буюртма бериш учун жойлашувингизни кўрсатинг."
+      }
+    },
+    "location_gps_title": {
+      "translatable": true,
+      "values": {
+        "default": "GPS-ni\\nyoqing",
+        "en": "Enable\\nGPS",
+        "ru": "Включите\\nGPS",
+        "uz-Latn": "GPS-ni\\nyoqing",
+        "uz-Cyrl": "GPS-ни\\nёқинг"
+      }
+    },
+    "location_gps_subtitle": {
+      "translatable": true,
+      "values": {
+        "default": "Sizning vaqtingiz — bizning tezligimiz",
+        "en": "Your time — our speed",
+        "ru": "Ваше время — наша скорость",
+        "uz-Latn": "Sizning vaqtingiz — bizning tezligimiz",
+        "uz-Cyrl": "Сизнинг вақтингиз — бизнинг тезлигимиз"
+      }
+    },
+    "location_permission_title": {
+      "translatable": true,
+      "values": {
+        "default": "Joylashuvni yoqing",
+        "en": "Enable Location",
+        "ru": "Включите местоположение",
+        "uz-Latn": "Joylashuvni yoqing",
+        "uz-Cyrl": "Жойлашувни ёқинг"
+      }
+    },
+    "location_permission_description": {
+      "translatable": true,
+      "values": {
+        "default": "Aniq chaqiruv uchun joylashuvingizni taqdim eting.",
+        "en": "Share your location for accurate pickup.",
+        "ru": "Отправьте своё местоположение для точной подачи.",
+        "uz-Latn": "Aniq chaqiruv uchun joylashuvingizni taqdim eting.",
+        "uz-Cyrl": "Аниқ чақирув учун жойлашувингизни тақдим этинг."
+      }
+    },
+    "location_permission_action": {
+      "translatable": true,
+      "values": {
+        "default": "Ruxsat berish",
+        "en": "Allow",
+        "ru": "Разрешить",
+        "uz-Latn": "Ruxsat berish",
+        "uz-Cyrl": "Рухсат бериш"
+      }
+    },
+    "intro_notification_title": {
+      "translatable": true,
+      "values": {
+        "default": "Bildirishnomalar",
+        "en": "Notifications",
+        "ru": "Уведомления",
+        "uz-Latn": "Bildirishnomalar",
+        "uz-Cyrl": "Билдиришномалар"
+      }
+    },
+    "intro_notification_description": {
+      "translatable": true,
+      "values": {
+        "default": "Bildirishnomalar yuborish uchun ruxsat bering",
+        "en": "Allow notifications to stay updated on your rides",
+        "ru": "Разрешите отправку уведомлений",
+        "uz-Latn": "Bildirishnomalar yuborish uchun ruxsat bering",
+        "uz-Cyrl": "Билдиришномалар юбориш учун рухсат беринг"
+      }
+    },
+    "intro_onboarding_1_title": {
+      "translatable": true,
+      "values": {
+        "default": "Tez va qulay",
+        "en": "Fast and Convenient",
+        "ru": "Быстро и удобно",
+        "uz-Latn": "Tez va qulay",
+        "uz-Cyrl": "Тез ва қулай"
+      }
+    },
+    "intro_onboarding_1_description": {
+      "translatable": true,
+      "values": {
+        "default": "Safarni buyurtma qiling — Yalla bir necha soniyada eng yaqin haydovchini topadi.",
+        "en": "Order a ride — Yalla finds the nearest driver in seconds.",
+        "ru": "Закажите поездку — Yalla мгновенно найдёт ближайшего водителя.",
+        "uz-Latn": "Safarni buyurtma qiling — Yalla bir necha soniyada eng yaqin haydovchini topadi.",
+        "uz-Cyrl": "Сафарни буюртма қилинг — Yalla бир неча сонияда энг яқин ҳайдовчини топади."
+      }
+    },
+    "intro_onboarding_2_title": {
+      "translatable": true,
+      "values": {
+        "default": "Ishonchli haydovchilar",
+        "en": "Trusted Drivers",
+        "ru": "Надёжные водители",
+        "uz-Latn": "Ishonchli haydovchilar",
+        "uz-Cyrl": "Ишончли ҳайдовчилар"
+      }
+    },
+    "intro_onboarding_2_description": {
+      "translatable": true,
+      "values": {
+        "default": "Yalladagi har bir haydovchi tekshiruvdan o'tgan va yuqori reytingga ega.",
+        "en": "Every Yalla driver is verified and highly rated.",
+        "ru": "Каждый водитель Yalla проверен и имеет высокий рейтинг.",
+        "uz-Latn": "Yalladagi har bir haydovchi tekshiruvdan oʻtgan va yuqori reytingga ega.",
+        "uz-Cyrl": "Yallaдаги ҳар бир ҳайдовчи текширувдан ўтган ва юқори рейтингга эга."
+      }
+    },
+    "intro_onboarding_3_title": {
+      "translatable": true,
+      "values": {
+        "default": "Shaffof narx",
+        "en": "Transparent Pricing",
+        "ru": "Прозрачная цена",
+        "uz-Latn": "Shaffof narx",
+        "uz-Cyrl": "Шаффоф нарх"
+      }
+    },
+    "intro_onboarding_3_description": {
+      "translatable": true,
+      "values": {
+        "default": "Safar boshlanishidan oldin narxni bilib oling — yashirin to'lovlar va kutilmagan xarajatlarsiz.",
+        "en": "Know the cost before your trip — no hidden fees or surprises.",
+        "ru": "Узнайте стоимость до начала поездки — без скрытых платежей и сюрпризов.",
+        "uz-Latn": "Safar boshlanishidan oldin narxni bilib oling — yashirin toʻlovlar va kutilmagan xarajatlarsiz.",
+        "uz-Cyrl": "Сафар бошланишидан олдин нархни билиб олинг — яширин тўловлар ва кутилмаган харажатлар йўқ."
+      }
+    },
+    "intro_onboarding_4_title": {
+      "translatable": true,
+      "values": {
+        "default": "Qulay to'lov",
+        "en": "Easy Payment",
+        "ru": "Удобная оплата",
+        "uz-Latn": "Qulay toʻlov",
+        "uz-Cyrl": "Қулай тўлов"
+      }
+    },
+    "intro_onboarding_4_description": {
+      "translatable": true,
+      "values": {
+        "default": "O'zingizga qulay usulda to'lang — karta yoki naqd pul bilan. Yalla bilan hammasi oson.",
+        "en": "Pay your way — by card or cash. It's simple with Yalla.",
+        "ru": "Платите, как удобно — картой или наличными. С Yalla всё просто.",
+        "uz-Latn": "Oʻzingizga qulay usulda toʻlang — karta yoki naqd pul bilan. Yalla bilan hammasi oson.",
+        "uz-Cyrl": "Ўзингизга қулай усулда тўланг — карта ёки нақд пул билан. Yalla билан ҳаммаси осон."
+      }
+    },
+    "settings_title": {
+      "translatable": true,
+      "values": {
+        "default": "Sozlamalar",
+        "en": "Settings",
+        "ru": "Настройки",
+        "uz-Latn": "Sozlamalar",
+        "uz-Cyrl": "Созламалар"
+      }
+    },
+    "settings_language": {
+      "translatable": true,
+      "values": {
+        "default": "Ilova tili",
+        "en": "App Language",
+        "ru": "Язык приложения",
+        "uz-Latn": "Ilova tili",
+        "uz-Cyrl": "Илова тили"
+      }
+    },
+    "settings_theme": {
+      "translatable": true,
+      "values": {
+        "default": "Ilova mavzusi",
+        "en": "App Theme",
+        "ru": "Тема приложения",
+        "uz-Latn": "Ilova mavzusi",
+        "uz-Cyrl": "Илова мавзуси"
+      }
+    },
+    "settings_theme_light": {
+      "translatable": true,
+      "values": {
+        "default": "Yorug' mavzu",
+        "en": "Light Mode",
+        "ru": "Светлая тема",
+        "uz-Latn": "Yorugʻ mavzu",
+        "uz-Cyrl": "Ёруғ мавзу"
+      }
+    },
+    "settings_theme_dark": {
+      "translatable": true,
+      "values": {
+        "default": "Qorong'i mavzu",
+        "en": "Dark Mode",
+        "ru": "Тёмная тема",
+        "uz-Latn": "Qorongʻi mavzu",
+        "uz-Cyrl": "Тунги мавзу"
+      }
+    },
+    "settings_theme_system": {
+      "translatable": true,
+      "values": {
+        "default": "Tizim bo'yicha",
+        "en": "System Default",
+        "ru": "Системная",
+        "uz-Latn": "Tizim boʻyicha",
+        "uz-Cyrl": "Тизим бўйича"
+      }
+    },
+    "settings_map": {
+      "translatable": true,
+      "values": {
+        "default": "Ilova xaritasi",
+        "en": "App Map",
+        "ru": "Карта приложения",
+        "uz-Latn": "Ilova xaritasi",
+        "uz-Cyrl": "Илова харитаси"
+      }
+    },
+    "settings_map_google": {
+      "translatable": true,
+      "values": {
+        "default": "Google xarita",
+        "en": "Google Maps",
+        "ru": "Google Карты",
+        "uz-Latn": "Google xarita",
+        "uz-Cyrl": "Google харита"
+      }
+    },
+    "settings_map_libre": {
+      "translatable": true,
+      "values": {
+        "default": "MapLibre xarita",
+        "en": "MapLibre Maps",
+        "ru": "MapLibre Карты",
+        "uz-Latn": "MapLibre xarita",
+        "uz-Cyrl": "MapLibre харита"
+      }
+    },
+    "places_title": {
+      "translatable": true,
+      "values": {
+        "default": "Mening manzillarim",
+        "en": "My Addresses",
+        "ru": "Мои адреса",
+        "uz-Latn": "Mening manzillarim",
+        "uz-Cyrl": "Менинг манзилларим"
+      }
+    },
+    "places_add_hint": {
+      "translatable": true,
+      "values": {
+        "default": "Tez buyurtma qilish uchun manzil qo'shing",
+        "en": "Add an address for quick ordering",
+        "ru": "Добавьте адрес для быстрого заказа",
+        "uz-Latn": "Tez buyurtma qilish uchun manzil qoʻshing",
+        "uz-Cyrl": "Тез буюртма қилиш учун манзил қўшинг"
+      }
+    },
+    "places_type_home": {
+      "translatable": true,
+      "values": {
+        "default": "Uy",
+        "en": "Home",
+        "ru": "Дом",
+        "uz-Latn": "Uy",
+        "uz-Cyrl": "Уй"
+      }
+    },
+    "places_type_work": {
+      "translatable": true,
+      "values": {
+        "default": "Ish",
+        "en": "Work",
+        "ru": "Работа",
+        "uz-Latn": "Ish",
+        "uz-Cyrl": "Иш"
+      }
+    },
+    "places_type_office": {
+      "translatable": true,
+      "values": {
+        "default": "Ofis",
+        "en": "Office",
+        "ru": "Офис",
+        "uz-Latn": "Ofis",
+        "uz-Cyrl": "Офис"
+      }
+    },
+    "places_type_other": {
+      "translatable": true,
+      "values": {
+        "default": "Boshqa",
+        "en": "Other",
+        "ru": "Другое",
+        "uz-Latn": "Boshqa",
+        "uz-Cyrl": "Бошқа"
+      }
+    },
+    "places_type_favorite": {
+      "translatable": true,
+      "values": {
+        "default": "Sevimli",
+        "en": "Favorite",
+        "ru": "Избранное",
+        "uz-Latn": "Sevimli",
+        "uz-Cyrl": "Севимли"
+      }
+    },
+    "places_form_new": {
+      "translatable": true,
+      "values": {
+        "default": "Yangi manzil",
+        "en": "New Address",
+        "ru": "Новый адрес",
+        "uz-Latn": "Yangi manzil",
+        "uz-Cyrl": "Янги манзил"
+      }
+    },
+    "places_form_edit": {
+      "translatable": true,
+      "values": {
+        "default": "Manzilni tahrirlash",
+        "en": "Edit Address",
+        "ru": "Редактировать адрес",
+        "uz-Latn": "Manzilni tahrirlash",
+        "uz-Cyrl": "Манзилни таҳрирлаш"
+      }
+    },
+    "places_form_address_hint": {
+      "translatable": true,
+      "values": {
+        "default": "Manzilni kiriting",
+        "en": "Enter address",
+        "ru": "Введите адрес",
+        "uz-Latn": "Manzilni kiriting",
+        "uz-Cyrl": "Манзилни киритинг"
+      }
+    },
+    "places_form_name": {
+      "translatable": true,
+      "values": {
+        "default": "Manzil nomi",
+        "en": "Address name",
+        "ru": "Название адреса",
+        "uz-Latn": "Manzil nomi",
+        "uz-Cyrl": "Манзил номи"
+      }
+    },
+    "places_form_building": {
+      "translatable": true,
+      "values": {
+        "default": "Uy raqami",
+        "en": "Building number",
+        "ru": "Номер дома",
+        "uz-Latn": "Uy raqami",
+        "uz-Cyrl": "Уй рақами"
+      }
+    },
+    "places_form_entrance": {
+      "translatable": true,
+      "values": {
+        "default": "Kirish",
+        "en": "Entrance",
+        "ru": "Подъезд",
+        "uz-Latn": "Kirish",
+        "uz-Cyrl": "Кириш"
+      }
+    },
+    "places_form_comment": {
+      "translatable": true,
+      "values": {
+        "default": "Izoh",
+        "en": "Comment",
+        "ru": "Комментарий",
+        "uz-Latn": "Izoh",
+        "uz-Cyrl": "Изоҳ"
+      }
+    },
+    "places_delete_title": {
+      "translatable": true,
+      "values": {
+        "default": "Manzilni o'chirish",
+        "en": "Delete Address",
+        "ru": "Удалить адрес",
+        "uz-Latn": "Manzilni oʻchirish",
+        "uz-Cyrl": "Манзилни ўчириш"
+      }
+    },
+    "places_delete_confirm": {
+      "translatable": true,
+      "values": {
+        "default": "Ushbu manzilni rostdan ham o'chirmoqchimisiz?",
+        "en": "Are you sure you want to delete this address?",
+        "ru": "Вы уверены, что хотите удалить этот адрес?",
+        "uz-Latn": "Ushbu manzilni rostdan ham oʻchirmoqchimisiz?",
+        "uz-Cyrl": "Сиз ҳақиқатан ҳам ушбу манзилни ўчирмоқчимисиз?"
+      }
+    },
+    "places_delete_warning": {
+      "translatable": true,
+      "values": {
+        "default": "Manzil o'chirilgandan so'ng ma'lumotlarni tiklab bo'lmaydi",
+        "en": "This action cannot be undone",
+        "ru": "После удаления адрес нельзя будет восстановить",
+        "uz-Latn": "Manzil oʻchirilgandan soʻng maʻlumotlarni tiklab boʻlmaydi",
+        "uz-Cyrl": "Манзил ўчирилгандан сўнг маълумотларни тиклаб бўлмайди"
+      }
+    },
+    "places_delete_action": {
+      "translatable": true,
+      "values": {
+        "default": "Ha, manzilni o'chirish",
+        "en": "Yes, delete address",
+        "ru": "Да, удалить адрес",
+        "uz-Latn": "Ha, manzilni oʻchirish",
+        "uz-Cyrl": "Ҳа, манзилни ўчириш"
+      }
+    },
+    "places_create_success": {
+      "translatable": true,
+      "values": {
+        "default": "Manzil muvaffaqiyatli qo'shildi",
+        "en": "Address added successfully",
+        "ru": "Адрес успешно добавлен",
+        "uz-Latn": "Manzil muvaffaqiyatli qoʻshildi",
+        "uz-Cyrl": "Манзил муваффақиятли қўшилди"
+      }
+    },
+    "places_create_error": {
+      "translatable": true,
+      "values": {
+        "default": "Manzilni yaratib bo'lmadi",
+        "en": "Failed to add address",
+        "ru": "Не удалось добавить адрес",
+        "uz-Latn": "Manzilni yaratib boʻlmadi",
+        "uz-Cyrl": "Манзилни яратиб бўлмади"
+      }
+    },
+    "places_update_success": {
+      "translatable": true,
+      "values": {
+        "default": "Manzil muvaffaqiyatli yangilandi",
+        "en": "Address updated successfully",
+        "ru": "Адрес успешно обновлён",
+        "uz-Latn": "Manzil muvaffaqiyatli yangilandi",
+        "uz-Cyrl": "Манзил муваффақиятли янгиланди"
+      }
+    },
+    "places_update_error": {
+      "translatable": true,
+      "values": {
+        "default": "Manzilni yangilab bo'lmadi",
+        "en": "Failed to update address",
+        "ru": "Не удалось обновить адрес",
+        "uz-Latn": "Manzilni yangilab boʻlmadi",
+        "uz-Cyrl": "Манзилни янгилаб бўлмади"
+      }
+    },
+    "places_delete_success": {
+      "translatable": true,
+      "values": {
+        "default": "Manzil muvaffaqiyatli o'chirildi",
+        "en": "Address deleted successfully",
+        "ru": "Адрес успешно удалён",
+        "uz-Latn": "Manzil muvaffaqiyatli oʻchirildi",
+        "uz-Cyrl": "Манзил муваффақиятли ўчирилди"
+      }
+    },
+    "places_delete_error": {
+      "translatable": true,
+      "values": {
+        "default": "Manzilni o'chirib bo'lmadi",
+        "en": "Failed to delete address",
+        "ru": "Не удалось удалить адрес",
+        "uz-Latn": "Manzilni oʻchirib boʻlmadi",
+        "uz-Cyrl": "Манзилни ўчириб бўлмади"
+      }
+    },
+    "payment_title": {
+      "translatable": true,
+      "values": {
+        "default": "To'lov usuli",
+        "en": "Payment Method",
+        "ru": "Способ оплаты",
+        "uz-Latn": "Toʻlov usuli",
+        "uz-Cyrl": "Тўлов усули"
+      }
+    },
+    "payment_section_cards": {
+      "translatable": true,
+      "values": {
+        "default": "Kartalar va bonus",
+        "en": "Cards and Bonus",
+        "ru": "Карты и бонус",
+        "uz-Latn": "Kartalar va bonus",
+        "uz-Cyrl": "Карталар ва бонус"
+      }
+    },
+    "payment_section_other": {
+      "translatable": true,
+      "values": {
+        "default": "Boshqa usullar",
+        "en": "Other Methods",
+        "ru": "Другие способы",
+        "uz-Latn": "Boshqa usullar",
+        "uz-Cyrl": "Бошқа усуллар"
+      }
+    },
+    "payment_type_cash": {
+      "translatable": true,
+      "values": {
+        "default": "Naqd pul",
+        "en": "Cash",
+        "ru": "Наличные",
+        "uz-Latn": "Naqd pul",
+        "uz-Cyrl": "Нақд пул"
+      }
+    },
+    "payment_type_card": {
+      "translatable": true,
+      "values": {
+        "default": "Karta {0}",
+        "en": "Card {0}",
+        "ru": "Карта {0}",
+        "uz-Latn": "Karta {0}",
+        "uz-Cyrl": "Карта {0}"
+      }
+    },
+    "payment_type_card_dot": {
+      "translatable": true,
+      "values": {
+        "default": "• {0}",
+        "en": "• {0}",
+        "ru": "• {0}",
+        "uz-Latn": "• {0}",
+        "uz-Cyrl": "• {0}"
+      }
+    },
+    "payment_card_list": {
+      "translatable": true,
+      "values": {
+        "default": "Kartalar",
+        "en": "Cards",
+        "ru": "Карты",
+        "uz-Latn": "Kartalar",
+        "uz-Cyrl": "Карталар"
+      }
+    },
+    "payment_card_new": {
+      "translatable": true,
+      "values": {
+        "default": "Yangi karta",
+        "en": "New Card",
+        "ru": "Новая карта",
+        "uz-Latn": "Yangi karta",
+        "uz-Cyrl": "Янги карта"
+      }
+    },
+    "payment_card_add": {
+      "translatable": true,
+      "values": {
+        "default": "Karta qo'shish",
+        "en": "Add Card",
+        "ru": "Добавить карту",
+        "uz-Latn": "Karta qoʻshish",
+        "uz-Cyrl": "Карта қўшиш"
+      }
+    },
+    "payment_card_number": {
+      "translatable": true,
+      "values": {
+        "default": "Karta raqami",
+        "en": "Card number",
+        "ru": "Номер карты",
+        "uz-Latn": "Karta raqami",
+        "uz-Cyrl": "Карта рақами"
+      }
+    },
+    "payment_card_delete": {
+      "translatable": true,
+      "values": {
+        "default": "Kartani o'chirish",
+        "en": "Delete Card",
+        "ru": "Удалить карту",
+        "uz-Latn": "Kartani oʻchirish",
+        "uz-Cyrl": "Картани ўчириш"
+      }
+    },
+    "payment_card_delete_confirm": {
+      "translatable": true,
+      "values": {
+        "default": "Kartangizni rostdan ham o'chirmoqchimisiz?",
+        "en": "Are you sure you want to delete this card?",
+        "ru": "Вы действительно хотите удалить эту карту?",
+        "uz-Latn": "Kartangizni rostdan ham oʻchirmoqchimisiz?",
+        "uz-Cyrl": "Картангизни ростдан ҳам ўчирмоқчимисиз?"
+      }
+    },
+    "payment_card_delete_warning": {
+      "translatable": true,
+      "values": {
+        "default": "**** {0} kartasi o'chirilgandan keyin ma'lumotlarni qayta tiklab bo'lmaydi.",
+        "en": "Card **** {0} will be permanently removed.",
+        "ru": "После удаления карты **** {0} восстановить данные будет невозможно.",
+        "uz-Latn": "**** {0} kartasi oʻchirilgandan keyin maʻlumotlarni qayta tiklab boʻlmaydi.",
+        "uz-Cyrl": "**** {0} картаси ўчирилгандан кейин маълумотларни қайта тиклаб бўлмайди."
+      }
+    },
+    "payment_card_add_success": {
+      "translatable": true,
+      "values": {
+        "default": "Karta muvaffaqiyatli qo'shildi",
+        "en": "Card added successfully",
+        "ru": "Карта успешно добавлена",
+        "uz-Latn": "Karta muvaffaqiyatli qoʻshildi",
+        "uz-Cyrl": "Карта муваффақиятли қўшилди"
+      }
+    },
+    "payment_card_add_error": {
+      "translatable": true,
+      "values": {
+        "default": "Noto'g'ri ma'lumot, qayta urinib ko'ring",
+        "en": "Invalid card details, please try again",
+        "ru": "Неверные данные, попробуйте ещё раз",
+        "uz-Latn": "Notoʻgʻri maʻlumot, qayta urinib koʻring",
+        "uz-Cyrl": "Нотўғри маълумот, қайта уриниб кўринг"
+      }
+    },
+    "payment_card_delete_success": {
+      "translatable": true,
+      "values": {
+        "default": "Karta muvaffaqiyatli o'chirildi",
+        "en": "Card deleted successfully",
+        "ru": "Карта успешно удалена",
+        "uz-Latn": "Karta muvaffaqiyatli oʻchirildi",
+        "uz-Cyrl": "Карта муваффақиятли ўчирилди"
+      }
+    },
+    "payment_card_delete_error": {
+      "translatable": true,
+      "values": {
+        "default": "Kartani o'chirish muvaffaqiyatsiz yakunlandi",
+        "en": "Failed to delete card",
+        "ru": "Не удалось удалить карту",
+        "uz-Latn": "Kartani oʻchirish muvaffaqiyatsiz yakunlandi",
+        "uz-Cyrl": "Картани ўчириш муваффақиятсиз якунланди"
+      }
+    },
+    "bonus_title": {
+      "translatable": true,
+      "values": {
+        "default": "Bonuslar va chegirmalar",
+        "en": "Bonuses and Discounts",
+        "ru": "Бонусы и скидки",
+        "uz-Latn": "Bonuslar va chegirmalar",
+        "uz-Cyrl": "Бонуслар ва чегирмалар"
+      }
+    },
+    "bonus_section_title": {
+      "translatable": true,
+      "values": {
+        "default": "Bonuslar",
+        "en": "Bonuses",
+        "ru": "Бонусы",
+        "uz-Latn": "Bonuslar",
+        "uz-Cyrl": "Бонуслар"
+      }
+    },
+    "bonus_rate": {
+      "translatable": true,
+      "values": {
+        "default": "1 tanga = 1 so'm",
+        "en": "1 coin = 1 sum",
+        "ru": "1 монета = 1 сум",
+        "uz-Latn": "1 tanga = 1 soʻm",
+        "uz-Cyrl": "1 танга = 1 сўм"
+      }
+    },
+    "bonus_balance": {
+      "translatable": true,
+      "values": {
+        "default": "Sizda {0} ball bor",
+        "en": "You have {0} points",
+        "ru": "У вас {0} баллов",
+        "uz-Latn": "Sizda {0} ball bor",
+        "uz-Cyrl": "Сизда {0} балл бор"
+      }
+    },
+    "bonus_pay": {
+      "translatable": true,
+      "values": {
+        "default": "Bonus bilan to'lash",
+        "en": "Pay with bonus",
+        "ru": "Оплатить бонусами",
+        "uz-Latn": "Bonus bilan toʻlash",
+        "uz-Cyrl": "Бонус билан тўлаш"
+      }
+    },
+    "bonus_pay_for_next_trip": {
+      "translatable": true,
+      "values": {
+        "default": "Ekonom va Komfortda sayohat qiling — keyingi sayohatlar uchun bonuslar bilan to'lang.",
+        "en": "Ride in Economy and Comfort — pay for your next trips with bonuses.",
+        "ru": "Ездите в Эконом и Комфорт — оплачивайте следующие поездки бонусами.",
+        "uz-Latn": "Ekonom va Komfortda safar qiling — keyingi safarlar uchun bonuslar bilan toʻlang.",
+        "uz-Cyrl": "Эконом ва Комфортда сафар қилинг — кейинги сафарлар учун бонуслар билан тўланг."
+      }
+    },
+    "bonus_amount": {
+      "translatable": true,
+      "values": {
+        "default": "Bonus miqdori",
+        "en": "Bonus amount",
+        "ru": "Сумма бонуса",
+        "uz-Latn": "Bonus miqdori",
+        "uz-Cyrl": "Бонус миқдори"
+      }
+    },
+    "cashback": {
+      "translatable": true,
+      "values": {
+        "default": "Keshbek",
+        "en": "Cashback",
+        "ru": "Кешбэк",
+        "uz-Latn": "Keshbek",
+        "uz-Cyrl": "Кешбек"
+      }
+    },
+    "bonus_promocode_title": {
+      "translatable": true,
+      "values": {
+        "default": "Promokod",
+        "en": "Promo Code",
+        "ru": "Промокод",
+        "uz-Latn": "Promokod",
+        "uz-Cyrl": "Промокод"
+      }
+    },
+    "bonus_promocode_enter": {
+      "translatable": true,
+      "values": {
+        "default": "Promokodni kiriting",
+        "en": "Enter promo code",
+        "ru": "Введите промокод",
+        "uz-Latn": "Promokodni kiriting",
+        "uz-Cyrl": "Промокодни киритинг"
+      }
+    },
+    "bonus_promocode_placeholder": {
+      "translatable": true,
+      "values": {
+        "default": "Kodni kiriting",
+        "en": "Enter code",
+        "ru": "Введите код",
+        "uz-Latn": "Kodni kiriting",
+        "uz-Cyrl": "Кодни киритинг"
+      }
+    },
+    "bonus_promocode_hint": {
+      "translatable": true,
+      "values": {
+        "default": "Chegirma keyingi safaringizda avtomatik qo'llanadi",
+        "en": "Discount will be applied automatically on your next ride",
+        "ru": "Скидка применится автоматически при следующей поездке",
+        "uz-Latn": "Chegirma keyingi safaringizda avtomatik qoʻllanadi",
+        "uz-Cyrl": "Чегирма кейинги сафарингизда автоматик қўлланади"
+      }
+    },
+    "bonus_promocode_success": {
+      "translatable": true,
+      "values": {
+        "default": "Promokod muvaffaqiyatli qo'llandi",
+        "en": "Promo code applied successfully",
+        "ru": "Промокод успешно применён",
+        "uz-Latn": "Promokod muvaffaqiyatli qoʻllandi",
+        "uz-Cyrl": "Промокод муваффақиятли қўлланди"
+      }
+    },
+    "bonus_promocode_error": {
+      "translatable": true,
+      "values": {
+        "default": "Bunday promokod mavjud emas",
+        "en": "This promo code doesn't exist",
+        "ru": "Такого промокода не существует",
+        "uz-Latn": "Bunday promokod mavjud emas",
+        "uz-Cyrl": "Бундай промокод мавжуд эмас"
+      }
+    },
+    "order_destination_hint": {
+      "translatable": true,
+      "values": {
+        "default": "Qayerga boramiz?",
+        "en": "Where are you going?",
+        "ru": "Куда поедем?",
+        "uz-Latn": "Qayerga boramiz?",
+        "uz-Cyrl": "Қаерга борамиз?"
+      }
+    },
+    "order_destination_short": {
+      "translatable": true,
+      "values": {
+        "default": "Qayerga boramiz?",
+        "en": "Where to?",
+        "ru": "Куда поедем?",
+        "uz-Latn": "Qayerga boramiz?",
+        "uz-Cyrl": "Қаерга борамиз?"
+      }
+    },
+    "order_location_not_found": {
+      "translatable": true,
+      "values": {
+        "default": "Biz bu manzilni topa olmadik.\\nIltimos, qayta urinib ko'ring.",
+        "en": "We couldn't find this address.\\nPlease try again.",
+        "ru": "Мы не нашли такой адрес.\\nПожалуйста, попробуйте ещё раз.",
+        "uz-Latn": "Biz bu manzilni topa olmadik.\\nIltimos, qayta urinib koʻring.",
+        "uz-Cyrl": "Биз бу манзилни тополмадик.\\nИлтимос, қайта уриниб кўринг."
+      }
+    },
+    "order_location_set_mark": {
+      "translatable": true,
+      "values": {
+        "default": "Belgi qo'yish",
+        "en": "Set location",
+        "ru": "Поставить метку",
+        "uz-Latn": "Belgi qoʻyish",
+        "uz-Cyrl": "Белги қўйиш"
+      }
+    },
+    "order_location_not_supported": {
+      "translatable": true,
+      "values": {
+        "default": "{0} taksi xizmati tomonidan qo'llab-quvvatlanmaydi",
+        "en": "{0} is not supported by our taxi service",
+        "ru": "{0} не поддерживается сервисом такси",
+        "uz-Latn": "{0} taksi xizmati tomonidan qoʻllab-quvvatlanmaydi",
+        "uz-Cyrl": "{0} такси хизмати томонидан қўллаб-қувватланмайди"
+      }
+    },
+    "order_stops_title": {
+      "translatable": true,
+      "values": {
+        "default": "Bekatlar",
+        "en": "Stops",
+        "ru": "Остановки",
+        "uz-Latn": "Bekatlar",
+        "uz-Cyrl": "Бекатлар"
+      }
+    },
+    "order_stops_add": {
+      "translatable": true,
+      "values": {
+        "default": "Bekat qo'shish",
+        "en": "Add a stop",
+        "ru": "Добавить остановку",
+        "uz-Latn": "Bekat qoʻshish",
+        "uz-Cyrl": "Бекат қўшиш"
+      }
+    },
+    "order_stops_count": {
+      "translatable": true,
+      "values": {
+        "default": "{0} manzil",
+        "en": "{0} destinations",
+        "ru": "{0} адресов",
+        "uz-Latn": "{0} manzil",
+        "uz-Cyrl": "{0} манзил"
+      }
+    },
+    "order_comment_title": {
+      "translatable": true,
+      "values": {
+        "default": "Haydovchiga izoh",
+        "en": "Note for driver",
+        "ru": "Комментарий водителю",
+        "uz-Latn": "Haydovchiga izoh",
+        "uz-Cyrl": "Ҳайдовчига изоҳ"
+      }
+    },
+    "order_comment_placeholder": {
+      "translatable": true,
+      "values": {
+        "default": "Izoh kiriting",
+        "en": "Enter your note",
+        "ru": "Введите комментарий",
+        "uz-Latn": "Izoh kiriting",
+        "uz-Cyrl": "Изоҳ киритинг"
+      }
+    },
+    "order_action_submit": {
+      "translatable": true,
+      "values": {
+        "default": "Buyurtma berish",
+        "en": "Order",
+        "ru": "Заказать",
+        "uz-Latn": "Buyurtma berish",
+        "uz-Cyrl": "Буюртма бериш"
+      }
+    },
+    "order_pickup_time": {
+      "translatable": true,
+      "values": {
+        "default": "Kelish {0} daq",
+        "en": "Pickup in {0} min",
+        "ru": "Подача через {0} мин",
+        "uz-Latn": "Kelish {0} daq",
+        "uz-Cyrl": "Келиш {0} дақ"
+      }
+    },
+    "order_services_unavailable": {
+      "translatable": true,
+      "values": {
+        "default": "Tanlangan xizmatlar ushbu tarif uchun mavjud emas",
+        "en": "Selected services are not available for this tariff",
+        "ru": "Выбранные услуги недоступны для данного тарифа",
+        "uz-Latn": "Tanlangan xizmatlar ushbu tarif uchun mavjud emas",
+        "uz-Cyrl": "Танланган хизматлар ушбу тариф учун мавжуд эмас"
+      }
+    },
+    "order_status_searching": {
+      "translatable": true,
+      "values": {
+        "default": "Qidirilmoqda",
+        "en": "Searching",
+        "ru": "Идёт поиск",
+        "uz-Latn": "Qidirilmoqda",
+        "uz-Cyrl": "Қидирилмоқда"
+      }
+    },
+    "order_status_coming": {
+      "translatable": true,
+      "values": {
+        "default": "Siz tomonga kelmoqda",
+        "en": "On the way to you",
+        "ru": "Едет к вам",
+        "uz-Latn": "Siz tomonga kelmoqda",
+        "uz-Cyrl": "Сиз томонга келмоқда"
+      }
+    },
+    "order_status_by_instruction": {
+      "translatable": true,
+      "values": {
+        "default": "Yo'nalish bo'ylab",
+        "en": "By instruction",
+        "ru": "По указанию",
+        "uz-Latn": "Yoʻnalish boʻylab",
+        "uz-Cyrl": "Йўналиш бўйлаб"
+      }
+    },
+    "order_list_title": {
+      "translatable": true,
+      "values": {
+        "default": "Sizning buyurtmalaringiz",
+        "en": "Your Orders",
+        "ru": "Ваши заказы",
+        "uz-Latn": "Sizning buyurtmalaringiz",
+        "uz-Cyrl": "Сизнинг буюртмаларингиз"
+      }
+    },
+    "order_search_cars_nearby": {
+      "translatable": true,
+      "values": {
+        "default": "Sizga yaqin {0} ta mashina bor",
+        "en": "{0} cars near you",
+        "ru": "Рядом с вами {0} машин",
+        "uz-Latn": "Sizga yaqin {0} ta mashina bor",
+        "uz-Cyrl": "Сизга яқин {0} та машина бор"
+      }
+    },
+    "order_search_selecting": {
+      "translatable": true,
+      "values": {
+        "default": "Mos keladiganlarni tanlaymiz",
+        "en": "Selecting the best match",
+        "ru": "Выбираем подходящие",
+        "uz-Latn": "Mos keladiganlarni tanlaymiz",
+        "uz-Cyrl": "Мос келадиганларни танлаймиз"
+      }
+    },
+    "order_search_time_estimate": {
+      "translatable": true,
+      "values": {
+        "default": "Bu jarayon {0} daqiqagacha davom etishi mumkin.",
+        "en": "This may take up to {0} minutes.",
+        "ru": "Это может занять до {0} минут.",
+        "uz-Latn": "Bu jarayon {0} daqiqagacha davom etishi mumkin.",
+        "uz-Cyrl": "Бу жараён {0} дақиқагача давом этиши мумкин."
+      }
+    },
+    "order_search_time_estimate_unknown": {
+      "translatable": true,
+      "values": {
+        "default": "Bu bir necha daqiqa vaqt olishi mumkin",
+        "en": "This may take a few minutes",
+        "ru": "Это может занять несколько минут",
+        "uz-Latn": "Bu bir necha daqiqa vaqt olishi mumkin",
+        "uz-Cyrl": "Бу бир неча дақиқа вақт олиши мумкин"
+      }
+    },
+    "order_action_order_more": {
+      "translatable": true,
+      "values": {
+        "default": "Yana buyurtma berish",
+        "en": "Order another",
+        "ru": "Заказать ещё",
+        "uz-Latn": "Yana buyurtma berish",
+        "uz-Cyrl": "Яна буюртма бериш"
+      }
+    },
+    "order_trip_info": {
+      "translatable": true,
+      "values": {
+        "default": "Buyurtma haqida",
+        "en": "Trip information",
+        "ru": "Информация о поездке",
+        "uz-Latn": "Buyurtma haqida",
+        "uz-Cyrl": "Буюртма ҳақида"
+      }
+    },
+    "order_trip_details": {
+      "translatable": true,
+      "values": {
+        "default": "Buyurtma tafsilotlari",
+        "en": "Trip details",
+        "ru": "Детали поездки",
+        "uz-Latn": "Buyurtma tafsilotlari",
+        "uz-Cyrl": "Буюртма тафсилотлари"
+      }
+    },
+    "order_action_cancel": {
+      "translatable": true,
+      "values": {
+        "default": "Buyurtmani bekor qilish",
+        "en": "Cancel order",
+        "ru": "Отменить заказ",
+        "uz-Latn": "Buyurtmani bekor qilish",
+        "uz-Cyrl": "Буюртмани бекор қилиш"
+      }
+    },
+    "order_free_waiting": {
+      "translatable": true,
+      "values": {
+        "default": "Bepul kutish",
+        "en": "Free waiting",
+        "ru": "Бесплатное ожидание",
+        "uz-Latn": "Bepul kutish",
+        "uz-Cyrl": "Бепул кутиш"
+      }
+    },
+    "order_paid_waiting": {
+      "translatable": true,
+      "values": {
+        "default": "Pullik kutish",
+        "en": "Paid waiting",
+        "ru": "Платное ожидание",
+        "uz-Latn": "Pullik kutish",
+        "uz-Cyrl": "Пуллик кутиш"
+      }
+    },
+    "order_eta_format": {
+      "translatable": true,
+      "values": {
+        "default": "~ {0} daq",
+        "en": "~ {0} min",
+        "ru": "~ {0} мин",
+        "uz-Latn": "~ {0} daq",
+        "uz-Cyrl": "~ {0} мин"
+      }
+    },
+    "order_arriving_in": {
+      "translatable": true,
+      "values": {
+        "default": "Kelish vaqti",
+        "en": "Arrives in",
+        "ru": "Приедет через",
+        "uz-Latn": "Kelish vaqti",
+        "uz-Cyrl": "Келиш вақти"
+      }
+    },
+    "order_contact_driver": {
+      "translatable": true,
+      "values": {
+        "default": "Haydovchi bilan bog'lanish",
+        "en": "Contact driver",
+        "ru": "Связаться с водителем",
+        "uz-Latn": "Haydovchi bilan bogʻlanish",
+        "uz-Cyrl": "Ҳайдовчи билан боғланиш"
+      }
+    },
+    "order_until_trip_end": {
+      "translatable": true,
+      "values": {
+        "default": "Safar yakunigacha",
+        "en": "Until trip ends",
+        "ru": "До конца поездки",
+        "uz-Latn": "Safar yakunigacha",
+        "uz-Cyrl": "Сафар якунигача"
+      }
+    },
+    "order_pay_by_card": {
+      "translatable": true,
+      "values": {
+        "default": "Karta orqali to'lash",
+        "en": "Pay by card",
+        "ru": "Оплата картой",
+        "uz-Latn": "Karta orqali toʻlash",
+        "uz-Cyrl": "Карта орқали тўлаш"
+      }
+    },
+    "order_pay_by_cash": {
+      "translatable": true,
+      "values": {
+        "default": "Naqd pul bilan to'lash",
+        "en": "Pay by cash",
+        "ru": "Оплата наличными",
+        "uz-Latn": "Naqd pul bilan toʻlash",
+        "uz-Cyrl": "Нақд пул билан тўлаш"
+      }
+    },
+    "order_details_contact": {
+      "translatable": true,
+      "values": {
+        "default": "Bog'lanish",
+        "en": "Contact",
+        "ru": "Связаться",
+        "uz-Latn": "Bogʻlanish",
+        "uz-Cyrl": "Боғланиш"
+      }
+    },
+    "order_details_safety": {
+      "translatable": true,
+      "values": {
+        "default": "Xavfsizlik",
+        "en": "Safety",
+        "ru": "Безопасность",
+        "uz-Latn": "Xavfsizlik",
+        "uz-Cyrl": "Хавфсизлик"
+      }
+    },
+    "order_details_share": {
+      "translatable": true,
+      "values": {
+        "default": "Ulashish",
+        "en": "Share",
+        "ru": "Поделиться",
+        "uz-Latn": "Ulashish",
+        "uz-Cyrl": "Улашиш"
+      }
+    },
+    "order_details_pickup_eta": {
+      "translatable": true,
+      "values": {
+        "default": "Yetib kelish ~{0}",
+        "en": "Pickup in ~{0}",
+        "ru": "Подача через ~{0}",
+        "uz-Latn": "Yetib kelish ~{0}",
+        "uz-Cyrl": "Етиб келиш ~{0}"
+      }
+    },
+    "order_details_about_trip": {
+      "translatable": true,
+      "values": {
+        "default": "Safar haqida",
+        "en": "About the trip",
+        "ru": "О поездке",
+        "uz-Latn": "Safar haqida",
+        "uz-Cyrl": "Сафар ҳақида"
+      }
+    },
+    "order_details_need_help": {
+      "translatable": true,
+      "values": {
+        "default": "Yordam kerakmi?",
+        "en": "Need help?",
+        "ru": "Нужна помощь?",
+        "uz-Latn": "Yordam kerakmi?",
+        "uz-Cyrl": "Ёрдам керакми?"
+      }
+    },
+    "order_details_arrival": {
+      "translatable": true,
+      "values": {
+        "default": "Yetib kelish",
+        "en": "Arrival",
+        "ru": "Прибытие",
+        "uz-Latn": "Yetib kelish",
+        "uz-Cyrl": "Етиб келиш"
+      }
+    },
+    "order_cancel_confirm_title": {
+      "translatable": true,
+      "values": {
+        "default": "Safarni rostdan ham bekor qilmoqchimisiz?",
+        "en": "Are you sure you want to cancel?",
+        "ru": "Вы действительно хотите отменить поездку?",
+        "uz-Latn": "Safarni rostdan ham bekor qilmoqchimisiz?",
+        "uz-Cyrl": "Сафарни ростдан ҳам бекор қилмоқчимисиз?"
+      }
+    },
+    "order_cancel_confirm_description": {
+      "translatable": true,
+      "values": {
+        "default": "Qidiruvni yoki safarni bekor qilgandan so'ng boshqa haydovchini qidirishga to'g'ri keladi",
+        "en": "After canceling, you will need to search for another driver",
+        "ru": "После отмены придётся искать другого водителя",
+        "uz-Latn": "Qidiruvni yoki safarni bekor qilgandan soʻng boshqa haydovchini qidirishga toʻgʻri keladi",
+        "uz-Cyrl": "Қидирувни ёки сафарни бекор қилгандан сўнг бошқа ҳайдовчини қидиришга тўғри келади"
+      }
+    },
+    "order_cancel_countdown": {
+      "translatable": true,
+      "values": {
+        "default": "{0} soniya",
+        "en": "{0} seconds",
+        "ru": "{0} сек",
+        "uz-Latn": "{0} soniya",
+        "uz-Cyrl": "{0} сония"
+      }
+    },
+    "order_cancel_trip_title": {
+      "translatable": true,
+      "values": {
+        "default": "Buyurtmani bekor qilish?",
+        "en": "Cancel order?",
+        "ru": "Отменить заказ?",
+        "uz-Latn": "Buyurtmani bekor qilish?",
+        "uz-Cyrl": "Буюртмани бекор қилиш?"
+      }
+    },
+    "order_cancel_action_yes": {
+      "translatable": true,
+      "values": {
+        "default": "Ha, bekor qilish",
+        "en": "Yes, cancel",
+        "ru": "Да, отменить",
+        "uz-Latn": "Ha, bekor qilish",
+        "uz-Cyrl": "Ҳа, бекор қилиш"
+      }
+    },
+    "order_cancel_before_search": {
+      "translatable": true,
+      "values": {
+        "default": "Safar haydovchini qidirish boshlanishidan oldin bekor qilindi",
+        "en": "Trip was canceled before driver search started",
+        "ru": "Поездка была отменена до начала поиска водителя",
+        "uz-Latn": "Safar haydovchini qidirish boshlanishidan oldin bekor qilindi",
+        "uz-Cyrl": "Сафар ҳайдовчини қидириш бошланишидан олдин бекор қилинди"
+      }
+    },
+    "order_cancel_reason_title": {
+      "translatable": true,
+      "values": {
+        "default": "Bekor qilish sababi",
+        "en": "Cancellation Reason",
+        "ru": "Причина отмены",
+        "uz-Latn": "Bekor qilish sababi",
+        "uz-Cyrl": "Бекор қилиш сабаби"
+      }
+    },
+    "order_cancel_reason_description": {
+      "translatable": true,
+      "values": {
+        "default": "Safarni qaysi sabab bilan bekor qildingiz?",
+        "en": "Why did you cancel the trip?",
+        "ru": "Укажите причину отмены поездки",
+        "uz-Latn": "Safarni qaysi sabab bilan bekor qildingiz?",
+        "uz-Cyrl": "Сафарни қайси сабаб билан бекор қилдингиз?"
+      }
+    },
+    "order_create_success": {
+      "translatable": true,
+      "values": {
+        "default": "Buyurtma muvaffaqiyatli yaratildi",
+        "en": "Order created successfully",
+        "ru": "Заказ успешно создан",
+        "uz-Latn": "Buyurtma muvaffaqiyatli yaratildi",
+        "uz-Cyrl": "Буюртма муваффақиятли яратилди"
+      }
+    },
+    "order_create_error": {
+      "translatable": true,
+      "values": {
+        "default": "Buyurtmani yaratib bo'lmadi",
+        "en": "Failed to create order",
+        "ru": "Не удалось создать заказ",
+        "uz-Latn": "Buyurtmani yaratib boʻlmadi",
+        "uz-Cyrl": "Буюртмани яратиб бўлмади"
+      }
+    },
+    "order_cancel_success": {
+      "translatable": true,
+      "values": {
+        "default": "Buyurtmangiz bekor qilindi",
+        "en": "Your order has been canceled",
+        "ru": "Ваш заказ отменён",
+        "uz-Latn": "Buyurtmangiz bekor qilindi",
+        "uz-Cyrl": "Буюртмангиз бекор қилинди"
+      }
+    },
+    "order_cancel_error": {
+      "translatable": true,
+      "values": {
+        "default": "Buyurtmani bekor qilib bo'lmadi",
+        "en": "Failed to cancel order",
+        "ru": "Не удалось отменить заказ",
+        "uz-Latn": "Buyurtmani bekor qilib boʻlmadi",
+        "uz-Cyrl": "Буюртмани бекор қилиб бўлмади"
+      }
+    },
+    "order_cancel_reason_success": {
+      "translatable": true,
+      "values": {
+        "default": "Bekor qilish sababi yuborildi",
+        "en": "Cancellation reason sent",
+        "ru": "Причина отмены отправлена",
+        "uz-Latn": "Bekor qilish sababi yuborildi",
+        "uz-Cyrl": "Бекор қилиш сабаби юборилди"
+      }
+    },
+    "order_cancel_reason_error": {
+      "translatable": true,
+      "values": {
+        "default": "Bekor qilish sababini yuborib bo'lmadi",
+        "en": "Failed to send cancellation reason",
+        "ru": "Не удалось отправить причину отмены",
+        "uz-Latn": "Bekor qilish sababini yuborib boʻlmadi",
+        "uz-Cyrl": "Бекор қилиш сабабини юбориб бўлмади"
+      }
+    },
+    "order_rate_success": {
+      "translatable": true,
+      "values": {
+        "default": "Safar muvaffaqiyatli baholandi",
+        "en": "Trip rated successfully",
+        "ru": "Поездка успешно оценена",
+        "uz-Latn": "Safar muvaffaqiyatli baholandi",
+        "uz-Cyrl": "Сафар муваффақиятли баҳоланди"
+      }
+    },
+    "order_rate_error": {
+      "translatable": true,
+      "values": {
+        "default": "Safarni baholab bo'lmadi",
+        "en": "Failed to rate trip",
+        "ru": "Не удалось оценить поездку",
+        "uz-Latn": "Safarni baholab boʻlmadi",
+        "uz-Cyrl": "Сафарни баҳолаб бўлмади"
+      }
+    },
+    "order_payment_update_success": {
+      "translatable": true,
+      "values": {
+        "default": "To'lov turi o'zgartirildi",
+        "en": "Payment method changed",
+        "ru": "Способ оплаты изменён",
+        "uz-Latn": "Toʻlov turi oʻzgartirildi",
+        "uz-Cyrl": "Тўлов тури ўзгартирилди"
+      }
+    },
+    "order_payment_update_error": {
+      "translatable": true,
+      "values": {
+        "default": "To'lov turini o'zgartirib bo'lmadi",
+        "en": "Failed to change payment method",
+        "ru": "Не удалось изменить способ оплаты",
+        "uz-Latn": "Toʻlov turini oʻzgartirib boʻlmadi",
+        "uz-Cyrl": "Тўлов турини ўзгартириб бўлмади"
+      }
+    },
+    "safety_title": {
+      "translatable": true,
+      "values": {
+        "default": "Xavfsizlik",
+        "en": "Safety",
+        "ru": "Безопасность",
+        "uz-Latn": "Xavfsizlik",
+        "uz-Cyrl": "Хавфсизлик"
+      }
+    },
+    "safety_description_one": {
+      "translatable": true,
+      "values": {
+        "default": "Barcha haydovchilarimiz malakali va katta tajribaga ega.",
+        "en": "All our drivers are qualified and have extensive driving experience.",
+        "ru": "Все наши водители квалифицированные и с большим опытом вождения.",
+        "uz-Latn": "Barcha haydovchilarimiz malakali va katta tajribaga ega.",
+        "uz-Cyrl": "Барча ҳайдовчиларимиз малакали ва катта тажрибага эга."
+      }
+    },
+    "safety_description_two": {
+      "translatable": true,
+      "values": {
+        "default": "Biz har bir haydovchini xavfsizlikning barcha mezonlari bo'yicha sinchkovlik bilan tekshiramiz.",
+        "en": "We thoroughly verify every driver against all safety criteria.",
+        "ru": "Мы тщательно проверяем каждого водителя по всем критериям безопасности.",
+        "uz-Latn": "Biz har bir haydovchini xavfsizlikning barcha mezonlari boʻyicha sinchkovlik bilan tekshiramiz.",
+        "uz-Cyrl": "Биз ҳар бир ҳайдовчини хавфсизликнинг барча мезонлари бўйича синчковлик билан текширамиз."
+      }
+    },
+    "safety_action_understood": {
+      "translatable": true,
+      "values": {
+        "default": "Tushunarli",
+        "en": "Got it",
+        "ru": "Понятно",
+        "uz-Latn": "Tushunarli",
+        "uz-Cyrl": "Тушунарли"
+      }
+    },
+    "history_title": {
+      "translatable": true,
+      "values": {
+        "default": "Mening safarlarim",
+        "en": "My Trips",
+        "ru": "Мои поездки",
+        "uz-Latn": "Mening safarlarim",
+        "uz-Cyrl": "Менинг сафарларим"
+      }
+    },
+    "history_menu_title": {
+      "translatable": true,
+      "values": {
+        "default": "Safarlar tarixi",
+        "en": "Trip History",
+        "ru": "История поездок",
+        "uz-Latn": "Safarlar tarixi",
+        "uz-Cyrl": "Сафарлар тарихи"
+      }
+    },
+    "history_delete": {
+      "translatable": true,
+      "values": {
+        "default": "Safarni o'chirish",
+        "en": "Delete Trip",
+        "ru": "Удалить поездку",
+        "uz-Latn": "Safarni oʻchirish",
+        "uz-Cyrl": "Сафарни ўчириш"
+      }
+    },
+    "history_empty": {
+      "translatable": true,
+      "values": {
+        "default": "Hozircha safarlar yo'q",
+        "en": "No trips yet",
+        "ru": "Поездок пока нет",
+        "uz-Latn": "Hozircha safarlar yoʻq",
+        "uz-Cyrl": "Ҳозирча сафарлар йўқ"
+      }
+    },
+    "history_date_time": {
+      "translatable": true,
+      "values": {
+        "default": "Safar sanasi va vaqti",
+        "en": "Trip date and time",
+        "ru": "Дата и время поездки",
+        "uz-Latn": "Safar sanasi va vaqti",
+        "uz-Cyrl": "Сафар санаси ва вақти"
+      }
+    },
+    "history_status_completed": {
+      "translatable": true,
+      "values": {
+        "default": "Safar yakunlandi",
+        "en": "Completed",
+        "ru": "Завершена",
+        "uz-Latn": "Safar yakunlandi",
+        "uz-Cyrl": "Сафар якунланди"
+      }
+    },
+    "history_status_canceled": {
+      "translatable": true,
+      "values": {
+        "default": "Bekor qilindi",
+        "en": "Canceled",
+        "ru": "Отменена",
+        "uz-Latn": "Bekor qilindi",
+        "uz-Cyrl": "Бекор қилинди"
+      }
+    },
+    "history_delete_success": {
+      "translatable": true,
+      "values": {
+        "default": "Safar muvaffaqiyatli o'chirildi",
+        "en": "Trip deleted successfully",
+        "ru": "Поездка успешно удалена",
+        "uz-Latn": "Safar muvaffaqiyatli oʻchirildi",
+        "uz-Cyrl": "Сафар муваффақиятли ўчирилди"
+      }
+    },
+    "history_delete_error": {
+      "translatable": true,
+      "values": {
+        "default": "Safarni o'chirib bo'lmadi",
+        "en": "Failed to delete trip",
+        "ru": "Не удалось удалить поездку",
+        "uz-Latn": "Safarni oʻchirib boʻlmadi",
+        "uz-Cyrl": "Сафарни ўчириб бўлмади"
+      }
+    },
+    "driver_status_coming": {
+      "translatable": true,
+      "values": {
+        "default": "Kelmoqda",
+        "en": "Arriving",
+        "ru": "Подъезжает",
+        "uz-Latn": "Kelmoqda",
+        "uz-Cyrl": "Келмоқда"
+      }
+    },
+    "driver_status_on_way": {
+      "translatable": true,
+      "values": {
+        "default": "Yo'lda",
+        "en": "On the way",
+        "ru": "В пути",
+        "uz-Latn": "Yoʻlda",
+        "uz-Cyrl": "Йўлда"
+      }
+    },
+    "driver_arrival_time": {
+      "translatable": true,
+      "values": {
+        "default": "{0} daq",
+        "en": "{0} min",
+        "ru": "{0} мин",
+        "uz-Latn": "{0} daq",
+        "uz-Cyrl": "{0} мин"
+      }
+    },
+    "driver_travel_time": {
+      "translatable": true,
+      "values": {
+        "default": "Yo'l vaqti: {0} daq",
+        "en": "Travel time: {0} min",
+        "ru": "Время пути: {0} мин",
+        "uz-Latn": "Yoʻl vaqti: {0} daq",
+        "uz-Cyrl": "Йўл вақти: {0} мин"
+      }
+    },
+    "driver_become": {
+      "translatable": true,
+      "values": {
+        "default": "Haydovchi bo'lish",
+        "en": "Become a Driver",
+        "ru": "Стать водителем",
+        "uz-Latn": "Haydovchi boʻlish",
+        "uz-Cyrl": "Ҳайдовчи бўлиш"
+      }
+    },
+    "driver_label_rating": {
+      "translatable": true,
+      "values": {
+        "default": "Reyting:",
+        "en": "Rating:",
+        "ru": "Рейтинг:",
+        "uz-Latn": "Reyting:",
+        "uz-Cyrl": "Рейтинг:"
+      }
+    },
+    "driver_label_trips": {
+      "translatable": true,
+      "values": {
+        "default": "Safarlar:",
+        "en": "Trips:",
+        "ru": "Поездки:",
+        "uz-Latn": "Safarlar:",
+        "uz-Cyrl": "Сафарлар:"
+      }
+    },
+    "driver_label_title": {
+      "translatable": true,
+      "values": {
+        "default": "Haydovchi",
+        "en": "Driver",
+        "ru": "Водитель",
+        "uz-Latn": "Haydovchi",
+        "uz-Cyrl": "Ҳайдовчи"
+      }
+    },
+    "driver_car": {
+      "translatable": true,
+      "values": {
+        "default": "Avtomobil",
+        "en": "Vehicle",
+        "ru": "Автомобиль",
+        "uz-Latn": "Avtomobil",
+        "uz-Cyrl": "Автомобил"
+      }
+    },
+    "driver_tariff": {
+      "translatable": true,
+      "values": {
+        "default": "Tarif",
+        "en": "Tariff",
+        "ru": "Тариф",
+        "uz-Latn": "Tarif",
+        "uz-Cyrl": "Тариф"
+      }
+    },
+    "driver_become_description": {
+      "translatable": true,
+      "values": {
+        "default": "Ariza qoldiring, biz siz bilan tez orada bog'lanamiz",
+        "en": "Leave a request and we'll contact you shortly",
+        "ru": "Оставьте заявку, и мы свяжемся с вами в ближайшее время",
+        "uz-Latn": "Ariza qoldiring, biz siz bilan tez orada bogʻlanamiz",
+        "uz-Cyrl": "Ариза қолдиринг, биз сиз билан тез орада боғланамиз"
+      }
+    },
+    "driver_become_name_hint": {
+      "translatable": true,
+      "values": {
+        "default": "Ismingiz",
+        "en": "Your name",
+        "ru": "Ваше имя",
+        "uz-Latn": "Ismingiz",
+        "uz-Cyrl": "Исмингиз"
+      }
+    },
+    "driver_become_submit": {
+      "translatable": true,
+      "values": {
+        "default": "Arizani yuborish",
+        "en": "Submit request",
+        "ru": "Отправить заявку",
+        "uz-Latn": "Arizani yuborish",
+        "uz-Cyrl": "Аризани юбориш"
+      }
+    },
+    "driver_become_success": {
+      "translatable": true,
+      "values": {
+        "default": "Arizangiz muvaffaqiyatli yuborildi. Tez orada siz bilan bog'lanamiz.",
+        "en": "Your request has been sent successfully. We'll contact you soon.",
+        "ru": "Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время.",
+        "uz-Latn": "Arizangiz muvaffaqiyatli yuborildi. Tez orada siz bilan bogʻlanamiz.",
+        "uz-Cyrl": "Аризангиз муваффақиятли юборилди. Тез орада сиз билан боғланамиз."
+      }
+    },
+    "driver_become_error": {
+      "translatable": true,
+      "values": {
+        "default": "Nimadir xato ketdi. Qayta urinib ko'ring.",
+        "en": "Something went wrong. Please try again.",
+        "ru": "Что-то пошло не так. Попробуйте ещё раз.",
+        "uz-Latn": "Nimadir xato ketdi. Qayta urinib koʻring.",
+        "uz-Cyrl": "Нимадир хато кетди. Қайтадан уриниб кўринг."
+      }
+    },
+    "driver_become_select_region": {
+      "translatable": true,
+      "values": {
+        "default": "Viloyatingiz",
+        "en": "Your region",
+        "ru": "Ваш регион",
+        "uz-Latn": "Viloyatingiz",
+        "uz-Cyrl": "Вилоятингиз"
+      }
+    },
+    "driver_become_region_title": {
+      "translatable": true,
+      "values": {
+        "default": "Viloyatingiz",
+        "en": "Your region",
+        "ru": "Ваш регион",
+        "uz-Latn": "Viloyatingiz",
+        "uz-Cyrl": "Вилоятингиз"
+      }
+    },
+    "service_taxi": {
+      "translatable": true,
+      "values": {
+        "default": "Taksi",
+        "en": "Taxi",
+        "ru": "Такси",
+        "uz-Latn": "Taksi",
+        "uz-Cyrl": "Такси"
+      }
+    },
+    "service_delivery": {
+      "translatable": true,
+      "values": {
+        "default": "Yetkazib berish",
+        "en": "Delivery",
+        "ru": "Доставка",
+        "uz-Latn": "Yetkazib berish",
+        "uz-Cyrl": "Етказиб бериш"
+      }
+    },
+    "service_intercity": {
+      "translatable": true,
+      "values": {
+        "default": "Shaharlararo",
+        "en": "Intercity",
+        "ru": "Межгород",
+        "uz-Latn": "Shaharlararo",
+        "uz-Cyrl": "Шаҳарлараро"
+      }
+    },
+    "service_mail": {
+      "translatable": true,
+      "values": {
+        "default": "Pochta",
+        "en": "Mail",
+        "ru": "Почта",
+        "uz-Latn": "Pochta",
+        "uz-Cyrl": "Почта"
+      }
+    },
+    "contact_support_title": {
+      "translatable": true,
+      "values": {
+        "default": "Qo'llab-quvvatlash xizmati",
+        "en": "Support Service",
+        "ru": "Служба поддержки",
+        "uz-Latn": "Qoʻllab-quvvatlash xizmati",
+        "uz-Cyrl": "Қўллаб-қувватлаш хизмати"
+      }
+    },
+    "contact_support_menu": {
+      "translatable": true,
+      "values": {
+        "default": "Yordam xizmati",
+        "en": "Support",
+        "ru": "Поддержка",
+        "uz-Latn": "Yordam xizmati",
+        "uz-Cyrl": "Ёрдам хизмати"
+      }
+    },
+    "contact_help": {
+      "translatable": true,
+      "values": {
+        "default": "Yordam",
+        "en": "Help",
+        "ru": "Помощь",
+        "uz-Latn": "Yordam",
+        "uz-Cyrl": "Ёрдам"
+      }
+    },
+    "contact_action_call": {
+      "translatable": true,
+      "values": {
+        "default": "Qo'ng'iroq qilish",
+        "en": "Call",
+        "ru": "Позвонить",
+        "uz-Latn": "Qoʻngʻiroq qilish",
+        "uz-Cyrl": "Қўнғироқ қилиш"
+      }
+    },
+    "contact_action_telegram": {
+      "translatable": true,
+      "values": {
+        "default": "Telegram",
+        "en": "Telegram",
+        "ru": "Telegram",
+        "uz-Latn": "Telegram",
+        "uz-Cyrl": "Telegram"
+      }
+    },
+    "info_about_title": {
+      "translatable": true,
+      "values": {
+        "default": "Ilova haqida",
+        "en": "About App",
+        "ru": "О приложении",
+        "uz-Latn": "Ilova haqida",
+        "uz-Cyrl": "Илова ҳақида"
+      }
+    },
+    "info_privacy_policy": {
+      "translatable": true,
+      "values": {
+        "default": "Maxfiylik siyosati",
+        "en": "Privacy Policy",
+        "ru": "Политика конфиденциальности",
+        "uz-Latn": "Maxfiylik siyosati",
+        "uz-Cyrl": "Махфийлик сиёсати"
+      }
+    },
+    "info_license": {
+      "translatable": true,
+      "values": {
+        "default": "Litsenziya shartnomasi",
+        "en": "License Agreement",
+        "ru": "Лицензионное соглашение",
+        "uz-Latn": "Litsenziya shartnomasi",
+        "uz-Cyrl": "Лицензия шартномаси"
+      }
+    },
+    "info_social_media": {
+      "translatable": true,
+      "values": {
+        "default": "Biz ijtimoiy tarmoqlarda",
+        "en": "Follow us on social media",
+        "ru": "Мы в соцсетях",
+        "uz-Latn": "Biz ijtimoiy tarmoqlarda",
+        "uz-Cyrl": "Биз ижтимоий тармоқларда"
+      }
+    },
+    "info_rate_app": {
+      "translatable": true,
+      "values": {
+        "default": "Ilovani baholash",
+        "en": "Rate the App",
+        "ru": "Оценить приложение",
+        "uz-Latn": "Ilovani baholash",
+        "uz-Cyrl": "Иловани баҳолаш"
+      }
+    },
+    "notification_title": {
+      "translatable": true,
+      "values": {
+        "default": "Bildirishnomalar",
+        "en": "Notifications",
+        "ru": "Уведомления",
+        "uz-Latn": "Bildirishnomalar",
+        "uz-Cyrl": "Билдиришномалар"
+      }
+    },
+    "notification_empty": {
+      "translatable": true,
+      "values": {
+        "default": "Hozircha bildirishnomalar yo'q",
+        "en": "No notifications yet",
+        "ru": "Уведомлений пока нет",
+        "uz-Latn": "Hozircha bildirishnomalar yoʻq",
+        "uz-Cyrl": "Ҳозирча билдиришномалар йўқ"
+      }
+    },
+    "rating_how_was_trip": {
+      "translatable": true,
+      "values": {
+        "default": "Safar qanday o'tdi?",
+        "en": "How was your trip?",
+        "ru": "Как прошла поездка?",
+        "uz-Latn": "Safar qanday oʻtdi?",
+        "uz-Cyrl": "Сафар қандай ўтди?"
+      }
+    },
+    "rating_what_did_you_like": {
+      "translatable": true,
+      "values": {
+        "default": "Sizga nima ayniqsa yoqdi?",
+        "en": "What did you especially like?",
+        "ru": "Что вам особенно понравилось?",
+        "uz-Latn": "Sizga nima ayniqsa yoqdi?",
+        "uz-Cyrl": "Сизга нима айниқса ёқди?"
+      }
+    },
+    "no_internet_title": {
+      "translatable": true,
+      "values": {
+        "default": "Internetga ulanish yo'q",
+        "en": "No internet connection",
+        "ru": "Нет подключения к интернету",
+        "uz-Latn": "Internetga ulanish yoʻq",
+        "uz-Cyrl": "Интернетга уланиш йўқ"
+      }
+    },
+    "no_internet_description": {
+      "translatable": true,
+      "values": {
+        "default": "Internet ulanishingizni tekshiring",
+        "en": "Check your internet connection and try again",
+        "ru": "Проверьте подключение к интернету и попробуйте снова",
+        "uz-Latn": "Internet ulanishingizni tekshiring",
+        "uz-Cyrl": "Интернетга уланишни текширинг"
+      }
+    },
+    "no_internet_action": {
+      "translatable": true,
+      "values": {
+        "default": "Yangilash",
+        "en": "Refresh",
+        "ru": "Обновить",
+        "uz-Latn": "Yangilash",
+        "uz-Cyrl": "Янгилаш"
+      }
+    },
+    "no_internet_action_menu": {
+      "translatable": true,
+      "values": {
+        "default": "Menyuga o'tish",
+        "en": "Open menu",
+        "ru": "Открыть меню",
+        "uz-Latn": "Menyuga oʻtish",
+        "uz-Cyrl": "Менюга ўтиш"
+      }
+    },
+    "force_update_title": {
+      "translatable": true,
+      "values": {
+        "default": "Yangilash kerak",
+        "en": "Update Required",
+        "ru": "Требуется обновление",
+        "uz-Latn": "Yangilash kerak",
+        "uz-Cyrl": "Янгилаш керак"
+      }
+    },
+    "force_update_description": {
+      "translatable": true,
+      "values": {
+        "default": "Ilovaning yangi versiyasi mavjud. Davom etish uchun yangilang.",
+        "en": "A new version is available. Please update to continue.",
+        "ru": "Доступна новая версия приложения. Обновите, чтобы продолжить.",
+        "uz-Latn": "Ilovaning yangi versiyasi mavjud. Davom etish uchun yangilang.",
+        "uz-Cyrl": "Илованинг янги версияси мавжуд. Давом этиш учун янгиланг."
+      }
+    },
+    "force_update_action": {
+      "translatable": true,
+      "values": {
+        "default": "Yangilash",
+        "en": "Update",
+        "ru": "Обновить",
+        "uz-Latn": "Yangilash",
+        "uz-Cyrl": "Янгилаш"
+      }
+    },
+    "error_no_internet": {
+      "translatable": true,
+      "values": {
+        "default": "Internetga ulanish yo'q. Iltimos, tarmoq sozlamalaringizni tekshiring.",
+        "en": "No internet connection. Please check your network settings.",
+        "ru": "Нет подключения к интернету. Проверьте настройки сети.",
+        "uz-Latn": "Internetga ulanish yoʻq. Iltimos, tarmoq sozlamalaringizni tekshiring.",
+        "uz-Cyrl": "Интернетга уланиш йўқ. Илтимос, тармоқ созламаларингизни текширинг."
+      }
+    },
+    "error_connection_timeout": {
+      "translatable": true,
+      "values": {
+        "default": "Ulanish vaqti tugadi. Iltimos, qayta urinib ko'ring.",
+        "en": "Connection timed out. Please try again.",
+        "ru": "Время ожидания истекло. Попробуйте ещё раз.",
+        "uz-Latn": "Ulanish vaqti tugadi. Iltimos, qayta urinib koʻring.",
+        "uz-Cyrl": "Уланиш вақти тугади. Илтимос, қайта уриниб кўринг."
+      }
+    },
+    "error_network_unexpected": {
+      "translatable": true,
+      "values": {
+        "default": "Kutilmagan tarmoq xatosi yuz berdi.",
+        "en": "An unexpected network error occurred.",
+        "ru": "Произошла непредвиденная сетевая ошибка.",
+        "uz-Latn": "Kutilmagan tarmoq xatosi yuz berdi.",
+        "uz-Cyrl": "Кутилмаган тармоқ хатоси юз берди."
+      }
+    },
+    "error_server_busy": {
+      "translatable": true,
+      "values": {
+        "default": "Serverlarimiz band. Iltimos, bir ozdan keyin qayta urinib ko'ring.",
+        "en": "Our servers are busy. Please try again shortly.",
+        "ru": "Серверы перегружены. Попробуйте чуть позже.",
+        "uz-Latn": "Serverlarimiz band. Iltimos, bir ozdan keyin qayta urinib koʻring.",
+        "uz-Cyrl": "Серверларимиз банд. Илтимос, бир оздан кейин қайта уриниб кўринг."
+      }
+    },
+    "error_unexpected_redirect": {
+      "translatable": true,
+      "values": {
+        "default": "Kutilmagan yo'naltirish. Iltimos, qo'llab-quvvatlash xizmati bilan bog'laning.",
+        "en": "Unexpected redirect. Please contact support.",
+        "ru": "Непредвиденное перенаправление. Обратитесь в поддержку.",
+        "uz-Latn": "Kutilmagan yoʻnaltirish. Iltimos, qoʻllab-quvvatlash xizmati bilan bogʻlaning.",
+        "uz-Cyrl": "Кутилмаган йўналтириш. Илтимос, қўллаб-қувватлаш хизмати билан боғланинг."
+      }
+    },
+    "error_session_expired": {
+      "translatable": true,
+      "values": {
+        "default": "Sessiya muddati tugadi. Iltimos, qayta kiring.",
+        "en": "Your session has expired. Please sign in again.",
+        "ru": "Сессия истекла. Войдите снова.",
+        "uz-Latn": "Sessiya muddati tugadi. Iltimos, qayta kiring.",
+        "uz-Cyrl": "Сессия муддати тугади. Илтимос, қайта киринг."
+      }
+    },
+    "error_data_format": {
+      "translatable": true,
+      "values": {
+        "default": "Ma'lumotlar formati xatosi. Iltimos, ilovangizni yangilang.",
+        "en": "Data format error. Please update your app.",
+        "ru": "Ошибка формата данных. Обновите приложение.",
+        "uz-Latn": "Maʻlumotlar formati xatosi. Iltimos, ilovangizni yangilang.",
+        "uz-Cyrl": "Маълумотлар формати хатоси. Илтимос, иловангизни янгиланг."
+      }
+    },
+    "error_client_request": {
+      "translatable": true,
+      "values": {
+        "default": "Bizning tarafimizda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.",
+        "en": "Something went wrong on our end. Please try again later.",
+        "ru": "Что-то пошло не так. Попробуйте позже.",
+        "uz-Latn": "Bizning tarafimizda xatolik yuz berdi. Iltimos, keyinroq qayta urinib koʻring.",
+        "uz-Cyrl": "Бизнинг тарафимизда хатолик юз берди. Илтимос, кейинроқ қайта уриниб кўринг."
+      }
+    },
+    "error_application": {
+      "translatable": true,
+      "values": {
+        "default": "Ilova xatosi yuz berdi. Iltimos, qo'llab-quvvatlash xizmati bilan bog'laning.",
+        "en": "An application error occurred. Please contact support.",
+        "ru": "Произошла ошибка приложения. Обратитесь в поддержку.",
+        "uz-Latn": "Ilova xatosi yuz berdi. Iltimos, qoʻllab-quvvatlash xizmati bilan bogʻlaning.",
+        "uz-Cyrl": "Илова хатоси юз берди. Илтимос, қўллаб-қувватлаш хизмати билан боғланинг."
+      }
+    },
+    "error_unknown": {
+      "translatable": true,
+      "values": {
+        "default": "Noma'lum xatolik yuz berdi. Iltimos, qayta urinib ko'ring.",
+        "en": "An unknown error occurred. Please try again.",
+        "ru": "Произошла неизвестная ошибка. Попробуйте ещё раз.",
+        "uz-Latn": "Nomaʻlum xatolik yuz berdi. Iltimos, qayta urinib koʻring.",
+        "uz-Cyrl": "Номаълум хатолик юз берди. Илтимос, қайта уриниб кўринг."
+      }
+    },
+    "error_unexpected": {
+      "translatable": true,
+      "values": {
+        "default": "Kutilmagan xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.",
+        "en": "An unexpected error occurred. Please try again later.",
+        "ru": "Произошла непредвиденная ошибка. Попробуйте позже.",
+        "uz-Latn": "Kutilmagan xatolik yuz berdi. Iltimos, keyinroq qayta urinib koʻring.",
+        "uz-Cyrl": "Кутилмаган хатолик юз берди. Илтимос, кейинроқ қайта уриниб кўринг."
+      }
+    }
+  }
+}
