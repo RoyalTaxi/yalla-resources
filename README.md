@@ -60,10 +60,18 @@ Native generated outputs use Uzbek Cyrillic locale identifiers.
 
 ## Commands
 
-Validate the string catalog and icon sources:
+Validate the catalog and source assets:
 
 ```bash
 python3 tools/yalla_resources.py validate
+```
+
+Run the full generator check. This validates resources, generates twice into
+temporary directories, verifies expected output paths/counts, parses generated
+XML/JSON, and checks byte-for-byte idempotency:
+
+```bash
+python3 tools/yalla_resources.py check --strict
 ```
 
 Generate sample outputs into `build/generated`:
@@ -72,9 +80,9 @@ Generate sample outputs into `build/generated`:
 python3 tools/yalla_resources.py generate --out build/generated
 ```
 
-Android icon generation uses the Android Gradle Plugin `Svg2Vector` converter
-from the local Gradle cache, so run an Android build once if the converter jars
-are not present yet.
+Android icon generation uses a pinned Android Gradle Plugin `Svg2Vector`
+converter (`com.android.tools:sdk-common:32.2.1`). The script first reuses the
+local Gradle cache, then downloads missing pinned jars into `build/maven`.
 
 Sync generated outputs into sibling repos:
 

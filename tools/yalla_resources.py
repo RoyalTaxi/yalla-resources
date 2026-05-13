@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 import argparse
+import hashlib
 import json
 import os
 import re
 import shutil
 import subprocess
 import sys
+import tempfile
+import urllib.error
+import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from xml.sax.saxutils import escape as xml_escape
@@ -19,6 +23,15 @@ DRAWABLE_DIR = ROOT / "assets/drawable"
 FONT_DIR = ROOT / "assets/font"
 FILE_DIR = ROOT / "assets/files"
 ANDROID_VECTOR_TOOL_DIR = ROOT / "build/android-vector-tool"
+MAVEN_CACHE_DIR = ROOT / "build/maven"
+
+ANDROID_TOOLS_VERSION = "32.2.1"
+GUAVA_VERSION = "33.3.1-jre"
+KOTLIN_STDLIB_VERSION = "2.2.10"
+JETBRAINS_ANNOTATIONS_VERSION = "26.0.2-1"
+
+GOOGLE_MAVEN = "https://dl.google.com/dl/android/maven2"
+MAVEN_CENTRAL = "https://repo.maven.apache.org/maven2"
 
 PLACEHOLDER = re.compile(r"\{(\d+)\}")
 ICON_NAME = re.compile(r"^ic_[a-z0-9]+(?:_[a-z0-9]+)*\.svg$")
@@ -103,40 +116,69 @@ def write(path: Path, content: str) -> None:
     path.write_text(content)
 
 
-def version_key(version: str) -> tuple[str, ...]:
-    parts = re.split(r"[.-]", version)
-    return tuple(part.zfill(8) if part.isdigit() else part for part in parts)
+def maven_relative_path(group: str, artifact: str, version: str) -> Path:
+    return Path(group.replace(".", "/")) / artifact / version / f"{artifact}-{version}.jar"
 
 
-def find_module_jar(group: str, artifact: str, version=None) -> tuple[Path, str]:
+def maven_repository(group: str) -> str:
+    if group.startswith("com.android."):
+        return GOOGLE_MAVEN
+    return MAVEN_CENTRAL
+
+
+def find_module_jar(group: str, artifact: str, version: str) -> Path:
     module_dir = Path.home() / ".gradle/caches/modules-2/files-2.1" / group / artifact
     if not module_dir.exists():
         raise RuntimeError(f"Gradle cache is missing {group}:{artifact}")
 
-    versions = [version] if version else sorted(
-        [path.name for path in module_dir.iterdir() if path.is_dir()],
-        key=version_key,
-        reverse=True,
-    )
+    for jar in sorted((module_dir / version).glob(f"*/{artifact}-{version}.jar")):
+        return jar
 
-    for candidate_version in versions:
-        for jar in sorted((module_dir / candidate_version).glob(f"*/{artifact}-{candidate_version}.jar")):
-            return jar, candidate_version
+    raise RuntimeError(f"Gradle cache is missing {group}:{artifact}:{version} jar")
 
-    requested = f":{version}" if version else ""
-    raise RuntimeError(f"Gradle cache is missing {group}:{artifact}{requested} jar")
+
+def download_module_jar(group: str, artifact: str, version: str) -> Path:
+    relative = maven_relative_path(group, artifact, version)
+    destination = MAVEN_CACHE_DIR / relative
+    if destination.exists():
+        return destination
+
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    url = f"{maven_repository(group)}/{relative.as_posix()}"
+    try:
+        with urllib.request.urlopen(url, timeout=30) as response:
+            with destination.open("wb") as output:
+                shutil.copyfileobj(response, output)
+    except (urllib.error.URLError, TimeoutError) as error:
+        raise RuntimeError(
+            f"Unable to fetch {group}:{artifact}:{version} from {url}. "
+            "Run an Android build once to populate the Gradle cache, or retry with network access."
+        ) from error
+
+    return destination
+
+
+def resolve_module_jar(group: str, artifact: str, version: str) -> Path:
+    try:
+        return find_module_jar(group, artifact, version)
+    except RuntimeError:
+        return download_module_jar(group, artifact, version)
 
 
 def android_vector_classpath() -> tuple[list[Path], str]:
-    sdk_common, sdk_version = find_module_jar("com.android.tools", "sdk-common")
-    common, _ = find_module_jar("com.android.tools", "common", sdk_version)
-    annotations, _ = find_module_jar("com.android.tools", "annotations", sdk_version)
-    guava, _ = find_module_jar("com.google.guava", "guava")
-    kotlin_stdlib, _ = find_module_jar("org.jetbrains.kotlin", "kotlin-stdlib")
-    jetbrains_annotations, _ = find_module_jar("org.jetbrains", "annotations")
+    sdk_common = resolve_module_jar("com.android.tools", "sdk-common", ANDROID_TOOLS_VERSION)
+    common = resolve_module_jar("com.android.tools", "common", ANDROID_TOOLS_VERSION)
+    annotations = resolve_module_jar("com.android.tools", "annotations", ANDROID_TOOLS_VERSION)
+    guava = resolve_module_jar("com.google.guava", "guava", GUAVA_VERSION)
+    kotlin_stdlib = resolve_module_jar("org.jetbrains.kotlin", "kotlin-stdlib", KOTLIN_STDLIB_VERSION)
+    jetbrains_annotations = resolve_module_jar(
+        "org.jetbrains",
+        "annotations",
+        JETBRAINS_ANNOTATIONS_VERSION,
+    )
     return (
         [sdk_common, common, annotations, guava, kotlin_stdlib, jetbrains_annotations],
-        sdk_version,
+        ANDROID_TOOLS_VERSION,
     )
 
 
@@ -428,6 +470,18 @@ def copy_directory_contents(source: Path, destination: Path, pattern: str = "*")
             shutil.copy2(path, destination / path.name)
 
 
+def sync_directory_contents(source: Path, destination: Path, pattern: str, prune: bool = False) -> None:
+    destination.mkdir(parents=True, exist_ok=True)
+    if prune:
+        source_names = {path.name for path in source.glob(pattern) if path.is_file()}
+        for path in sorted(destination.glob(pattern)):
+            if path.is_file() and path.name not in source_names:
+                path.unlink()
+    for path in sorted(source.glob(pattern)):
+        if path.is_file():
+            shutil.copy2(path, destination / path.name)
+
+
 def generate_icons(out: Path) -> None:
     copy_directory_contents(
         ICON_DIR,
@@ -555,6 +609,124 @@ def generate(out: Path) -> int:
     return 0
 
 
+def file_hash(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as file:
+        for chunk in iter(lambda: file.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def tree_snapshot(root: Path) -> dict:
+    return {
+        str(path.relative_to(root)): file_hash(path)
+        for path in sorted(root.rglob("*"))
+        if path.is_file()
+    }
+
+
+def verify_generated_output(out: Path) -> list:
+    errors = []
+
+    expected_icon_count = len(list(ICON_DIR.glob("*.svg")))
+    expected_drawable_count = len(list(DRAWABLE_DIR.glob("*.png")))
+    expected_font_count = len(list(FONT_DIR.glob("*.ttf")))
+    expected_file_count = len(list(FILE_DIR.glob("*.json")))
+
+    expected_counts = {
+        "compose icons": (out / "compose/valkyrieResources", "*.svg", expected_icon_count),
+        "android icons": (out / "android/res/drawable", "ic_*.xml", expected_icon_count),
+        "ios icons": (out / "ios/YallaResourcesIOS/Resources/Icons", "*.svg", expected_icon_count),
+        "compose drawables": (out / "compose/composeResources/drawable", "img_*.png", expected_drawable_count),
+        "android drawables": (out / "android/res/drawable-nodpi", "img_*.png", expected_drawable_count),
+        "ios drawables": (out / "ios/YallaResourcesIOS/Resources/Drawables", "img_*.png", expected_drawable_count),
+        "compose fonts": (out / "compose/composeResources/font", "*.ttf", expected_font_count),
+        "android fonts": (out / "android/res/font", "*.ttf", expected_font_count),
+        "ios fonts": (out / "ios/YallaResourcesIOS/Resources/Fonts", "*.ttf", expected_font_count),
+        "compose files": (out / "compose/composeResources/files", "*.json", expected_file_count),
+        "android raw files": (out / "android/res/raw", "*.json", expected_file_count),
+        "ios files": (out / "ios/YallaResourcesIOS/Resources/Files", "*.json", expected_file_count),
+    }
+
+    for label, (directory, pattern, expected) in expected_counts.items():
+        actual = len(list(directory.glob(pattern)))
+        if actual != expected:
+            errors.append(f"{label}: expected {expected}, got {actual}")
+
+    for locale_dir in COMPOSE_LOCALE_DIRS.values():
+        path = out / "compose/composeResources" / locale_dir / "strings.xml"
+        if not path.exists():
+            errors.append(f"missing Compose strings: {path.relative_to(out)}")
+        else:
+            ET.parse(path)
+
+    for locale_dir in ANDROID_LOCALE_DIRS.values():
+        path = out / "android/res" / locale_dir / "strings.xml"
+        if not path.exists():
+            errors.append(f"missing Android strings: {path.relative_to(out)}")
+        else:
+            ET.parse(path)
+
+    android_latn_dir = out / "android/res/values-b+uz+Latn"
+    if android_latn_dir.exists():
+        errors.append("Android output must not generate values-b+uz+Latn")
+
+    localizable = out / "ios/YallaResourcesIOS/Resources/Localizable.xcstrings"
+    if not localizable.exists():
+        errors.append("missing iOS Localizable.xcstrings")
+    else:
+        payload = json.loads(localizable.read_text())
+        if payload.get("sourceLanguage") != "uz-Latn":
+            errors.append("iOS Localizable.xcstrings sourceLanguage must be uz-Latn")
+
+    for path in sorted((out / "android/res/drawable").glob("*.xml")):
+        ET.parse(path)
+        if path.name.startswith("yalla_"):
+            errors.append(f"legacy Android icon prefix generated: {path.name}")
+
+    return errors
+
+
+def check(strict: bool) -> int:
+    validation = validate(strict=strict)
+    if validation != 0:
+        return validation
+
+    with tempfile.TemporaryDirectory() as first_tmp, tempfile.TemporaryDirectory() as second_tmp:
+        first = Path(first_tmp) / "generated"
+        second = Path(second_tmp) / "generated"
+        generate(first)
+        generate(second)
+
+        errors = verify_generated_output(first)
+        first_snapshot = tree_snapshot(first)
+        second_snapshot = tree_snapshot(second)
+        if first_snapshot != second_snapshot:
+            first_paths = set(first_snapshot)
+            second_paths = set(second_snapshot)
+            missing = sorted(first_paths - second_paths)
+            extra = sorted(second_paths - first_paths)
+            changed = sorted(
+                path for path in first_paths & second_paths
+                if first_snapshot[path] != second_snapshot[path]
+            )
+            if missing:
+                errors.append(f"idempotency: missing files on second run: {missing[:10]}")
+            if extra:
+                errors.append(f"idempotency: extra files on second run: {extra[:10]}")
+            if changed:
+                errors.append(f"idempotency: changed files on second run: {changed[:10]}")
+
+    for error in errors:
+        print(f"ERROR: {error}", file=sys.stderr)
+
+    if errors:
+        return 1
+
+    print("Resource generator check passed")
+    return 0
+
+
 def copy_file(source: Path, destination: Path) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source, destination)
@@ -563,9 +735,8 @@ def copy_file(source: Path, destination: Path) -> None:
 def clean_generated_android_strings(res_dir: Path) -> None:
     if not res_dir.exists():
         return
-    for pattern in ["values*/yalla_strings.xml", "values*/strings.xml"]:
-        for path in res_dir.glob(pattern):
-            path.unlink()
+    for path in res_dir.glob("values*/yalla_strings.xml"):
+        path.unlink()
 
 
 def clean_generated_android_icons(res_dir: Path) -> None:
@@ -578,16 +749,10 @@ def clean_generated_android_icons(res_dir: Path) -> None:
 
 
 def clean_generated_android_assets(res_dir: Path) -> None:
-    for directory, pattern in [
-        ("drawable", "img_*.png"),
-        ("drawable-nodpi", "img_*.png"),
-        ("font", "*.ttf"),
-        ("raw", "*.json"),
-    ]:
-        asset_dir = res_dir / directory
-        if asset_dir.exists():
-            for path in asset_dir.glob(pattern):
-                path.unlink()
+    legacy_drawable_dir = res_dir / "drawable"
+    if legacy_drawable_dir.exists():
+        for path in legacy_drawable_dir.glob("img_*.png"):
+            path.unlink()
 
 
 def sync(args: argparse.Namespace) -> int:
@@ -608,20 +773,22 @@ def sync(args: argparse.Namespace) -> int:
                 generated / "compose/composeResources" / locale_dir / "strings.xml",
                 cmp_resources / locale_dir / "strings.xml",
             )
-        copy_directory_contents(
+        sync_directory_contents(
             generated / "compose/valkyrieResources",
             cmp_icons,
             "*.svg",
+            prune=True,
         )
-        for directory, pattern in [
-            ("drawable", "*.png"),
-            ("font", "*.ttf"),
-            ("files", "*.json"),
+        for directory, pattern, prune in [
+            ("drawable", "img_*.png", True),
+            ("font", "*.ttf", False),
+            ("files", "*.json", False),
         ]:
-            copy_directory_contents(
+            sync_directory_contents(
                 generated / "compose/composeResources" / directory,
                 cmp_resources / directory,
                 pattern,
+                prune=prune,
             )
         print(f"Synced Compose strings to {cmp_resources}")
         print(f"Synced Compose icons to {cmp_icons}")
@@ -634,15 +801,23 @@ def sync(args: argparse.Namespace) -> int:
         clean_generated_android_assets(android_res)
         for source in (generated / "android/res").glob("values*/strings.xml"):
             copy_file(source, android_res / source.parent.name / source.name)
-        for source in (generated / "android/res/drawable").glob("ic_*.xml"):
-            copy_file(source, android_res / "drawable" / source.name)
-        for directory, pattern in [
-            ("drawable-nodpi", "img_*.png"),
-            ("font", "*.ttf"),
-            ("raw", "*.json"),
+        sync_directory_contents(
+            generated / "android/res/drawable",
+            android_res / "drawable",
+            "ic_*.xml",
+            prune=True,
+        )
+        for directory, pattern, prune in [
+            ("drawable-nodpi", "img_*.png", True),
+            ("font", "*.ttf", False),
+            ("raw", "*.json", False),
         ]:
-            for source in (generated / "android/res" / directory).glob(pattern):
-                copy_file(source, android_res / directory / source.name)
+            sync_directory_contents(
+                generated / "android/res" / directory,
+                android_res / directory,
+                pattern,
+                prune=prune,
+            )
         print(f"Synced Android strings to {android_res}")
         print(f"Synced Android icons to {android_res / 'drawable'}")
         print(f"Synced Android assets to {android_res}")
@@ -654,20 +829,22 @@ def sync(args: argparse.Namespace) -> int:
             generated / "ios/YallaResourcesIOS/Resources/Localizable.xcstrings",
             ios_resources / "Localizable.xcstrings",
         )
-        copy_directory_contents(
+        sync_directory_contents(
             generated / "ios/YallaResourcesIOS/Resources/Icons",
             ios_icons,
             "*.svg",
+            prune=True,
         )
-        for directory, pattern in [
-            ("Drawables", "*.png"),
-            ("Fonts", "*.ttf"),
-            ("Files", "*.json"),
+        for directory, pattern, prune in [
+            ("Drawables", "img_*.png", True),
+            ("Fonts", "*.ttf", False),
+            ("Files", "*.json", False),
         ]:
-            copy_directory_contents(
+            sync_directory_contents(
                 generated / "ios/YallaResourcesIOS/Resources" / directory,
                 ios_resources / directory,
                 pattern,
+                prune=prune,
             )
         print(f"Synced iOS strings to {ios_resources}")
         print(f"Synced iOS icons to {ios_icons}")
@@ -682,6 +859,9 @@ def main() -> int:
 
     validate_parser = subparsers.add_parser("validate")
     validate_parser.add_argument("--strict", action="store_true")
+
+    check_parser = subparsers.add_parser("check")
+    check_parser.add_argument("--strict", action="store_true")
 
     generate_parser = subparsers.add_parser("generate")
     generate_parser.add_argument("--out", type=Path, default=ROOT / "build/generated")
@@ -712,6 +892,8 @@ def main() -> int:
     args = parser.parse_args()
     if args.command == "validate":
         return validate(args.strict)
+    if args.command == "check":
+        return check(args.strict)
     if args.command == "generate":
         return generate(args.out)
     if args.command == "sync":
