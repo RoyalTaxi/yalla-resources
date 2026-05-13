@@ -389,7 +389,9 @@
       "values": {
         "default": "Davom etish orqali maxfiylik siyosatimiz bilan rozilik bildirasiz.",
         "en": "By continuing, you agree to our Privacy Policy.",
-        "ru": "Продолжая, вы соглашаетесь с нашей политикой конфиденциальности."
+        "ru": "Продолжая, вы соглашаетесь с нашей политикой конфиденциальности.",
+        "uz-Latn": "Davom etish orqali maxfiylik siyosatimiz bilan rozilik bildirasiz.",
+        "uz-Cyrl": "Давом этиш орқали махфийлик сиёсатимиз билан розилик билдирасиз."
       }
     },
     "auth_privacy_policy_link": {
@@ -397,7 +399,9 @@
       "values": {
         "default": "maxfiylik siyosatimiz",
         "en": "Privacy Policy",
-        "ru": "политикой конфиденциальности"
+        "ru": "политикой конфиденциальности",
+        "uz-Latn": "maxfiylik siyosatimiz",
+        "uz-Cyrl": "махфийлик сиёсатимиз"
       }
     },
     "auth_otp_title": {
