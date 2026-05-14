@@ -5,7 +5,7 @@ import shutil
 from pathlib import Path
 
 from .io import write
-from .paths import IMAGE_DIR
+from .paths import ICON_DIR, IMAGE_DIR
 
 
 def asset_catalog_info() -> dict:
@@ -17,12 +17,15 @@ def asset_catalog_info() -> dict:
     }
 
 
-def image_entry(filename: str, luminosity: str | None = None) -> dict:
+def image_entry(filename: str, luminosity: str | None = None, is_vector: bool = False) -> dict:
     entry = {
         "idiom": "universal",
         "filename": filename,
-        "scale": "1x",
     }
+    if is_vector:
+        # For SVGs, we want to preserve vector data and use single scale (universal)
+        entry["preserves-vector-data"] = True
+    
     if luminosity:
         entry["appearances"] = [
             {
@@ -39,7 +42,7 @@ def write_asset_contents(path: Path, images: list[dict]) -> None:
     write(path / "Contents.json", json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
 
 
-def copy_image_to_imageset(source: Path, imageset: Path) -> None:
+def copy_resource_to_imageset(source: Path, imageset: Path) -> None:
     imageset.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source, imageset / source.name)
 
@@ -68,15 +71,15 @@ def generate_ios_image_asset_catalog(out: Path) -> None:
 
     for source in sorted(IMAGE_DIR.glob("*.png")):
         imageset = catalog / f"{source.stem}.imageset"
-        copy_image_to_imageset(source, imageset)
+        copy_resource_to_imageset(source, imageset)
         write_asset_contents(imageset, [image_entry(source.name)])
 
     for suffix, (light, dark) in themed_image_pairs().items():
         imageset = catalog / f"yalla_img_{suffix}.imageset"
         if imageset.exists():
             shutil.rmtree(imageset)
-        copy_image_to_imageset(light, imageset)
-        copy_image_to_imageset(dark, imageset)
+        copy_resource_to_imageset(light, imageset)
+        copy_resource_to_imageset(dark, imageset)
         write_asset_contents(
             imageset,
             [
@@ -84,3 +87,16 @@ def generate_ios_image_asset_catalog(out: Path) -> None:
                 image_entry(dark.name, "dark"),
             ],
         )
+
+
+def generate_ios_icon_asset_catalog(out: Path) -> None:
+    catalog = out / "ios/YallaResourcesIOS/Resources/YallaIcons.xcassets"
+    if catalog.exists():
+        shutil.rmtree(catalog)
+    catalog.mkdir(parents=True, exist_ok=True)
+    write(catalog / "Contents.json", json.dumps(asset_catalog_info(), ensure_ascii=False, indent=2) + "\n")
+
+    for source in sorted(ICON_DIR.glob("*.svg")):
+        imageset = catalog / f"{source.stem}.imageset"
+        copy_resource_to_imageset(source, imageset)
+        write_asset_contents(imageset, [image_entry(source.name, is_vector=True)])

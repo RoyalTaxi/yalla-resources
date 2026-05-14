@@ -108,8 +108,12 @@ def sync(args: argparse.Namespace) -> int:
 
     if not args.no_ios:
         ios_resources = args.ios / "Sources/YallaResourcesIOS/Resources"
-        ios_icons = ios_resources / "Icons"
         clean_generated_ios_legacy_assets(ios_resources)
+        # Remove loose Icons folder if it exists
+        legacy_icons = ios_resources / "Icons"
+        if legacy_icons.exists():
+            shutil.rmtree(legacy_icons)
+
         copy_file(
             generated / "ios/YallaResourcesIOS/YallaResourcesIOS.swift",
             args.ios / "Sources/YallaResourcesIOS/YallaResourcesIOS.swift",
@@ -122,11 +126,9 @@ def sync(args: argparse.Namespace) -> int:
             generated / "ios/YallaResourcesIOS/Resources/YallaImages.xcassets",
             ios_resources / "YallaImages.xcassets",
         )
-        sync_directory_contents(
-            generated / "ios/YallaResourcesIOS/Resources/Icons",
-            ios_icons,
-            "*.svg",
-            prune=True,
+        replace_directory(
+            generated / "ios/YallaResourcesIOS/Resources/YallaIcons.xcassets",
+            ios_resources / "YallaIcons.xcassets",
         )
         for directory, pattern, prune in [
             ("Fonts", "*.ttf", False),
@@ -139,7 +141,6 @@ def sync(args: argparse.Namespace) -> int:
                 prune=prune,
             )
         print(f"Synced iOS strings to {ios_resources}")
-        print(f"Synced iOS icons to {ios_icons}")
         print(f"Synced iOS assets to {ios_resources}")
 
     return 0

@@ -32,7 +32,7 @@ def verify_generated_output(out: Path) -> list[str]:
     expected_counts = {
         "compose icons": (out / "compose/valkyrieResources", "*.svg", expected_icon_count),
         "android icons": (out / "android/res/drawable", "ic_*.xml", expected_icon_count),
-        "ios icons": (out / "ios/YallaResourcesIOS/Resources/Icons", "*.svg", expected_icon_count),
+        "ios icons": (out / "ios/YallaResourcesIOS/Resources/YallaIcons.xcassets", "*.imageset", expected_icon_count),
         "compose images": (out / "compose/composeResources/drawable", "img_*.png", expected_image_count),
         "android images": (out / "android/res/drawable-nodpi", "img_*.png", expected_image_count),
         "ios image sets": (out / "ios/YallaResourcesIOS/Resources/YallaImages.xcassets", "*.imageset", expected_ios_imageset_count),
