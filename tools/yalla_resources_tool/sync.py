@@ -9,36 +9,6 @@ from .paths import COMPOSE_LOCALE_DIRS, ROOT
 from .validation import validate
 
 
-def clean_generated_android_strings(res_dir):
-    if not res_dir.exists():
-        return
-    for path in res_dir.glob("values*/yalla_strings.xml"):
-        path.unlink()
-
-
-def clean_generated_android_icons(res_dir):
-    drawable_dir = res_dir / "drawable"
-    if not drawable_dir.exists():
-        return
-    for pattern in ["yalla_ic_*.xml", "ic_*.xml"]:
-        for path in drawable_dir.glob(pattern):
-            path.unlink()
-
-
-def clean_generated_android_assets(res_dir):
-    legacy_drawable_dir = res_dir / "drawable"
-    if legacy_drawable_dir.exists():
-        for path in legacy_drawable_dir.glob("img_*.png"):
-            path.unlink()
-
-
-def clean_generated_ios_legacy_assets(resources_dir):
-    for directory in ("Drawables", "Images"):
-        legacy_dir = resources_dir / directory
-        if legacy_dir.exists():
-            shutil.rmtree(legacy_dir)
-
-
 def sync(args: argparse.Namespace) -> int:
     validation = validate(strict=False)
     if validation != 0:
@@ -79,10 +49,8 @@ def sync(args: argparse.Namespace) -> int:
         print(f"Synced Compose assets to {cmp_resources}")
 
     if not args.no_android:
-        android_res = args.android / "sdk/src/main/res"
-        clean_generated_android_strings(android_res)
-        clean_generated_android_icons(android_res)
-        clean_generated_android_assets(android_res)
+        # Changed target from sdk module to resources module
+        android_res = args.android / "resources/src/main/res"
         for source in (generated / "android/res").glob("values*/strings.xml"):
             copy_file(source, android_res / source.parent.name / source.name)
         sync_directory_contents(
@@ -102,18 +70,10 @@ def sync(args: argparse.Namespace) -> int:
                 pattern,
                 prune=prune,
             )
-        print(f"Synced Android strings to {android_res}")
-        print(f"Synced Android icons to {android_res / 'drawable'}")
-        print(f"Synced Android assets to {android_res}")
+        print(f"Synced Android resources to {android_res}")
 
     if not args.no_ios:
         ios_resources = args.ios / "Sources/YallaResourcesIOS/Resources"
-        clean_generated_ios_legacy_assets(ios_resources)
-        # Remove loose Icons folder if it exists
-        legacy_icons = ios_resources / "Icons"
-        if legacy_icons.exists():
-            shutil.rmtree(legacy_icons)
-
         copy_file(
             generated / "ios/YallaResourcesIOS/YallaResourcesIOS.swift",
             args.ios / "Sources/YallaResourcesIOS/YallaResourcesIOS.swift",
@@ -144,4 +104,3 @@ def sync(args: argparse.Namespace) -> int:
         print(f"Synced iOS assets to {ios_resources}")
 
     return 0
-
