@@ -113,7 +113,7 @@ def import_assets(resources_dir: Path) -> None:
     common = resources_dir / "src/commonMain"
     compose = common / "composeResources"
     copy_tree(common / "valkyrieResources", ROOT / "assets/icons", "*.svg")
-    copy_tree(compose / "drawable", ROOT / "assets/drawable")
+    copy_tree(compose / "drawable", ROOT / "assets/images")
     copy_tree(compose / "font", ROOT / "assets/font")
     copy_tree(compose / "files", ROOT / "assets/files")
 

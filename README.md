@@ -13,7 +13,7 @@ made here first, then generated into each platform's native resource format.
 
 ## Current Scope
 
-The implemented workflow covers strings, canonical SVG icons, PNG drawables,
+The implemented workflow covers strings, canonical SVG icons, PNG images,
 fonts, and JSON file resources:
 
 ```text
@@ -27,10 +27,10 @@ assets/icons/*.svg
     +-> Android VectorDrawable res/drawable/ic_*.xml
     +-> iOS bundled Resources/Icons/*.svg
 
-assets/drawable/*.png
+assets/images/*.png
     +-> Compose Multiplatform composeResources/drawable/*.png
     +-> Android res/drawable-nodpi/img_*.png
-    +-> iOS bundled Resources/Drawables/*.png
+    +-> iOS bundled Resources/YallaImages.xcassets/*.imageset
 
 assets/font/*.ttf
     +-> Compose Multiplatform composeResources/font/*.ttf
