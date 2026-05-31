@@ -45,6 +45,10 @@ assets/files/*.json
 
 All generated resource files should be updated through this repo.
 
+On iOS, paired `img_light_*` and `img_dark_*` source files are generated as a
+single `img_*.imageset` with Any and Dark appearances. The individual
+`img_light_*` and `img_dark_*` imagesets are intentionally not emitted.
+
 ## Locales
 
 | Canonical locale | Meaning | Source mapping |

@@ -24,24 +24,32 @@ def verify_generated_output(out: Path) -> list[str]:
     errors = []
 
     expected_icon_count = len(list(ICON_DIR.glob("*.svg")))
-    expected_image_count = len(list(IMAGE_DIR.glob("*.png")))
-    expected_ios_imageset_count = expected_image_count + len(themed_image_pairs())
+    image_stems = {path.stem for path in IMAGE_DIR.glob("*.png")}
+    themed_pairs = themed_image_pairs()
+    ios_image_set_names = {
+        stem
+        for stem in image_stems
+        if not any(stem in (f"img_light_{suffix}", f"img_dark_{suffix}") for suffix in themed_pairs)
+    }
+    ios_image_set_names.update(f"img_{suffix}" for suffix in themed_pairs)
+    expected_image_count = len(image_stems)
+    expected_ios_imageset_count = len(ios_image_set_names)
     expected_font_count = len(list(FONT_DIR.glob("*.ttf")))
     expected_file_count = len(list(FILE_DIR.glob("*.json")))
 
     expected_counts = {
         "compose icons": (out / "compose/valkyrieResources", "*.svg", expected_icon_count),
         "android icons": (out / "android/res/drawable", "ic_*.xml", expected_icon_count),
-        "ios icons": (out / "ios/YallaResourcesIOS/Resources/YallaIcons.xcassets", "*.imageset", expected_icon_count),
+        "ios icons": (out / "ios/Resources/Resources/YallaIcons.xcassets", "*.imageset", expected_icon_count),
         "compose images": (out / "compose/composeResources/drawable", "img_*.png", expected_image_count),
         "android images": (out / "android/res/drawable-nodpi", "img_*.png", expected_image_count),
-        "ios image sets": (out / "ios/YallaResourcesIOS/Resources/YallaImages.xcassets", "*.imageset", expected_ios_imageset_count),
+        "ios image sets": (out / "ios/Resources/Resources/YallaImages.xcassets", "*.imageset", expected_ios_imageset_count),
         "compose fonts": (out / "compose/composeResources/font", "*.ttf", expected_font_count),
         "android fonts": (out / "android/res/font", "*.ttf", expected_font_count),
-        "ios fonts": (out / "ios/YallaResourcesIOS/Resources/Fonts", "*.ttf", expected_font_count),
+        "ios fonts": (out / "ios/Resources/Resources/Fonts", "*.ttf", expected_font_count),
         "compose files": (out / "compose/composeResources/files", "*.json", expected_file_count),
         "android raw files": (out / "android/res/raw", "*.json", expected_file_count),
-        "ios files": (out / "ios/YallaResourcesIOS/Resources/Files", "*.json", expected_file_count),
+        "ios files": (out / "ios/Resources/Resources/Files", "*.json", expected_file_count),
     }
 
     for label, (directory, pattern, expected) in expected_counts.items():
@@ -67,7 +75,7 @@ def verify_generated_output(out: Path) -> list[str]:
     if android_latn_dir.exists():
         errors.append("Android output must not generate values-b+uz+Latn")
 
-    localizable = out / "ios/YallaResourcesIOS/Resources/Localizable.xcstrings"
+    localizable = out / "ios/Resources/Resources/Localizable.xcstrings"
     if not localizable.exists():
         errors.append("missing iOS Localizable.xcstrings")
     else:
@@ -75,11 +83,11 @@ def verify_generated_output(out: Path) -> list[str]:
         if payload.get("sourceLanguage") != "uz-Latn":
             errors.append("iOS Localizable.xcstrings sourceLanguage must be uz-Latn")
 
-    ios_accessor = out / "ios/YallaResourcesIOS/YallaResourcesIOS.swift"
+    ios_accessor = out / "ios/Resources/YallaResources.swift"
     if not ios_accessor.exists():
         errors.append("missing iOS resource accessor")
 
-    ios_asset_catalog = out / "ios/YallaResourcesIOS/Resources/YallaImages.xcassets"
+    ios_asset_catalog = out / "ios/Resources/Resources/YallaImages.xcassets"
     if (ios_asset_catalog / "Contents.json").exists():
         json.loads((ios_asset_catalog / "Contents.json").read_text())
     else:
@@ -90,6 +98,13 @@ def verify_generated_output(out: Path) -> list[str]:
             errors.append(f"missing iOS imageset Contents.json: {imageset.name}")
         else:
             json.loads(contents.read_text())
+        if imageset.name.startswith(("img_light_", "img_dark_")):
+            errors.append(f"duplicated iOS themed variant imageset generated: {imageset.name}")
+
+    for suffix in themed_image_pairs():
+        imageset = ios_asset_catalog / f"img_{suffix}.imageset"
+        if not imageset.exists():
+            errors.append(f"missing iOS themed appearance imageset: {imageset.name}")
 
     for path in sorted((out / "android/res/drawable").glob("*.xml")):
         ET.parse(path)
@@ -137,4 +152,3 @@ def check(strict: bool) -> int:
 
     print("Resource generator check passed")
     return 0
-

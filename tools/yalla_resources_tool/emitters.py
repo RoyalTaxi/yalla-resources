@@ -85,7 +85,7 @@ def generate_ios(out: Path, catalog: dict) -> None:
         "version": "1.0",
     }
     write(
-        out / "ios/YallaResourcesIOS/Resources/Localizable.xcstrings",
+        out / "ios/Resources/Resources/Localizable.xcstrings",
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
     )
     generate_ios_accessor(out)
@@ -93,7 +93,7 @@ def generate_ios(out: Path, catalog: dict) -> None:
 
 def generate_ios_accessor(out: Path) -> None:
     write(
-        out / "ios/YallaResourcesIOS/YallaResourcesIOS.swift",
+        out / "ios/Resources/YallaResources.swift",
         """import Foundation
 import SwiftUI
 #if canImport(UIKit)
@@ -103,7 +103,7 @@ import AppKit
 #endif
 
 /// Native iOS resource accessors generated from the canonical Yalla resources.
-public enum YallaResourcesIOS {
+public enum YallaResources {
     public static let bundle = Bundle.module
 
     public static func localizedString(
@@ -249,12 +249,12 @@ def generate_asset_files(out: Path) -> None:
     generate_ios_image_asset_catalog(out)
     copy_directory_contents(
         FONT_DIR,
-        out / "ios/YallaResourcesIOS/Resources/Fonts",
+        out / "ios/Resources/Resources/Fonts",
         "*.ttf",
     )
     copy_directory_contents(
         FILE_DIR,
-        out / "ios/YallaResourcesIOS/Resources/Files",
+        out / "ios/Resources/Resources/Files",
         "*.json",
     )
 

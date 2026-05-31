@@ -62,20 +62,31 @@ def themed_image_pairs() -> dict[str, tuple[Path, Path]]:
     }
 
 
+def themed_image_sources() -> set[Path]:
+    return {
+        image
+        for pair in themed_image_pairs().values()
+        for image in pair
+    }
+
+
 def generate_ios_image_asset_catalog(out: Path) -> None:
-    catalog = out / "ios/YallaResourcesIOS/Resources/YallaImages.xcassets"
+    catalog = out / "ios/Resources/Resources/YallaImages.xcassets"
     if catalog.exists():
         shutil.rmtree(catalog)
     catalog.mkdir(parents=True, exist_ok=True)
     write(catalog / "Contents.json", json.dumps(asset_catalog_info(), ensure_ascii=False, indent=2) + "\n")
 
+    themed_sources = themed_image_sources()
     for source in sorted(IMAGE_DIR.glob("*.png")):
+        if source in themed_sources:
+            continue
         imageset = catalog / f"{source.stem}.imageset"
         copy_resource_to_imageset(source, imageset)
         write_asset_contents(imageset, [image_entry(source.name)])
 
     for suffix, (light, dark) in themed_image_pairs().items():
-        imageset = catalog / f"yalla_img_{suffix}.imageset"
+        imageset = catalog / f"img_{suffix}.imageset"
         if imageset.exists():
             shutil.rmtree(imageset)
         copy_resource_to_imageset(light, imageset)
@@ -90,7 +101,7 @@ def generate_ios_image_asset_catalog(out: Path) -> None:
 
 
 def generate_ios_icon_asset_catalog(out: Path) -> None:
-    catalog = out / "ios/YallaResourcesIOS/Resources/YallaIcons.xcassets"
+    catalog = out / "ios/Resources/Resources/YallaIcons.xcassets"
     if catalog.exists():
         shutil.rmtree(catalog)
     catalog.mkdir(parents=True, exist_ok=True)

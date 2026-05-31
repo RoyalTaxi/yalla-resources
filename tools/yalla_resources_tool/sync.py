@@ -73,21 +73,21 @@ def sync(args: argparse.Namespace) -> int:
         print(f"Synced Android resources to {android_res}")
 
     if not args.no_ios:
-        ios_resources = args.ios / "Sources/YallaResourcesIOS/Resources"
+        ios_resources = args.ios / "Sources/Resources/Resources"
         copy_file(
-            generated / "ios/YallaResourcesIOS/YallaResourcesIOS.swift",
-            args.ios / "Sources/YallaResourcesIOS/YallaResourcesIOS.swift",
+            generated / "ios/Resources/YallaResources.swift",
+            args.ios / "Sources/Resources/YallaResources.swift",
         )
         copy_file(
-            generated / "ios/YallaResourcesIOS/Resources/Localizable.xcstrings",
+            generated / "ios/Resources/Resources/Localizable.xcstrings",
             ios_resources / "Localizable.xcstrings",
         )
         replace_directory(
-            generated / "ios/YallaResourcesIOS/Resources/YallaImages.xcassets",
+            generated / "ios/Resources/Resources/YallaImages.xcassets",
             ios_resources / "YallaImages.xcassets",
         )
         replace_directory(
-            generated / "ios/YallaResourcesIOS/Resources/YallaIcons.xcassets",
+            generated / "ios/Resources/Resources/YallaIcons.xcassets",
             ios_resources / "YallaIcons.xcassets",
         )
         for directory, pattern, prune in [
@@ -95,7 +95,7 @@ def sync(args: argparse.Namespace) -> int:
             ("Files", "*.json", False),
         ]:
             sync_directory_contents(
-                generated / "ios/YallaResourcesIOS/Resources" / directory,
+                generated / "ios/Resources/Resources" / directory,
                 ios_resources / directory,
                 pattern,
                 prune=prune,
