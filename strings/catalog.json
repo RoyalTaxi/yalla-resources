@@ -1150,6 +1150,16 @@
         "uz-Cyrl": "Манзилни киритинг"
       }
     },
+    "places_search_empty_hint": {
+      "translatable": true,
+      "values": {
+        "default": "Manzilni qidiring",
+        "en": "Search for an address",
+        "ru": "Найдите адрес",
+        "uz-Latn": "Manzilni qidiring",
+        "uz-Cyrl": "Манзилни қидиринг"
+      }
+    },
     "places_form_name": {
       "translatable": true,
       "values": {
@@ -1288,6 +1298,26 @@
         "ru": "Не удалось удалить адрес",
         "uz-Latn": "Manzilni oʻchirib boʻlmadi",
         "uz-Cyrl": "Манзилни ўчириб бўлмади"
+      }
+    },
+    "places_load_error": {
+      "translatable": true,
+      "values": {
+        "default": "Manzillarni yuklab bo'lmadi",
+        "en": "Failed to load addresses",
+        "ru": "Не удалось загрузить адреса",
+        "uz-Latn": "Manzillarni yuklab boʻlmadi",
+        "uz-Cyrl": "Манзилларни юклаб бўлмади"
+      }
+    },
+    "places_section_custom": {
+      "translatable": true,
+      "values": {
+        "default": "Boshqa manzillar",
+        "en": "Other addresses",
+        "ru": "Другие адреса",
+        "uz-Latn": "Boshqa manzillar",
+        "uz-Cyrl": "Бошқа манзиллар"
       }
     },
     "payment_title": {
@@ -2253,11 +2283,11 @@
     "history_empty": {
       "translatable": true,
       "values": {
-        "default": "Hozircha safarlar yo'q",
-        "en": "No trips yet",
-        "ru": "Поездок пока нет",
-        "uz-Latn": "Hozircha safarlar yoʻq",
-        "uz-Cyrl": "Ҳозирча сафарлар йўқ"
+        "default": "Hech narsa topilmadi, chamasi siz hali taksi chaqirmagansiz",
+        "en": "We found nothing — it seems you haven't ordered a taxi yet",
+        "ru": "Мы ничего не нашли, кажется вы еще не вызывали такси",
+        "uz-Latn": "Hech narsa topilmadi, chamasi siz hali taksi chaqirmagansiz",
+        "uz-Cyrl": "Ҳеч нарса топилмади, чамаси сиз ҳали такси чақирмагансиз"
       }
     },
     "history_date_time": {
@@ -2308,6 +2338,66 @@
         "ru": "Не удалось удалить поездку",
         "uz-Latn": "Safarni oʻchirib boʻlmadi",
         "uz-Cyrl": "Сафарни ўчириб бўлмади"
+      }
+    },
+    "history_detail_title": {
+      "translatable": true,
+      "values": {
+        "default": "Safar tafsilotlari",
+        "en": "Trip details",
+        "ru": "Детали поездки",
+        "uz-Latn": "Safar tafsilotlari",
+        "uz-Cyrl": "Сафар тафсилотлари"
+      }
+    },
+    "history_label_date": {
+      "translatable": true,
+      "values": {
+        "default": "Sana",
+        "en": "Date",
+        "ru": "Дата",
+        "uz-Latn": "Sana",
+        "uz-Cyrl": "Сана"
+      }
+    },
+    "history_load_error": {
+      "translatable": true,
+      "values": {
+        "default": "Safarlarni yuklab bo'lmadi",
+        "en": "Couldn't load trips",
+        "ru": "Не удалось загрузить поездки",
+        "uz-Latn": "Safarlarni yuklab boʻlmadi",
+        "uz-Cyrl": "Сафарларни юклаб бўлмади"
+      }
+    },
+    "history_delete_confirm": {
+      "translatable": true,
+      "values": {
+        "default": "Ushbu safarni o'chirishni xohlaysizmi?",
+        "en": "Are you sure you want to delete this trip?",
+        "ru": "Вы действительно хотите удалить эту поездку?",
+        "uz-Latn": "Ushbu safarni oʻchirishni xohlaysizmi?",
+        "uz-Cyrl": "Ушбу сафарни ўчиришни хохлайсизми?"
+      }
+    },
+    "history_delete_warning": {
+      "translatable": true,
+      "values": {
+        "default": "Safar o'chirilgandan so'ng ma'lumotlarni tiklab bo'lmaydi",
+        "en": "This action cannot be undone",
+        "ru": "После удаления поездки восстановить все данные будет невозможно",
+        "uz-Latn": "Safar oʻchirilgandan soʻng maʻlumotlarni tiklab boʻlmaydi",
+        "uz-Cyrl": "Сафар ўчирилгандан сўнг маълумотларни тиклаб бўлмайди"
+      }
+    },
+    "history_delete_action": {
+      "translatable": true,
+      "values": {
+        "default": "Ha, safarni o'chirish",
+        "en": "Yes, delete trip",
+        "ru": "Да, удалить поездку",
+        "uz-Latn": "Ha, safarni oʻchirish",
+        "uz-Cyrl": "Ҳа, сафарни ўчириш"
       }
     },
     "driver_status_coming": {
@@ -2478,6 +2568,16 @@
         "ru": "Ваш регион",
         "uz-Latn": "Viloyatingiz",
         "uz-Cyrl": "Вилоятингиз"
+      }
+    },
+    "driver_region_search": {
+      "translatable": true,
+      "values": {
+        "default": "Qidirish",
+        "en": "Search",
+        "ru": "Поиск",
+        "uz-Latn": "Qidirish",
+        "uz-Cyrl": "Қидириш"
       }
     },
     "service_taxi": {
