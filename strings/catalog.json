@@ -106,6 +106,16 @@
         "uz-Cyrl": "Меню"
       }
     },
+    "home_title": {
+      "translatable": true,
+      "values": {
+        "default": "Bosh sahifa",
+        "en": "Home",
+        "ru": "Главная",
+        "uz-Latn": "Bosh sahifa",
+        "uz-Cyrl": "Бош саҳифа"
+      }
+    },
     "social_instagram": {
       "translatable": false,
       "values": {
