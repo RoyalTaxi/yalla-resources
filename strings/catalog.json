@@ -66,6 +66,46 @@
         "default": "O'zbek"
       }
     },
+    "language_title": {
+      "translatable": true,
+      "values": {
+        "default": "Til",
+        "en": "Language",
+        "ru": "Язык",
+        "uz-Latn": "Til",
+        "uz-Cyrl": "Тил"
+      }
+    },
+    "onboarding_title": {
+      "translatable": true,
+      "values": {
+        "default": "Xush kelibsiz",
+        "en": "Welcome",
+        "ru": "Добро пожаловать",
+        "uz-Latn": "Xush kelibsiz",
+        "uz-Cyrl": "Хуш келибсиз"
+      }
+    },
+    "permission_title": {
+      "translatable": true,
+      "values": {
+        "default": "Ruxsatlar",
+        "en": "Permissions",
+        "ru": "Разрешения",
+        "uz-Latn": "Ruxsatlar",
+        "uz-Cyrl": "Рухсатлар"
+      }
+    },
+    "menu_title": {
+      "translatable": true,
+      "values": {
+        "default": "Menyu",
+        "en": "Menu",
+        "ru": "Меню",
+        "uz-Latn": "Menyu",
+        "uz-Cyrl": "Меню"
+      }
+    },
     "social_instagram": {
       "translatable": false,
       "values": {
@@ -358,6 +398,16 @@
         "ru": "До {0}%",
         "uz-Latn": "{0}% gacha",
         "uz-Cyrl": "{0}% гача"
+      }
+    },
+    "auth_login_title": {
+      "translatable": true,
+      "values": {
+        "default": "Kirish",
+        "en": "Login",
+        "ru": "Вход",
+        "uz-Latn": "Kirish",
+        "uz-Cyrl": "Кириш"
       }
     },
     "auth_welcome_title": {
