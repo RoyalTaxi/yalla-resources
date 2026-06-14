@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 from .android_vector import ensure_android_vector_runner
-from .formatters import android_text, ios_format, xml_header, xml_text
+from .formatters import android_text, compose_text, ios_format, xml_header
 from .io import copy_directory_contents, load_catalog, write
 from .ios_assets import generate_ios_image_asset_catalog, generate_ios_icon_asset_catalog
 from .paths import (
@@ -34,7 +34,7 @@ def generate_compose(out: Path, catalog: dict) -> None:
             if locale != "default" and not entry.get("translatable", True):
                 continue
             attr = ' translatable="false"' if locale == "default" and not entry.get("translatable", True) else ""
-            lines.append(f'    <string name="{key}"{attr}>{xml_text(values[locale])}</string>\n')
+            lines.append(f'    <string name="{key}"{attr}>{compose_text(values[locale])}</string>\n')
         lines.append("</resources>\n")
         write(base / directory / "strings.xml", "".join(lines))
 
