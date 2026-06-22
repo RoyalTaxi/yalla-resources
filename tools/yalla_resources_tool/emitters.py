@@ -6,9 +6,10 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+from typing import Callable
 
 from .android_vector import ensure_android_vector_runner
-from .formatters import android_text, ios_format, xml_header, xml_text
+from .formatters import android_text, compose_text, ios_format, xml_header
 from .io import copy_directory_contents, load_catalog, write
 from .ios_assets import generate_ios_image_asset_catalog, generate_ios_icon_asset_catalog
 from .paths import (
@@ -23,36 +24,54 @@ from .paths import (
 )
 
 
-def generate_compose(out: Path, catalog: dict) -> None:
-    base = out / "compose/composeResources"
-    for locale, directory in COMPOSE_LOCALE_DIRS.items():
+def _is_translatable(entry: dict) -> bool:
+    return entry.get("translatable", True)
+
+
+def _emits_locale(entry: dict, locale: str) -> bool:
+    """The single source of truth for which (string, locale) pairs are emitted.
+
+    Every platform shares this rule: a string is emitted in its ``default``
+    locale always, and in any other locale only when the string is marked
+    translatable. Untranslatable strings (e.g. ``app_name``) therefore appear
+    only once -- in the default bucket -- on Compose, Android, and iOS alike.
+    """
+    if locale not in entry["values"]:
+        return False
+    return locale == "default" or _is_translatable(entry)
+
+
+def _generate_xml_strings(
+    out: Path,
+    catalog: dict,
+    base: Path,
+    locale_dirs: dict,
+    text: Callable[[str], str],
+) -> None:
+    """Emit Android-style ``<resources>`` string tables, one per locale dir.
+
+    Compose and Android share an identical file shape and traversal; they differ
+    only in the output root, the locale->directory map, and the per-value text
+    escaper (``compose_text`` / ``android_text``). Parameterizing those three
+    keeps the placeholder/escaping/skip logic in exactly one place.
+    """
+    for locale, directory in locale_dirs.items():
         lines = [xml_header()]
         for key, entry in catalog["strings"].items():
-            values = entry["values"]
-            if locale not in values:
+            if not _emits_locale(entry, locale):
                 continue
-            if locale != "default" and not entry.get("translatable", True):
-                continue
-            attr = ' translatable="false"' if locale == "default" and not entry.get("translatable", True) else ""
-            lines.append(f'    <string name="{key}"{attr}>{xml_text(values[locale])}</string>\n')
+            attr = ' translatable="false"' if locale == "default" and not _is_translatable(entry) else ""
+            lines.append(f'    <string name="{key}"{attr}>{text(entry["values"][locale])}</string>\n')
         lines.append("</resources>\n")
         write(base / directory / "strings.xml", "".join(lines))
+
+
+def generate_compose(out: Path, catalog: dict) -> None:
+    _generate_xml_strings(out, catalog, out / "compose/composeResources", COMPOSE_LOCALE_DIRS, compose_text)
 
 
 def generate_android(out: Path, catalog: dict) -> None:
-    base = out / "android/res"
-    for locale, directory in ANDROID_LOCALE_DIRS.items():
-        lines = [xml_header()]
-        for key, entry in catalog["strings"].items():
-            values = entry["values"]
-            if locale not in values:
-                continue
-            if locale != "default" and not entry.get("translatable", True):
-                continue
-            attr = ' translatable="false"' if locale == "default" and not entry.get("translatable", True) else ""
-            lines.append(f'    <string name="{key}"{attr}>{android_text(values[locale])}</string>\n')
-        lines.append("</resources>\n")
-        write(base / directory / "strings.xml", "".join(lines))
+    _generate_xml_strings(out, catalog, out / "android/res", ANDROID_LOCALE_DIRS, android_text)
 
 
 def generate_ios(out: Path, catalog: dict) -> None:
@@ -62,14 +81,16 @@ def generate_ios(out: Path, catalog: dict) -> None:
             "extractionState": "manual",
             "localizations": {},
         }
-        if not entry.get("translatable", True):
+        if not _is_translatable(entry):
             item["shouldTranslate"] = False
 
         for locale, value in entry["values"].items():
-            ios_locale = IOS_LOCALE_IDS[locale]
-            if ios_locale in item["localizations"]:
+            if not _emits_locale(entry, locale):
                 continue
-            if locale != "default" and not entry.get("translatable", True):
+            ios_locale = IOS_LOCALE_IDS[locale]
+            # ``default`` and ``uz-Latn`` collapse to the same iOS id; the first
+            # one in catalog order (``default``) wins, matching legacy output.
+            if ios_locale in item["localizations"]:
                 continue
             item["localizations"][ios_locale] = {
                 "stringUnit": {
@@ -321,4 +342,3 @@ def generate(out: Path) -> int:
     generate_asset_files(out)
     print(f"Generated resources into {out}")
     return 0
-
