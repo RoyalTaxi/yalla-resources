@@ -4,7 +4,6 @@ from pathlib import Path
 
 import yalla_resources
 
-
 class YallaResourcesTests(unittest.TestCase):
     def test_validate_strict(self):
         self.assertEqual(yalla_resources.validate(strict=True), 0)
@@ -55,7 +54,6 @@ class YallaResourcesTests(unittest.TestCase):
             self.assertFalse((destination / "img_old.png").exists())
             self.assertTrue((destination / "manual.png").exists())
             self.assertTrue((destination / "notes.txt").exists())
-
 
 if __name__ == "__main__":
     unittest.main()

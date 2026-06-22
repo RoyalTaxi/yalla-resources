@@ -19,7 +19,6 @@ from .paths import (
 )
 from .validation import validate
 
-
 def verify_generated_output(out: Path) -> list[str]:
     errors = []
 
@@ -112,7 +111,6 @@ def verify_generated_output(out: Path) -> list[str]:
             errors.append(f"legacy Android icon prefix generated: {path.name}")
 
     return errors
-
 
 def check(strict: bool) -> int:
     validation = validate(strict=strict)

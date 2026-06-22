@@ -1,16 +1,3 @@
-"""Round-trip tests for parameterized strings.
-
-The canonical catalog stores placeholders in the neutral ``{0}`` form. Each
-platform emitter must rewrite them into the *exact* token that platform's
-runtime substitutes at format time, otherwise ``stringResource(..., arg)`` (and
-its Android/iOS equivalents) silently render the literal placeholder instead of
-the argument.
-
-These tests format a real parameterized key end-to-end on every platform and
-assert that (1) the argument is substituted and (2) no canonical ``{0}`` token
-survives in the emitted resource. A literal ``{0}`` left in the output fails the
-test -- which is exactly what the buggy Compose emitter used to produce.
-"""
 from __future__ import annotations
 
 import html
@@ -25,46 +12,28 @@ from yalla_resources_tool.emitters import generate_android, generate_compose, ge
 from yalla_resources_tool.io import load_catalog
 from yalla_resources_tool.paths import IOS_LOCALE_IDS, PLACEHOLDER
 
-# A real, single-argument key from the catalog (``"Sizda {0} ball bor"``).
 PARAM_KEY = "bonus_balance"
 ARG = "1500"
 
-
 def _positional_args_runtime(template: str, args: list[str], token: re.Pattern) -> str:
-    """Substitute 1-indexed positional ``%N$<conv>`` tokens, mirroring the
-    runtime formatters each platform applies: java.util.Formatter on
-    Android/Compose, ``-[NSString stringWithFormat:]`` on iOS."""
     return token.sub(lambda m: args[int(m.group(1)) - 1], template)
 
-
-# Compose Resources substitutes via SimpleStringFormatRegex = Regex("%(\\d+)\\$[ds]")
-# (confirmed from org.jetbrains.compose.resources internals). Format args are
-# ``toString()``-ed before substitution, so ``%N$s`` round-trips any value.
 COMPOSE_TOKEN = re.compile(r"%(\d+)\$[ds]")
-# Android: java.util.Formatter positional conversions ``%N$s`` / ``%N$d``.
 ANDROID_TOKEN = re.compile(r"%(\d+)\$[ds]")
-# iOS: NSString format positional specifiers ``%N$@`` (object) / ``%N$d`` (int).
 IOS_TOKEN = re.compile(r"%(\d+)\$[@d]")
-
 
 def _catalog_value(key: str) -> str:
     return load_catalog()["strings"][key]["values"]["default"]
 
-
 def _expected(value: str) -> str:
-    """The neutral template rendered with ARG via the canonical ``{N}`` form."""
     return PLACEHOLDER.sub(lambda m: ARG, value)
 
-
 def _unescape_android(text: str) -> str:
-    """Reverse the backslash escaping the Android/Compose runtime resolves."""
     return text.replace("\\'", "'").replace('\\"', '"')
-
 
 class PlaceholderRoundTripTests(unittest.TestCase):
     def setUp(self) -> None:
         self.value = _catalog_value(PARAM_KEY)
-        # Guard: this key must actually be parameterized, else the test is moot.
         self.assertIn("{0}", self.value, f"{PARAM_KEY} is not parameterized")
         self.expected = _expected(self.value)
 
@@ -113,8 +82,6 @@ class PlaceholderRoundTripTests(unittest.TestCase):
         self.assertEqual(rendered, self.expected)
 
     def test_no_emitter_leaks_canonical_placeholder(self) -> None:
-        """Belt-and-suspenders: every parameterized key on every platform must
-        emit a runtime token, never the canonical ``{N}`` form."""
         catalog = load_catalog()
         param_keys = [
             key for key, entry in catalog["strings"].items()
@@ -138,14 +105,12 @@ class PlaceholderRoundTripTests(unittest.TestCase):
                     f"{label} emitted a literal {{0}} for {key}"
                 )
 
-
 def _value_for_key(blob: str, key: str, label: str) -> str:
     if label == "iOS":
         loc = json.loads(blob)["strings"][key]["localizations"]
         return next(iter(loc.values()))["stringUnit"]["value"] if loc else ""
     node = ET.fromstring(blob).find(f"./string[@name='{key}']")
     return html.unescape(node.text) if node is not None and node.text else ""
-
 
 if __name__ == "__main__":
     unittest.main()
