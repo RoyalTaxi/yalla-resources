@@ -1,2 +1,0 @@
-"""Yalla resource generator package."""
-

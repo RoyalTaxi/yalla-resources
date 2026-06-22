@@ -7,20 +7,16 @@ from pathlib import Path
 
 from .paths import CATALOG_PATH
 
-
 def load_catalog() -> dict:
     return json.loads(CATALOG_PATH.read_text())
-
 
 def write(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content)
 
-
 def copy_file(source: Path, destination: Path) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source, destination)
-
 
 def copy_directory_contents(source: Path, destination: Path, pattern: str = "*") -> None:
     if destination.exists():
@@ -29,7 +25,6 @@ def copy_directory_contents(source: Path, destination: Path, pattern: str = "*")
     for path in sorted(source.glob(pattern)):
         if path.is_file():
             shutil.copy2(path, destination / path.name)
-
 
 def sync_directory_contents(source: Path, destination: Path, pattern: str, prune: bool = False) -> None:
     destination.mkdir(parents=True, exist_ok=True)
@@ -42,12 +37,10 @@ def sync_directory_contents(source: Path, destination: Path, pattern: str, prune
         if path.is_file():
             shutil.copy2(path, destination / path.name)
 
-
 def replace_directory(source: Path, destination: Path) -> None:
     if destination.exists():
         shutil.rmtree(destination)
     shutil.copytree(source, destination)
-
 
 def file_hash(path: Path) -> str:
     digest = hashlib.sha256()
@@ -56,11 +49,9 @@ def file_hash(path: Path) -> str:
             digest.update(chunk)
     return digest.hexdigest()
 
-
 def tree_snapshot(root: Path) -> dict[str, str]:
     return {
         str(path.relative_to(root)): file_hash(path)
         for path in sorted(root.rglob("*"))
         if path.is_file()
     }
-

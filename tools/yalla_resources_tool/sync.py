@@ -8,7 +8,6 @@ from .io import copy_file, replace_directory, sync_directory_contents
 from .paths import COMPOSE_LOCALE_DIRS, ROOT
 from .validation import validate
 
-
 def sync(args: argparse.Namespace) -> int:
     validation = validate(strict=False)
     if validation != 0:
@@ -49,7 +48,6 @@ def sync(args: argparse.Namespace) -> int:
         print(f"Synced Compose assets to {cmp_resources}")
 
     if not args.no_android:
-        # Changed target from sdk module to resources module
         android_res = args.android / "resources/src/main/res"
         for source in (generated / "android/res").glob("values*/strings.xml"):
             copy_file(source, android_res / source.parent.name / source.name)

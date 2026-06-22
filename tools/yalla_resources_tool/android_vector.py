@@ -21,16 +21,13 @@ from .paths import (
     ROOT,
 )
 
-
 def maven_relative_path(group: str, artifact: str, version: str) -> Path:
     return Path(group.replace(".", "/")) / artifact / version / f"{artifact}-{version}.jar"
-
 
 def maven_repository(group: str) -> str:
     if group.startswith("com.android."):
         return GOOGLE_MAVEN
     return MAVEN_CENTRAL
-
 
 def find_module_jar(group: str, artifact: str, version: str) -> Path:
     module_dir = Path.home() / ".gradle/caches/modules-2/files-2.1" / group / artifact
@@ -41,7 +38,6 @@ def find_module_jar(group: str, artifact: str, version: str) -> Path:
         return jar
 
     raise RuntimeError(f"Gradle cache is missing {group}:{artifact}:{version} jar")
-
 
 def download_module_jar(group: str, artifact: str, version: str) -> Path:
     relative = maven_relative_path(group, artifact, version)
@@ -63,13 +59,11 @@ def download_module_jar(group: str, artifact: str, version: str) -> Path:
 
     return destination
 
-
 def resolve_module_jar(group: str, artifact: str, version: str) -> Path:
     try:
         return find_module_jar(group, artifact, version)
     except RuntimeError:
         return download_module_jar(group, artifact, version)
-
 
 def android_vector_classpath() -> tuple[list[Path], str]:
     sdk_common = resolve_module_jar("com.android.tools", "sdk-common", ANDROID_TOOLS_VERSION)
@@ -86,7 +80,6 @@ def android_vector_classpath() -> tuple[list[Path], str]:
         [sdk_common, common, annotations, guava, kotlin_stdlib, jetbrains_annotations],
         ANDROID_TOOLS_VERSION,
     )
-
 
 def ensure_android_vector_runner() -> tuple[Path, str]:
     if not shutil.which("java") or not shutil.which("javac"):
@@ -106,4 +99,3 @@ def ensure_android_vector_runner() -> tuple[Path, str]:
         )
 
     return ANDROID_VECTOR_TOOL_DIR, classpath
-

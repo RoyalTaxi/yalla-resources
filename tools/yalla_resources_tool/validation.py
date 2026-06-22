@@ -20,7 +20,6 @@ from .paths import (
     ROOT,
 )
 
-
 def validate_strings() -> tuple[list[str], list[str]]:
     catalog = load_catalog()
     locales = [locale for locale in catalog["locales"] if locale != "default"]
@@ -49,7 +48,6 @@ def validate_strings() -> tuple[list[str], list[str]]:
                     warnings.append(f"{key}: missing translation for {locale}")
 
     return errors, warnings
-
 
 def validate_icons() -> tuple[list[str], list[str]]:
     errors = []
@@ -88,7 +86,6 @@ def validate_icons() -> tuple[list[str], list[str]]:
         errors.append("no icons found")
 
     return errors, warnings
-
 
 def validate_binary_assets(
     directory: Path,
@@ -130,7 +127,6 @@ def validate_binary_assets(
 
     return errors, warnings
 
-
 def validate_file_assets() -> tuple[list[str], list[str]]:
     errors = []
     warnings = []
@@ -165,7 +161,6 @@ def validate_file_assets() -> tuple[list[str], list[str]]:
 
     return errors, warnings
 
-
 def validate_assets() -> tuple[list[str], list[str]]:
     image_errors, image_warnings = validate_binary_assets(
         IMAGE_DIR,
@@ -187,7 +182,6 @@ def validate_assets() -> tuple[list[str], list[str]]:
         image_warnings + font_warnings + file_warnings,
     )
 
-
 def validate(strict: bool) -> int:
     string_errors, string_warnings = validate_strings()
     icon_errors, icon_warnings = validate_icons()
@@ -203,4 +197,3 @@ def validate(strict: bool) -> int:
     if errors or (strict and warnings):
         return 1
     return 0
-

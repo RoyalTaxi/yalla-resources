@@ -23,23 +23,13 @@ from .paths import (
     ROOT,
 )
 
-
 def _is_translatable(entry: dict) -> bool:
     return entry.get("translatable", True)
 
-
 def _emits_locale(entry: dict, locale: str) -> bool:
-    """The single source of truth for which (string, locale) pairs are emitted.
-
-    Every platform shares this rule: a string is emitted in its ``default``
-    locale always, and in any other locale only when the string is marked
-    translatable. Untranslatable strings (e.g. ``app_name``) therefore appear
-    only once -- in the default bucket -- on Compose, Android, and iOS alike.
-    """
     if locale not in entry["values"]:
         return False
     return locale == "default" or _is_translatable(entry)
-
 
 def _generate_xml_strings(
     out: Path,
@@ -48,13 +38,6 @@ def _generate_xml_strings(
     locale_dirs: dict,
     text: Callable[[str], str],
 ) -> None:
-    """Emit Android-style ``<resources>`` string tables, one per locale dir.
-
-    Compose and Android share an identical file shape and traversal; they differ
-    only in the output root, the locale->directory map, and the per-value text
-    escaper (``compose_text`` / ``android_text``). Parameterizing those three
-    keeps the placeholder/escaping/skip logic in exactly one place.
-    """
     for locale, directory in locale_dirs.items():
         lines = [xml_header()]
         for key, entry in catalog["strings"].items():
@@ -65,14 +48,11 @@ def _generate_xml_strings(
         lines.append("</resources>\n")
         write(base / directory / "strings.xml", "".join(lines))
 
-
 def generate_compose(out: Path, catalog: dict) -> None:
     _generate_xml_strings(out, catalog, out / "compose/composeResources", COMPOSE_LOCALE_DIRS, compose_text)
 
-
 def generate_android(out: Path, catalog: dict) -> None:
     _generate_xml_strings(out, catalog, out / "android/res", ANDROID_LOCALE_DIRS, android_text)
-
 
 def generate_ios(out: Path, catalog: dict) -> None:
     strings = {}
@@ -88,8 +68,6 @@ def generate_ios(out: Path, catalog: dict) -> None:
             if not _emits_locale(entry, locale):
                 continue
             ios_locale = IOS_LOCALE_IDS[locale]
-            # ``default`` and ``uz-Latn`` collapse to the same iOS id; the first
-            # one in catalog order (``default``) wins, matching legacy output.
             if ios_locale in item["localizations"]:
                 continue
             item["localizations"][ios_locale] = {
@@ -110,7 +88,6 @@ def generate_ios(out: Path, catalog: dict) -> None:
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
     )
     generate_ios_accessor(out)
-
 
 def generate_ios_accessor(out: Path) -> None:
     write(
@@ -224,7 +201,6 @@ public enum YallaResources {
 """,
     )
 
-
 def generate_icons(out: Path) -> None:
     copy_directory_contents(
         ICON_DIR,
@@ -232,7 +208,6 @@ def generate_icons(out: Path) -> None:
         "*.svg",
     )
     generate_ios_icon_asset_catalog(out)
-
 
 def generate_asset_files(out: Path) -> None:
     copy_directory_contents(
@@ -279,15 +254,6 @@ def generate_asset_files(out: Path) -> None:
         "*.json",
     )
 
-
-def add_generated_comment(path: Path) -> None:
-    content = path.read_text()
-    path.write_text(
-        "<!-- Generated from RoyalTaxi/yalla-resources. Do not edit by hand. -->\n"
-        + content
-    )
-
-
 def generate_android_icons(out: Path) -> None:
     runner_dir, classpath = ensure_android_vector_runner()
     drawable_dir = out / "android/res/drawable"
@@ -318,7 +284,6 @@ def generate_android_icons(out: Path) -> None:
             raise RuntimeError(f"{source.relative_to(ROOT)}: Android vector conversion failed: {message}")
         if not destination.exists() or destination.stat().st_size == 0:
             raise RuntimeError(f"{source.relative_to(ROOT)}: Android vector conversion produced no output")
-        add_generated_comment(destination)
         if result.stderr.strip() or result.stdout.strip():
             warnings.append(source.name)
 
@@ -328,7 +293,6 @@ def generate_android_icons(out: Path) -> None:
             f"{len(warnings)} icon(s): {', '.join(warnings)}",
             file=sys.stderr,
         )
-
 
 def generate(out: Path) -> int:
     catalog = load_catalog()

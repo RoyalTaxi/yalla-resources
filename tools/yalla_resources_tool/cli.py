@@ -9,7 +9,6 @@ from .paths import DEFAULT_WORKSPACE, ROOT
 from .sync import sync
 from .validation import validate
 
-
 def main() -> int:
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -56,4 +55,3 @@ def main() -> int:
     if args.command == "sync":
         return sync(args)
     return 2
-
