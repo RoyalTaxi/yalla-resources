@@ -2999,6 +2999,306 @@
         "uz-Latn": "Kutilmagan xatolik yuz berdi. Iltimos, keyinroq qayta urinib koʻring.",
         "uz-Cyrl": "Кутилмаган хатолик юз берди. Илтимос, кейинроқ қайта уриниб кўринг."
       }
+    },
+    "intercity_setup_fastest_title": {
+      "translatable": true,
+      "values": {
+        "default": "Iloji boricha tezroq",
+        "en": "As fast as possible",
+        "ru": "Как можно быстрее",
+        "uz-Latn": "Iloji boricha tezroq",
+        "uz-Cyrl": "Иложи борича тезроқ"
+      }
+    },
+    "intercity_setup_fastest_subtitle": {
+      "translatable": true,
+      "values": {
+        "default": "So'rovingizga mos taksini imkon qadar tez topamiz",
+        "en": "We will find a taxi for your request as fast as possible",
+        "ru": "Мы подберем вам такси по вашим запросам как можно быстрее",
+        "uz-Latn": "Soʻrovingizga mos taksini imkon qadar tez topamiz",
+        "uz-Cyrl": "Сўровингизга мос таксини имкон қадар тез топамиз"
+      }
+    },
+    "intercity_setup_schedule_placeholder": {
+      "translatable": true,
+      "values": {
+        "default": "Sana va vaqtni tanlang",
+        "en": "Select date and time",
+        "ru": "Выберите дату и время",
+        "uz-Latn": "Sana va vaqtni tanlang",
+        "uz-Cyrl": "Сана ва вақтни танланг"
+      }
+    },
+    "intercity_setup_schedule_title": {
+      "translatable": true,
+      "values": {
+        "default": "Safar vaqti:",
+        "en": "Trip time:",
+        "ru": "Время поездки:",
+        "uz-Latn": "Safar vaqti:",
+        "uz-Cyrl": "Сафар вақти:"
+      }
+    },
+    "intercity_schedule_picker_title": {
+      "translatable": true,
+      "values": {
+        "default": "Safar vaqti va sanasi",
+        "en": "Trip time and date",
+        "ru": "Время и дата поездки",
+        "uz-Latn": "Safar vaqti va sanasi",
+        "uz-Cyrl": "Сафар вақти ва санаси"
+      }
+    },
+    "intercity_setup_whole_cabin": {
+      "translatable": true,
+      "values": {
+        "default": "Butun salon",
+        "en": "Whole cabin",
+        "ru": "Весь салон",
+        "uz-Latn": "Butun salon",
+        "uz-Cyrl": "Бутун салон"
+      }
+    },
+    "intercity_setup_select_seat": {
+      "translatable": true,
+      "values": {
+        "default": "Joyni tanlang",
+        "en": "Select seat",
+        "ru": "Выберите место",
+        "uz-Latn": "Joyni tanlang",
+        "uz-Cyrl": "Жойни танланг"
+      }
+    },
+    "intercity_setup_seat_summary": {
+      "translatable": true,
+      "values": {
+        "default": "Siz {0} ta joy tanladingiz",
+        "en": "You selected {0} seats",
+        "ru": "Вы выбрали {0} мест",
+        "uz-Latn": "Siz {0} ta joy tanladingiz",
+        "uz-Cyrl": "Сиз {0} та жой танладингиз"
+      }
+    },
+    "intercity_setup_total_amount": {
+      "translatable": true,
+      "values": {
+        "default": "Jami summa",
+        "en": "Total amount",
+        "ru": "Итоговая сумма",
+        "uz-Latn": "Jami summa",
+        "uz-Cyrl": "Жами сумма"
+      }
+    },
+    "intercity_setup_postal_select": {
+      "translatable": true,
+      "values": {
+        "default": "Pochtani tanlang",
+        "en": "Select posts",
+        "ru": "Выберите почту",
+        "uz-Latn": "Pochtani tanlang",
+        "uz-Cyrl": "Почтани танланг"
+      }
+    },
+    "intercity_setup_preferences_select": {
+      "translatable": true,
+      "values": {
+        "default": "Qo'shimcha imkoniyatlarni tanlang",
+        "en": "Select preferences",
+        "ru": "Выберите опции",
+        "uz-Latn": "Qoʻshimcha imkoniyatlarni tanlang",
+        "uz-Cyrl": "Қўшимча имкониятларни танланг"
+      }
+    },
+    "intercity_setup_preferences_title": {
+      "translatable": true,
+      "values": {
+        "default": "Qo'shimcha imkoniyatlar",
+        "en": "Preferences",
+        "ru": "Опции",
+        "uz-Latn": "Qoʻshimcha imkoniyatlar",
+        "uz-Cyrl": "Қўшимча имкониятлар"
+      }
+    },
+    "intercity_setup_trip": {
+      "translatable": true,
+      "values": {
+        "default": "Safarni sozlash",
+        "en": "Trip setup",
+        "ru": "Настройка поездки",
+        "uz-Latn": "Safarni sozlash",
+        "uz-Cyrl": "Сафарни созлаш"
+      }
+    },
+    "intercity_setup_transport_discard_title": {
+      "translatable": true,
+      "values": {
+        "default": "O'zgarishlarni bekor qilasizmi?",
+        "en": "Discard changes?",
+        "ru": "Отменить изменения?",
+        "uz-Latn": "Oʻzgarishlarni bekor qilasizmi?",
+        "uz-Cyrl": "Ўзгаришларни бекор қиласизми?"
+      }
+    },
+    "intercity_setup_transport_discard_message": {
+      "translatable": true,
+      "values": {
+        "default": "Transport turini almashtirish joriy tanlovni tozalaydi. Davom etasizmi?",
+        "en": "Switching transport will clear your current selection. Continue?",
+        "ru": "Смена транспорта очистит текущий выбор. Продолжить?",
+        "uz-Latn": "Transport turini almashtirish joriy tanlovni tozalaydi. Davom etasizmi?",
+        "uz-Cyrl": "Транспорт турини алмаштириш жорий танловни тозалайди. Давом этасизми?"
+      }
+    },
+    "intercity_setup_transport_discard_confirm": {
+      "translatable": true,
+      "values": {
+        "default": "Bekor qilish",
+        "en": "Discard",
+        "ru": "Сброс",
+        "uz-Latn": "Bekor qilish",
+        "uz-Cyrl": "Бекор қилиш"
+      }
+    },
+    "intercity_schedule_section_now": {
+      "translatable": true,
+      "values": {
+        "default": "Hozir",
+        "en": "Now",
+        "ru": "Сейчас",
+        "uz-Latn": "Hozir",
+        "uz-Cyrl": "Ҳозир"
+      }
+    },
+    "intercity_schedule_section_today": {
+      "translatable": true,
+      "values": {
+        "default": "Bugun",
+        "en": "Today",
+        "ru": "Сегодня",
+        "uz-Latn": "Bugun",
+        "uz-Cyrl": "Бугун"
+      }
+    },
+    "intercity_schedule_section_tomorrow": {
+      "translatable": true,
+      "values": {
+        "default": "Ertaga",
+        "en": "Tomorrow",
+        "ru": "Завтра",
+        "uz-Latn": "Ertaga",
+        "uz-Cyrl": "Эртага"
+      }
+    },
+    "intercity_seat_title": {
+      "translatable": true,
+      "values": {
+        "default": "O'rindiqlarni tanlang",
+        "en": "Select seats",
+        "ru": "Выберите места",
+        "uz-Latn": "Oʻrindiqlarni tanlang",
+        "uz-Cyrl": "Ўриндиқларни танланг"
+      }
+    },
+    "intercity_seat_passenger": {
+      "translatable": true,
+      "values": {
+        "default": "{0}-yo'lovchi",
+        "en": "Passenger {0}",
+        "ru": "Пассажир {0}",
+        "uz-Latn": "{0}-yoʻlovchi",
+        "uz-Cyrl": "{0}-йўловчи"
+      }
+    },
+    "intercity_seat_position_front_right": {
+      "translatable": true,
+      "values": {
+        "default": "Oldda, o'ngda",
+        "en": "Front, right",
+        "ru": "Спереди, справа",
+        "uz-Latn": "Oldda, oʻngda",
+        "uz-Cyrl": "Олдда, ўнгда"
+      }
+    },
+    "intercity_seat_position_back_left": {
+      "translatable": true,
+      "values": {
+        "default": "Orqada, chapda",
+        "en": "Back, left",
+        "ru": "Сзади, слева",
+        "uz-Latn": "Orqada, chapda",
+        "uz-Cyrl": "Орқада, чапда"
+      }
+    },
+    "intercity_seat_position_back_center": {
+      "translatable": true,
+      "values": {
+        "default": "Orqada, o'rtada",
+        "en": "Back, center",
+        "ru": "Сзади, в центре",
+        "uz-Latn": "Orqada, oʻrtada",
+        "uz-Cyrl": "Орқада, ўртада"
+      }
+    },
+    "intercity_seat_position_back_right": {
+      "translatable": true,
+      "values": {
+        "default": "Orqada, o'ngda",
+        "en": "Back, right",
+        "ru": "Сзади, справа",
+        "uz-Latn": "Orqada, oʻngda",
+        "uz-Cyrl": "Орқада, ўнгда"
+      }
+    },
+    "intercity_seat_price_note": {
+      "translatable": true,
+      "values": {
+        "default": "O'rindiq narxi buyurtma tasdiqlangach o'zgarishi mumkin",
+        "en": "Seat prices may change after the trip is confirmed",
+        "ru": "Стоимость места может измениться после подтверждения поездки",
+        "uz-Latn": "Oʻrindiq narxi buyurtma tasdiqlangach oʻzgarishi mumkin",
+        "uz-Cyrl": "Ўриндиқ нархи буюртма тасдиқлангач ўзгариши мумкин"
+      }
+    },
+    "intercity_seat_selected_count": {
+      "translatable": true,
+      "values": {
+        "default": "{0} ta o'rindiq tanlandi",
+        "en": "{0} seats selected",
+        "ru": "Выбрано мест: {0}",
+        "uz-Latn": "{0} ta oʻrindiq tanlandi",
+        "uz-Cyrl": "{0} та ўриндиқ танланди"
+      }
+    },
+    "intercity_seat_total": {
+      "translatable": true,
+      "values": {
+        "default": "Umumiy summa",
+        "en": "Total amount",
+        "ru": "Итоговая сумма",
+        "uz-Latn": "Umumiy summa",
+        "uz-Cyrl": "Умумий сумма"
+      }
+    },
+    "intercity_seat_whole_back_row": {
+      "translatable": true,
+      "values": {
+        "default": "Butun orqa qator",
+        "en": "Whole back row",
+        "ru": "Весь задний ряд",
+        "uz-Latn": "Butun orqa qator",
+        "uz-Cyrl": "Бутун орқа қатор"
+      }
+    },
+    "intercity_seat_confirm_title": {
+      "translatable": true,
+      "values": {
+        "default": "Yo'lovchilarni tasdiqlang",
+        "en": "Confirm passengers",
+        "ru": "Подтвердите пассажиров",
+        "uz-Latn": "Yoʻlovchilarni tasdiqlang",
+        "uz-Cyrl": "Йўловчиларни тасдиқланг"
+      }
     }
   }
 }

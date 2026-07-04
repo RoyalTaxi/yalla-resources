@@ -15,7 +15,7 @@ def android_format(value: str) -> str:
     return _positional_format(value, "s")
 
 def compose_format(value: str) -> str:
-    return android_format(value)
+    return value
 
 def ios_format(value: str) -> str:
     return _positional_format(value, "@")

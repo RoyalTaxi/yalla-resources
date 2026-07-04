@@ -18,7 +18,10 @@ ARG = "1500"
 def _positional_args_runtime(template: str, args: list[str], token: re.Pattern) -> str:
     return token.sub(lambda m: args[int(m.group(1)) - 1], template)
 
-COMPOSE_TOKEN = re.compile(r"%(\d+)\$[ds]")
+def _compose_args_runtime(template: str, args: list[str]) -> str:
+    return COMPOSE_TOKEN.sub(lambda m: args[int(m.group(1))], template)
+
+COMPOSE_TOKEN = re.compile(r"\{(\d+)\}")
 ANDROID_TOKEN = re.compile(r"%(\d+)\$[ds]")
 IOS_TOKEN = re.compile(r"%(\d+)\$[@d]")
 
@@ -62,8 +65,8 @@ class PlaceholderRoundTripTests(unittest.TestCase):
     def test_compose_round_trip_substitutes_argument(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             template = self._compose_template(Path(tmp))
-        self.assertNotIn("{0}", template, "Compose left a literal {0} placeholder")
-        rendered = _positional_args_runtime(template, [ARG], COMPOSE_TOKEN)
+        self.assertIn("{0}", template, "Compose must preserve canonical placeholders for formatArgs")
+        rendered = _compose_args_runtime(template, [ARG])
         self.assertEqual(rendered, self.expected)
         self.assertIn(ARG, rendered)
 
@@ -81,7 +84,7 @@ class PlaceholderRoundTripTests(unittest.TestCase):
         rendered = _positional_args_runtime(template, [ARG], IOS_TOKEN)
         self.assertEqual(rendered, self.expected)
 
-    def test_no_emitter_leaks_canonical_placeholder(self) -> None:
+    def test_compose_preserves_canonical_placeholders(self) -> None:
         catalog = load_catalog()
         param_keys = [
             key for key, entry in catalog["strings"].items()
@@ -91,14 +94,30 @@ class PlaceholderRoundTripTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp)
             generate_compose(out, catalog)
+
+            compose_xml = (out / "compose/composeResources/values/strings.xml").read_text()
+
+        for key in param_keys:
+            expected = PLACEHOLDER.findall(catalog["strings"][key]["values"]["default"])
+            actual = PLACEHOLDER.findall(_value_for_key(compose_xml, key, "Compose"))
+            self.assertEqual(actual, expected, f"Compose changed canonical placeholders for {key}")
+
+    def test_platform_emitters_do_not_leak_canonical_placeholder(self) -> None:
+        catalog = load_catalog()
+        param_keys = [
+            key for key, entry in catalog["strings"].items()
+            if PLACEHOLDER.search(entry["values"]["default"])
+        ]
+        self.assertGreater(len(param_keys), 0)
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp)
             generate_android(out, catalog)
             generate_ios(out, catalog)
 
-            compose_xml = (out / "compose/composeResources/values/strings.xml").read_text()
             android_xml = (out / "android/res/values/strings.xml").read_text()
             ios_json = (out / "ios/Resources/Resources/Localizable.xcstrings").read_text()
 
-        for blob, label in [(compose_xml, "Compose"), (android_xml, "Android"), (ios_json, "iOS")]:
+        for blob, label in [(android_xml, "Android"), (ios_json, "iOS")]:
             for key in param_keys:
                 self.assertNotIn(
                     "{0}", _value_for_key(blob, key, label),
