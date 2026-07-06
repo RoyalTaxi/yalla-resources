@@ -3270,6 +3270,26 @@
         "uz-Cyrl": "Орқада, ўнгда"
       }
     },
+    "intercity_seat_boarding_place_label": {
+      "translatable": true,
+      "values": {
+        "default": "O'rindiq joyi",
+        "en": "Boarding seat",
+        "ru": "Место посадки",
+        "uz-Latn": "Oʻrindiq joyi",
+        "uz-Cyrl": "Ўриндиқ жойи"
+      }
+    },
+    "intercity_seat_boarding_place_select": {
+      "translatable": true,
+      "values": {
+        "default": "O'rindiq joyini tanlang",
+        "en": "Select boarding seat",
+        "ru": "Выберите место посадки",
+        "uz-Latn": "Oʻrindiq joyini tanlang",
+        "uz-Cyrl": "Ўриндиқ жойини танланг"
+      }
+    },
     "intercity_seat_price_note": {
       "translatable": true,
       "values": {
