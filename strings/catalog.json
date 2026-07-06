@@ -1600,6 +1600,16 @@
         "uz-Cyrl": "Бонус билан тўлаш"
       }
     },
+    "bonus_you_pay": {
+      "translatable": true,
+      "values": {
+        "default": "Siz {0} to'laysiz",
+        "en": "You pay {0}",
+        "ru": "Вы платите {0}",
+        "uz-Latn": "Siz {0} toʻlaysiz",
+        "uz-Cyrl": "Сиз {0} тўлайсиз"
+      }
+    },
     "bonus_pay_for_next_trip": {
       "translatable": true,
       "values": {
@@ -2670,11 +2680,11 @@
         "uz-Cyrl": "Шаҳарлараро"
       }
     },
-    "service_mail": {
+    "service_postal": {
       "translatable": true,
       "values": {
         "default": "Pochta",
-        "en": "Mail",
+        "en": "Postal",
         "ru": "Почта",
         "uz-Latn": "Pochta",
         "uz-Cyrl": "Почта"
@@ -3093,11 +3103,21 @@
     "intercity_setup_postal_select": {
       "translatable": true,
       "values": {
-        "default": "Pochtani tanlang",
-        "en": "Select posts",
-        "ru": "Выберите почту",
-        "uz-Latn": "Pochtani tanlang",
-        "uz-Cyrl": "Почтани танланг"
+        "default": "Pochta turini tanlang",
+        "en": "Select postal type",
+        "ru": "Выберите тип почты",
+        "uz-Latn": "Pochta turini tanlang",
+        "uz-Cyrl": "Почта турини танланг"
+      }
+    },
+    "intercity_setup_postal_title": {
+      "translatable": true,
+      "values": {
+        "default": "Pochta turi:",
+        "en": "Postal type:",
+        "ru": "Тип почты:",
+        "uz-Latn": "Pochta turi:",
+        "uz-Cyrl": "Почта тури:"
       }
     },
     "intercity_setup_preferences_select": {
